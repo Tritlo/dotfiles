@@ -1,0 +1,1 @@
+alias docker=docker.io

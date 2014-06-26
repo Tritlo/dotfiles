@@ -1,0 +1,12 @@
+[user]
+	Name = Matthías Páll Gissurarson
+	email = mpg@mpg.is
+[push]
+	default = simple
+[mergetool]
+	prompt = false
+[merge]
+	conflictstyle = diff3
+	tool = gvimdiff
+[core]
+	excludesfile = /home/tritlo/.gitignore_global

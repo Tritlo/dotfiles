@@ -1,0 +1,14 @@
+#!/bin/sh
+case $1 in
+   "inc")
+       xbacklight -time 0 -inc 20
+       ;;
+   "dec")
+       xbacklight -time 0 -dec 20
+       ;;
+   *)
+       echo "Usage: $0 inc|dec"
+       exit 1
+        ;;
+esac
+exit 0
