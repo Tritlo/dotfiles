@@ -1,8 +1,8 @@
 # DO NOT EDIT! This file will be overwritten by LXAppearance.
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
-gtk-theme-name="Ambiance"
-gtk-icon-theme-name="ubuntu-mono-dark"
+gtk-theme-name="Numix"
+gtk-icon-theme-name="Numix-Circle"
 gtk-font-name="Ubuntu 11"
 gtk-cursor-theme-name="DMZ-White"
 gtk-cursor-theme-size=24
