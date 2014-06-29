@@ -86,14 +86,18 @@ set number " display line numbers
 syntax enable " syntax highlighting
 set laststatus=2 " always display status bar
 set encoding=utf-8
+" automatically indent
 set smartindent autoindent
+" ignore case in searches/replaces, except if they contain uppercase letters.
 set smartcase ignorecase
+" Tab = 4 spaces, expand tabs into 4 spaces, and make a <BS> delete 4 spaces.
 set tabstop=4 shiftwidth=4 expandtab smarttab
+" read .exrc's in project folders.
 set exrc secure
 
 au BufRead,BufNewFile *.X68 setfiletype asm68k
 
-
+" use w!! to save a file that should have been opened with sudo!
 cmap w!! w !sudo tee > /dev/null %
 
 let g:syntastic_c_check_header = 1
