@@ -220,22 +220,7 @@ nnoremap <Leader>bh :bp<CR>
 nnoremap <Leader>bl :bn<CR>
 nnoremap <Leader>bd :bd<CR>
 
-
-" buffers
-" next buffer
-inoremap <C-tab>   <Esc>:bn<CR>i
-nnoremap <C-tab> :bn<CR>
-
-" previous buffer
-nnoremap <C-S-tab> :bp<CR>
-inoremap <C-S-tab> <Esc>:bp<CR>i
-"new buffer
-nnoremap <C-t> :enew<CR>
-inoremap <C-t>  <Esc>:enew<CR>
-nnoremap <C-x>n :enew<CR>
-
-" delete buffer
-nnoremap <C-x>k :bd<Space>
+nnoremap <Leader>e :e 
 
 " tabs
 " vi bindings
