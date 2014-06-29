@@ -80,7 +80,6 @@ fi
 
 # User configuration
 
-#export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/tritlo/.scripts:/home/tritlo/go/bin"
 #
 # export MANPATH="/usr/local/man:$MANPATH"
 

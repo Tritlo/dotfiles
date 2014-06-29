@@ -78,8 +78,11 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#222222" :foreground "#BEBFB7" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 128 :width normal :foundry "unknown" :family "Terminus")))))
 
-;Load el4r, which loads Xiki
-(add-to-list 'load-path "/home/tritlo/.rvm/gems/ruby-1.9.3-p547/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
-(require 'el4r)
-(el4r-boot)
-(el4r-troubleshooting-keys)
+; Load el4r, which loads Xiki
+;(add-to-list 'load-path "/var/lib/gems/1.9.1/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
+;(require 'el4r)
+;(el4r-boot)
+;(el4r-troubleshooting-keys)
+
+; Don't create #... files when editing
+(setq make-backup-files nil)

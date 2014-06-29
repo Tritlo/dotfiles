@@ -253,3 +253,5 @@ if has('gui_running')
     inoremap <M-x> <Esc>:
 endif
 
+"let $XIKI_DIR="/home/tritlo/Workspace/xiki"
+"source $XIKI_DIR/etc/vim/xiki.vim
