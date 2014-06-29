@@ -91,7 +91,7 @@ set smartindent autoindent
 " ignore case in searches/replaces, except if they contain uppercase letters.
 set smartcase ignorecase
 " Tab = 4 spaces, expand tabs into 4 spaces, and make a <BS> delete 4 spaces.
-set tabstop=4 shiftwidth=4 expandtab smarttab
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 " read .exrc's in project folders.
 set exrc secure
 
