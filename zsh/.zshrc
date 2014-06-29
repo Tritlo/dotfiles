@@ -102,3 +102,8 @@ fi
 # Make up and down act like in fish
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
+
+bindkey -a 'k' history-beginning-search-backward
+bindkey -a 'j' history-beginning-search-forward
+
+bindkey '^?' backward-delete-char
