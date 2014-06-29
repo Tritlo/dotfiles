@@ -1,3 +1,0 @@
-alias docker=docker.io
-alias -s pdf=evince
-alias open=xdg-open

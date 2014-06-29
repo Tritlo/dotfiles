@@ -69,14 +69,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-if [ -f ~/.zsh_aliases ]; then
-    . ~/.zsh_aliases
+if [ -f ~/.zaliases ]; then
+    . ~/.zaliases
 fi
 
-
-if [ -f ~/.zsh_profile ]; then
-    . ~/.zsh_profile
-fi
 
 # User configuration
 
