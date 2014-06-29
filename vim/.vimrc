@@ -38,6 +38,8 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'fs111/pydoc.vim'
 
+Plugin 'pangloss/vim-javascript'
+
 Plugin 'Blackrush/vim-gocode'
 autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
 autocmd BufRead,BufNewFile *.go set filetype=go
@@ -54,6 +56,8 @@ if has('gui_running')
     " containing the command
     " autocmd BufRead,BufNewFile *.cl set filetype=opencl
     Plugin 'petRUShka/vim-opencl'
+
+    Plugin 'nathanaelkane/vim-indent-guides'
 
     " File finder
     Plugin 'kien/ctrlp.vim'
@@ -76,16 +80,16 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 set omnifunc=syntaxcomplete#Complete
 
-set hidden
-set nocompatible
-set number
-syntax enable
-set laststatus=2
+set hidden " do not remove buffers that are hidden
+set nocompatible " no vi mode here
+set number " display line numbers
+syntax enable " syntax highlighting
+set laststatus=2 " always display status bar
 set encoding=utf-8
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
+set smartindent autoindent
+set smartcase ignorecase
+set tabstop=4 shiftwidth=4 expandtab smarttab
+set exrc secure
 
 au BufRead,BufNewFile *.X68 setfiletype asm68k
 
@@ -112,8 +116,12 @@ if has('gui_running')
     let g:ctrlp_extensions = ['gazetteer']
     let g:ycm_confirm_extra_conf = 0
 
+    let g:indent_guides_guide_size=1
+    let g:indent_guides_start_level=2
+
     "toggle tagbar
     nnoremap <F8> :TagbarToggle<CR>
+    nnoremap <Leader>tb :TagbarToggle<CR>
     inoremap <F8> <ESC>:TagbarToggle<CR>i
 endif
 

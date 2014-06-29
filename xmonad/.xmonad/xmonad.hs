@@ -264,12 +264,12 @@ btsync <- spawnPipe "btsync --config .btsync.conf"
 xmproc <- spawnPipe "killall -q xmobar ; xmobar /home/tritlo/.xmobarrc" --Status bar
 xflux <- spawnPipe "killall -q xflux; xflux -l 64 -g -22" --Make display better
 stalonetray <- spawnPipe "sleep 10; killall -q stalonetray; stalonetray" -- Tray
---sound <- spawnPipe "sleep 15; killall -q gnome-sound-applet; gnome-sound-applet" -- Audio keys
-volti <- spawnPipe "sleep 15; killall -q prime-indicator; prime-indicator" -- nvidia switching
+sound <- spawnPipe "sleep 15; killall -q gnome-sound-applet; gnome-sound-applet" -- Audio keys
+primeind <- spawnPipe "sleep 15; killall -q prime-indicator; prime-indicator" -- nvidia switching
 circscroll <- spawnPipe "/home/tritlo/.scripts/circscroll.sh"
 dropbox <- spawnPipe "sleep 15; dropbox start"
 --not needed with nm-cli
---networkm <- spawnPipe "sleep 15; killall -q nm-applet; nm-applet;"
+networkm <- spawnPipe "sleep 15; killall -q nm-applet; nm-applet;"
 gnomesettings <- spawnPipe "sleep 15; killall -q gnome-settings-daemon; gnome-settings-daemon;" --Brightness and audio keys.
 --wicd <- spawnPipe "sleep 15; killall -q wicd-client;  wicd-client -t;"
 --redshift <- spawnPipe "sleep 15; killall -q redshift-gtk; redshift-gtk -l 64:-22"
