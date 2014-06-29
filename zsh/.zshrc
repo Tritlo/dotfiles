@@ -103,3 +103,11 @@ fi
 # vim mode
 bindkey -v
 #export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/<N>}/(main|viins)/<I>}"
+    zle reset-prompt
+}
+
+#preexec () { print -rn -- $terminfo[el]; }
+zle -N zle-keymap-select
+zle -N zle-line-init
