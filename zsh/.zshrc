@@ -48,7 +48,7 @@ ZSH_THEME="flazz"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git vi-mode web-search docker pip virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,14 +100,6 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# vim mode
-bindkey -v
-#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/<N>}/(main|viins)/<I>}"
-    zle reset-prompt
-}
-
-#preexec () { print -rn -- $terminfo[el]; }
-zle -N zle-keymap-select
-zle -N zle-line-init
+# Make up and down act like in fish
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
