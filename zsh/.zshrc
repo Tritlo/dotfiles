@@ -50,7 +50,10 @@ ZSH_THEME="flazz"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=()
 plugins+=(git)
-plugins+=(web-search docker pip virtualenvwrapper)
+plugins+=(docker)
+plugins+=(web-search)
+plugins+=(pip)
+#plugins+=(virtualenvwrapper)
 plugins+=(vi-mode history-substring-search zsh-autosuggestions zsh-syntax-highlighting)
 
 . $ZSH/oh-my-zsh.sh
