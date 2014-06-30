@@ -118,3 +118,6 @@ bindkey -a 'j' history-beginning-search-forward
 bindkey '^?' backward-delete-char
 
 bindkey '^f' vi-forward-blank-word
+#load virtualenvwrapper here, lazily.
+#virtualenvwrapper plugin is too slow
+. /usr/local/bin/virtualenvwrapper_lazy.sh
