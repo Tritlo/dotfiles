@@ -80,6 +80,8 @@ zle-line-init() {
 }
 
 zle -N zle-line-init
+AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=6'
+AUTOSUGGESTION_HIGHLIGHT_CURSOR=0
 # User configuration
 
 #
@@ -109,5 +111,4 @@ bindkey -a 'k' history-beginning-search-backward
 bindkey -a 'j' history-beginning-search-forward
 bindkey '^?' backward-delete-char
 
-bindkey '^f' vi-forward-word
-bindkey '^t' autosuggest-toggle
+bindkey '^f' vi-forward-blank-word
