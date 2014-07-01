@@ -53,6 +53,7 @@ plugins+=(git)
 plugins+=(docker)
 plugins+=(web-search)
 plugins+=(pip)
+plugins+=(django)
 #plugins+=(virtualenvwrapper)
 plugins+=(vi-mode history-substring-search zsh-autosuggestions zsh-syntax-highlighting)
 
@@ -121,3 +122,4 @@ bindkey '^f' vi-forward-blank-word
 #load virtualenvwrapper here, lazily.
 #virtualenvwrapper plugin is too slow
 . /usr/local/bin/virtualenvwrapper_lazy.sh
+unsetopt extendedglob

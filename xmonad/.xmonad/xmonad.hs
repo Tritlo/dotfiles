@@ -72,9 +72,10 @@ wspaces = ["1","2","3","4","5","6","7","8","9"]
 gridLayout = Grid
 spiralLayout = spiral (1 % 1)
 spaceLayouts = ["Tall", "Mirror Tall","Full"]
-bLayouts = ["Tabs", "Grid", "Spiral",
-             "Float", "Three Col", "Three Col Mid",
-              "i3","Tall Tabs","Groups Tall Tabs" ]
+smallLayouts = ["SmallTall","SmallMirror","Float"]
+bLayouts = ["Tabs", "Grid", "Spiral"]
+             {-"Float", "Three Col", "Three Col Mid",-}
+              {-"i3","Tall Tabs","Groups Tall Tabs" ]-}
 nLayouts =["IMGBFloat", "Tall"]
 
 -- Layouts based on workspace names
@@ -84,8 +85,10 @@ myLayoutHook =
      --maximize  $
      --minimize  $
      avoidStruts $
-     named "Tall" (subTabbed (Tall 1 (3%100) (1%2)))  |||
-     named "Mirror Tall" (subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
+     named "Tall" ( smartSpacing 10 $ subTabbed (Tall 1 (3%100) (1%2)))  |||
+     named "SmallTall" ( subTabbed (Tall 1 (3%100) (1%2)))  |||
+     named "Mirror Tall" (smartSpacing 10 $ subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
+     named "SmallMirror" (subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
      named "Full" (subTabbed (Full)) |||
      named "Grid" (subTabbed (gridLayout)) |||
      named "Spiral" (subTabbed (spiralLayout)) |||
@@ -181,6 +184,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     , ((modm .|. shiftMask  , xK_x), decreaseNMasterGroups)
 	, ((modm                , xK_space), (spawn changeKbLayout))
 	, ((modm                , xK_b), (cycleThroughLayouts spaceLayouts))
+	, ((modm                , xK_n), (cycleThroughLayouts smallLayouts))
+	, ((modm .|. shiftMask  , xK_n), (cycleThroughLayouts bLayouts))
 	{-, ((modm                , xK_n), (cycleThroughLayouts nLayouts))-}
     , ((modm .|. shiftMask  , xK_b     ), sendMessage ToggleStruts)
     , ((modm                , xK_i ), removeEmptyWorkspaceAfterExcept wspaces (moveTo Prev HiddenWS))
@@ -265,7 +270,7 @@ xmproc <- spawnPipe "killall -q xmobar ; xmobar /home/tritlo/.xmobarrc" --Status
 xflux <- spawnPipe "killall -q xflux; xflux -l 64 -g -22" --Make display better
 stalonetray <- spawnPipe "sleep 10; killall -q stalonetray; stalonetray" -- Tray
 sound <- spawnPipe "sleep 15; killall -q gnome-sound-applet; gnome-sound-applet" -- Audio keys
-primeind <- spawnPipe "sleep 15; killall -q prime-indicator; prime-indicator" -- nvidia switching
+primeind <- spawnPipe "sleep 15; ps -ax | grep prime-indicator | grep -v grep | awk '{print $1}' | xargs kill; prime-indicator" -- nvidia switching
 circscroll <- spawnPipe "/home/tritlo/.scripts/circscroll.sh"
 dropbox <- spawnPipe "sleep 15; dropbox start"
 --not needed with nm-cli
