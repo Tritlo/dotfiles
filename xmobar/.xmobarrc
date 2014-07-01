@@ -7,14 +7,14 @@ Config { font = "xft:Terminus-9"
        , lowerOnStart = False
        , hideOnStart = False
        , persistent = True
-       , borderColor = "red"
+       , borderColor = "#1D1F21"
        , commands = [
              Run Cpu ["-L","3","-H","50","--normal","#B5BD68","--high","#CC6666","-t", "<total>%"] 10
              , Run Memory ["-t","<usedratio>%"] 10
              , Run Network "wlan0" ["-L","0","-H","1500","--normal","#B5BD68","--high","#CC6666", "-t", "<rx>:<tx>","-d", "2", "-S", "True"] 10
              --, Run Wireless "wlan0" [] 10
              , Run Com "/bin/bash" ["-c", "bash ~/.scripts/connstat.sh "] "wlan0wi" 100
-             , Run XMonadLog
+             --, Run XMonadLog
              --, Run MPD [] 10
              , Run Com "/bin/bash" ["-c", "sh ~/.scripts/gmail.sh | wc -l"] "gmail" 3000
              , Run Kbd [("us","en")]
@@ -23,6 +23,7 @@ Config { font = "xft:Terminus-9"
              --, Run Volume "default" "Master" [ "-t", "V:<volume>% <status>"] 5
              , Run Battery  [ "-t", "<acstatus> <left>%/<timeleft>", "--", "-f", "ACAD/online", "-O","<fc=#7aa6da>AC</fc>", "-o", "<fc=#CC6666>B</fc>", "-p", "blue"] 600 
              , Run Date "%a %F %H:%M:%S" "date" 10
+             , Run UnsafeStdinReader
              --, Run Com "/bin/bash" ["-c","~/.scripts/spotifyName"] "spotify" 10
              ]
        , border = NoBorder
@@ -31,5 +32,5 @@ Config { font = "xft:Terminus-9"
        --, pickBroadest = True
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "Cpu/Mem: %cpu%/%memory% %wlan0wi%: %wlan0%  } %XMonadLog% {G %gmail%  %battery% %kbd%  %date%"
+       , template = " Cpu/Mem: %cpu%/%memory% %wlan0wi%: %wlan0%  } %UnsafeStdinReader% {G %gmail%  %battery% %kbd%  %date% "
        }

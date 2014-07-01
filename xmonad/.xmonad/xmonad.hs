@@ -64,9 +64,19 @@ import XMonad.Layout.ShowWName
 --Android-studio
 import XMonad.Hooks.ICCCMFocus
 
+xmobarEscape = concatMap doubleLts
+  where doubleLts '<' = "<<"
+        doubleLts x   = [x]
 
 --Skipum nofnum
 wspaces = ["1","2","3","4","5","6","7","8","9"]
+mywspaces = clickable . (map xmobarEscape) $ wspaces
+    where
+        clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
+                            (i,ws) <- zip [1..9] l,
+                            let n = i ]
+layoutPrinter str ="<action=xdotool key super+b >"++str++"</action>"
+
 --wspaces = ["main", "web","code","laer","5","6","7","facebook","9"]
 --wspaces = ["main", "web","code","laer","facebook"]
 gridLayout = Grid
@@ -85,15 +95,15 @@ myLayoutHook =
      --maximize  $
      --minimize  $
      avoidStruts $
-     named "Tall" ( smartSpacing 10 $ subTabbed (Tall 1 (3%100) (1%2)))  |||
-     named "SmallTall" ( subTabbed (Tall 1 (3%100) (1%2)))  |||
-     named "Mirror Tall" (smartSpacing 10 $ subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
-     named "SmallMirror" (subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
+     named "Tall" ( subTabbed (Tall 1 (3%100) (1%2)))  |||
+     named "Mirror Tall" (subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
      named "Full" (subTabbed (Full)) |||
+     named "SmallTall" ( smartSpacing 10 $ subTabbed (Tall 1 (3%100) (1%2)))  |||
+     named "SmallMirror" (smartSpacing 10 $ subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
+     named "Float" (subTabbed (simplestFloat)) |||
      named "Grid" (subTabbed (gridLayout)) |||
      named "Spiral" (subTabbed (spiralLayout)) |||
      named "Tabs" (subTabbed (simpleTabbedBottom)) |||
-     named "Float" (subTabbed (simplestFloat)) |||
      named "IMGBFloat" ( mouseResize $ minimize $ maximize $ imageButtonDeco shrinkText defaultThemeWithImageButtons simplestFloat) |||
      named "Three Col" (subTabbed (ThreeCol 1 (3%100) (1%2))) |||
      named "Three Col Mid" (subTabbed (ThreeColMid 1 (3%100) (1%2)))
@@ -108,8 +118,8 @@ changeKbLayout = "(setxkbmap -query | grep \"layout:\\s\\+us\")  && setxkbmap -l
 
 gestures = M.fromList
     [ ([], focus)
-    , ([L],\_ -> removeEmptyWorkspaceAfterExcept wspaces (moveTo Prev HiddenWS))
-    , ([R], \_ ->  removeEmptyWorkspaceAfterExcept wspaces (moveTo Next HiddenWS))
+    , ([L],\_ -> removeEmptyWorkspaceAfterExcept mywspaces (moveTo Prev HiddenWS))
+    , ([R], \_ ->  removeEmptyWorkspaceAfterExcept mywspaces (moveTo Next HiddenWS))
     ]
 
 --altbrowserCmd = "firefox-ux -new-window"
@@ -188,11 +198,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
 	, ((modm .|. shiftMask  , xK_n), (cycleThroughLayouts bLayouts))
 	{-, ((modm                , xK_n), (cycleThroughLayouts nLayouts))-}
     , ((modm .|. shiftMask  , xK_b     ), sendMessage ToggleStruts)
-    , ((modm                , xK_i ), removeEmptyWorkspaceAfterExcept wspaces (moveTo Prev HiddenWS))
-    , ((modm                , xK_o), removeEmptyWorkspaceAfterExcept wspaces (moveTo Next HiddenWS))
-    , ((modm .|. shiftMask  , xK_i), removeEmptyWorkspaceAfterExcept wspaces (shiftTo Prev HiddenWS))
-    , ((modm .|. shiftMask  , xK_o), removeEmptyWorkspaceAfterExcept wspaces (shiftTo Next HiddenWS))
-    , ((modm                , xK_a), removeEmptyWorkspaceAfterExcept wspaces toggleWS)
+    , ((modm                , xK_i ), removeEmptyWorkspaceAfterExcept mywspaces (moveTo Prev HiddenWS))
+    , ((modm                , xK_o), removeEmptyWorkspaceAfterExcept mywspaces (moveTo Next HiddenWS))
+    , ((modm .|. shiftMask  , xK_i), removeEmptyWorkspaceAfterExcept mywspaces (shiftTo Prev HiddenWS))
+    , ((modm .|. shiftMask  , xK_o), removeEmptyWorkspaceAfterExcept mywspaces (shiftTo Next HiddenWS))
+    , ((modm                , xK_a), removeEmptyWorkspaceAfterExcept mywspaces toggleWS)
     , ((modm .|. shiftMask  , xK_BackSpace), removeWorkspace)
     , ((modm .|. shiftMask  , xK_v), selectWorkspace defaultXPConfig)
     , ((modm                , xK_m), withWorkspace defaultXPConfig (windows . W.shift))
@@ -241,9 +251,10 @@ myGreen = "#B5BD68"
                   ppTitle = xmobarColor "#00ff00" "" . shorten 90
                 }
 -}
-myPP = xmobarPP { ppCurrent = xmobarColor myGreen "" . wrap "[" "]",
-                     ppTitle = xmobarColor myGreen "" . shorten 90
-                }
+{-myPP = xmobarPP { ppCurrent = xmobarColor myGreen "" . wrap "[" "]",
+                  ppTitle = xmobarColor myGreen "" . shorten 90,
+                  ppOutput = hPutStrLn xmproc
+                }-}
 {-
 myPP = xmobarPP { ppCurrent = xmobarColor "#b9ca4a" "" . wrap "[" "]",
                   ppTitle = xmobarColor "#b9ca4a" "" . shorten 120
@@ -255,9 +266,9 @@ myStartupHook = do
     setWMName "LG3D"
 
 --Android-studio
-myLogHook = do
+{-myLogHook = do
     takeTopFocus
-    dynamicLogString myPP >>= xmonadPropLog
+    dynamicLogWithPP myPP >>= xmonadPropLog-}
 
 myEventHook = fullscreenEventHook
 
@@ -266,7 +277,7 @@ replace
 --conky <- spawnPipe "conky -c /home/tritlo/.conkyrc"
 dunst <- spawnPipe "dunst" -- Notification daemon
 btsync <- spawnPipe "btsync --config .btsync.conf"
-xmproc <- spawnPipe "killall -q xmobar ; xmobar /home/tritlo/.xmobarrc" --Status bar
+xmproc <- spawnPipe "xmobar /home/tritlo/.xmobarrc" --Status bar
 xflux <- spawnPipe "killall -q xflux; xflux -l 64 -g -22" --Make display better
 stalonetray <- spawnPipe "sleep 10; killall -q stalonetray; stalonetray" -- Tray
 sound <- spawnPipe "sleep 15; killall -q gnome-sound-applet; gnome-sound-applet" -- Audio keys
@@ -288,11 +299,18 @@ keys = addPrefix (controlMask, xK_less)  (myKeys <+> keys defaultConfig) <+> (my
 layoutHook =  myLayoutHook,
 terminal = myTerm,
 focusedBorderColor = myRed,
-XMonad.workspaces = wspaces,
+workspaces = mywspaces,
 startupHook = myStartupHook,
 --modMask = mod1Mask,
 modMask = mod4Mask,
-logHook = myLogHook,
+logHook = do
+    takeTopFocus
+    dynamicLogWithPP  xmobarPP { ppCurrent = xmobarColor myGreen "" . wrap "[" "]",
+                  ppTitle = xmobarColor myGreen "" . shorten 90,
+                  ppOutput = hPutStrLn xmproc,
+                  ppLayout = layoutPrinter
+                },
+
 handleEventHook = handleEventHook defaultConfig <+> myEventHook
 }
 
