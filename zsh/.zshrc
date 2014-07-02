@@ -81,6 +81,7 @@ if [ -f ~/.zaliases ]; then
 fi
 
 
+
 . /home/tritlo/.oh-my-zsh/custom/plugins/zsh-autosuggestions/autosuggestions.zsh
 zle-line-init() {
     zle autosuggest-start
@@ -123,3 +124,7 @@ bindkey '^f' vi-forward-blank-word
 #virtualenvwrapper plugin is too slow
 . /usr/local/bin/virtualenvwrapper_lazy.sh
 unsetopt extendedglob
+
+if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+nix-env -q > $HOME/.nix-installed-pkgs
