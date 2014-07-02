@@ -209,10 +209,11 @@ nnoremap <Leader>wl :winc l<CR>
 
 nnoremap <Leader>wv :winc v<CR>
 nnoremap <Leader>ws :winc s<CR>
-noremap <Leader>w- :winc -<CR>
-noremap <Leader>w+ :winc +<CR>
-noremap <Leader>w< :winc <<CR>
-noremap <Leader>w> :winc ><CR>
+
+"noremap <Leader>w- :winc -<CR>
+"noremap <Leader>w+ :winc +<CR>
+"noremap <Leader>w< :winc <<CR>
+"noremap <Leader>w> :winc ><CR>
 
 "continuous resize
 call tinymode#EnterMap("winsize","<C-W>+","+")
