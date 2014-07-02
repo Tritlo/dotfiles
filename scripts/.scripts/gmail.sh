@@ -5,14 +5,15 @@ mails=$(curl -u icetritlo:***REMOVED***  --silent "https://mail.google.com/mail/
 #echo "<action=chromium-browser --new-window gmail.com>G $mails</action>"
 
 if [ "$mails" -ge "5" ]; then
-    display="<fc=#F34E3D><icon=/home/tritlo/.icons/mail.xbm/></fc> $mails"
+    display="<fc=#F34E3D><icon=$HOME/.icons/mail.xbm/></fc> $mails"
 else
-    display="<fc=#2BAC52><icon=/home/tritlo/.icons/mail.xbm/></fc> $mails"
+    display="<fc=#2BAC52><icon=$HOME/.icons/mail.xbm/></fc> $mails"
 fi
 
 if [ "$mails" -eq "0" ]; then
-     display="<fc=#1778BA><icon=/home/tritlo/.icons/mail.xbm/></fc>"
+     display="<fc=#1778BA><icon=$HOME/.icons/mail.xbm/></fc>"
 fi
 
-echo "<action=chromium-browser --new-window gmail.com>$display</action>"
+browser=$(grep ^Exec= /usr/share/applications/`xdg-mime query default x-scheme-handler/https`| head -1 | sed 's/^Exec=//' | sed 's/%.//')
+echo "<action=$browser --new-window https://mail.google.com/ >$display</action>"
 
