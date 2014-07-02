@@ -38,11 +38,12 @@ Plugin 'scrooloose/syntastic'
 " git integration
 Plugin 'tpope/vim-fugitive'
 
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'fs111/pydoc.vim'
 
 Plugin 'pangloss/vim-javascript'
 
-Plugin 'Blackrush/vim-gocode'
 autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
 autocmd BufRead,BufNewFile *.go set filetype=go
 
@@ -106,8 +107,10 @@ let g:syntastic_c_check_header = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:airline#extensions#tabline#enabled = 1
 " let g:molokai_original = 1
-let g:rehash256 = 1
-set t_Co=256
+if has("unix")
+    let g:rehash256 = 1
+    set t_Co=256
+endif
 colorscheme molokai
 if has('gui_running')
     set guioptions-=m  "remove menu bar
@@ -117,7 +120,7 @@ if has('gui_running')
     if has("win32")
         set guifont=Terminus:h14
     else
-        set guifont=Terminus\ 14
+        set guifont=Terminus\ 13
     endif
     let g:ctrlp_extensions = ['gazetteer']
     let g:ycm_confirm_extra_conf = 0
@@ -196,13 +199,19 @@ nnoremap <Leader>ww :winc w<CR>
 nnoremap <Leader>wn :winc n<CR>
 nnoremap <Leader>wo :winc o<CR>
 nnoremap <Leader>wc :winc c<CR>
+nnoremap <Leader>wd :winc c<CR>
 
 nnoremap <Leader>wh :winc h<CR>
 nnoremap <Leader>wj :winc j<CR>
 nnoremap <Leader>wk :winc k<CR>
 nnoremap <Leader>wl :winc l<CR>
+
 nnoremap <Leader>wv :winc v<CR>
 nnoremap <Leader>ws :winc s<CR>
+noremap <Leader>w- :winc -<CR>
+noremap <Leader>w+ :winc +<CR>
+noremap <Leader>w< :winc <<CR>
+noremap <Leader>w> :winc ><CR>
 
 "move
 nnoremap <Leader>wH :winc H<CR>
@@ -250,11 +259,17 @@ inoremap <C-x>b <ESC>:buffer<Space>
 " list buffers
 nnoremap <C-x><C-b> :buffers<CR>
 inoremap <C-x><C-b> <ESC>:buffers<CR>
+if has("unix")
+    " unix only mappings
+    nnoremap <F4> :!sakura & disown<CR>
+    inoremap <F4> :!sakura & disown<CR>
+endif
 
 if has('gui_running')
     nnoremap <M-x> :
     inoremap <M-x> <Esc>:
 endif
+
 
 "let $XIKI_DIR="/home/tritlo/Workspace/xiki"
 "source $XIKI_DIR/etc/vim/xiki.vim
