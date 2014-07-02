@@ -43,6 +43,7 @@ Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'fs111/pydoc.vim'
 
 Plugin 'pangloss/vim-javascript'
+Plugin 'tinymode.vim'
 
 autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
 autocmd BufRead,BufNewFile *.go set filetype=go
@@ -212,6 +213,21 @@ noremap <Leader>w- :winc -<CR>
 noremap <Leader>w+ :winc +<CR>
 noremap <Leader>w< :winc <<CR>
 noremap <Leader>w> :winc ><CR>
+
+"continuous resize
+call tinymode#EnterMap("winsize","<C-W>+","+")
+call tinymode#EnterMap("winsize","<C-W>-","-")
+call tinymode#EnterMap("winsize","<Leader>w+","+")
+call tinymode#EnterMap("winsize","<Leader>w-","-")
+call tinymode#Map("winsize","+","wincmd +")
+call tinymode#Map("winsize","-","wincmd -")
+call tinymode#EnterMap("winsize","<C-W><","<")
+call tinymode#EnterMap("winsize","<C-W>>",">")
+call tinymode#EnterMap("winsize","<Leader>w<","<")
+call tinymode#EnterMap("winsize","<Leader>w>",">")
+call tinymode#Map("winsize","<","wincmd <")
+call tinymode#Map("winsize",">","wincmd >")
+call tinymode#ModeMsg("winsize","Change window size +/-, </>")
 
 "move
 nnoremap <Leader>wH :winc H<CR>
