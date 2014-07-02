@@ -303,6 +303,7 @@ workspaces = mywspaces,
 startupHook = myStartupHook,
 --modMask = mod1Mask,
 modMask = mod4Mask,
+--must be here so xmproc is defined
 logHook = do
     takeTopFocus
     dynamicLogWithPP  xmobarPP { ppCurrent = xmobarColor myGreen "" . wrap "[" "]",
