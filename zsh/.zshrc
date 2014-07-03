@@ -127,4 +127,7 @@ unsetopt extendedglob
 
 if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
-nix-env -q > $HOME/.nix-installed-pkgs
+#Updated installed packages if havent done so for 5 min
+#if [[ -e $(find "$HOME/.nix-installed-pkgs" -amin 15) ]]; then
+    #nix-env -q > $HOME/.nix-installed-pkgs
+#fi
