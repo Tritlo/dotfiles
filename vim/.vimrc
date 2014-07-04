@@ -45,7 +45,12 @@ Plugin 'fs111/pydoc.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tinymode.vim'
 
+Plugin 'thiderman/vim-supervisor'
+Plugin 'vim-scripts/Tail-Bundle'
+Plugin 'nginx.vim'
+
 autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
+autocmd BufRead,BufNewFile Dockerfile set filetype=Dockerfile
 autocmd BufRead,BufNewFile *.go set filetype=go
 
 if has("unix")
@@ -182,17 +187,16 @@ let mapleader=" "
 
 " key bindings
 " file browsing
-nmap <silent> <C-x>f :NERDTreeToggle<CR>
-nnoremap <C-x><C-f> :e<Space>
+nmap <silent> <Leader>f :NERDTreeToggle<CR>
 
 nnoremap <Leader>wq :wq<Space>
 
 " emacs keybindings
-nnoremap <C-x>o :winc w<CR>
-nnoremap <C-x>1 :winc o<CR>
-nnoremap <C-x>2 :vsplit<CR>
-nnoremap <C-x>3 :split<CR>
-nnoremap <C-x>0 :winc c<CR>
+nnoremap <Leader>o :winc w<CR>
+nnoremap <Leader>1 :winc o<CR>
+nnoremap <Leader>2 :vsplit<CR>
+nnoremap <Leader>3 :split<CR>
+nnoremap <Leader>0 :winc c<CR>
 nnoremap <C-w>0 :winc c<CR>
 
 " more vimlike
@@ -244,7 +248,8 @@ nnoremap <Leader>w3 :split<CR>
 
 " buffers
 nnoremap <Leader>bn :enew<CR>
-nnoremap <Leader>bb :enew<CR>
+nnoremap <Leader>bb :b<Space>
+nnoremap <Leader>bB :buffers<CR>
 nnoremap <Leader>bh :bp<CR>
 nnoremap <Leader>bl :bn<CR>
 nnoremap <Leader>bd :bd<CR>
@@ -259,7 +264,7 @@ nnoremap  <Leader>tn :tabnew<CR>
 nnoremap  <Leader>td :tabclose<CR>
 
 " quit
-nnoremap <C-x>q :wqa<CR>
+nnoremap <Leader>q :wqa<CR>
 
 " save
 " enable emacs save in insert,
@@ -269,13 +274,7 @@ inoremap <C-x><C-s> <ESC>:w<CR>i
 " done on save
 " nnoremap <C-c><C-c> :SyntasticCheck<CR>
 
-" go to buffer
-nnoremap <C-x>b :buffer<Space>
-inoremap <C-x>b <ESC>:buffer<Space>
-
 " list buffers
-nnoremap <C-x><C-b> :buffers<CR>
-inoremap <C-x><C-b> <ESC>:buffers<CR>
 if has("unix")
     " unix only mappings
     nnoremap <F4> :!sakura & disown<CR>
