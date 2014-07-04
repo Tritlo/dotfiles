@@ -122,12 +122,12 @@ bindkey '^?' backward-delete-char
 bindkey '^f' vi-forward-blank-word
 #load virtualenvwrapper here, lazily.
 #virtualenvwrapper plugin is too slow
-. /usr/local/bin/virtualenvwrapper_lazy.sh
+if [ -e /usr/local/bin/virtualenvwrapper_lazy.sh ]; then . /usr/local/bin/virtualenvwrapper_lazy.sh; fi
 unsetopt extendedglob
 
 export EDITOR=vim
 
-if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi
 
 #Updated installed packages if havent done so for 5 min
 #if [[ -e $(find "$HOME/.nix-installed-pkgs" -amin 15) ]]; then
