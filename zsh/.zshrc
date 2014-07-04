@@ -125,6 +125,8 @@ bindkey '^f' vi-forward-blank-word
 . /usr/local/bin/virtualenvwrapper_lazy.sh
 unsetopt extendedglob
 
+export EDITOR=vim
+
 if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 #Updated installed packages if havent done so for 5 min
