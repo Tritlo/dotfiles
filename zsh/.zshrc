@@ -82,7 +82,7 @@ fi
 
 
 
-. /home/tritlo/.oh-my-zsh/custom/plugins/zsh-autosuggestions/autosuggestions.zsh
+. $HOME.oh-my-zsh/custom/plugins/zsh-autosuggestions/autosuggestions.zsh
 zle-line-init() {
     zle autosuggest-start
 }
