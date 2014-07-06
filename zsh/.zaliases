@@ -1,2 +1,3 @@
 alias -s pdf=evince
 alias open=xdg-open
+alias tmux="tmux -2"

@@ -126,6 +126,9 @@ if [ -e /usr/local/bin/virtualenvwrapper_lazy.sh ]; then . /usr/local/bin/virtua
 unsetopt extendedglob
 
 export EDITOR=vim
+if echo $TERM | grep -v 256color; then
+    export TERM=$TERM-256color
+fi
 
 if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi
 
