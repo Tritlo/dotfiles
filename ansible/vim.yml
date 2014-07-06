@@ -10,5 +10,13 @@
              dest={{ansible_env.HOME}}/.vim/bundle/Vundle.vim
       - name: install vim plugins
         command: gvim +PluginInstall +qall
+
+      - name: install you complete me dep cmake
+        apt: name=cmake state=present
+
+      - name: install you complete me dep build-essentials
+        apt: name=build-essentials state=present
+      - name: install you complete me dep python-dev
+        apt: name=python-dev state=present
       - name: compile YouCompleteMe
         command: chdir={{ansible_env.HOME}}/.vim/bundle/YouCompleteMe ./install.sh --clang-completer

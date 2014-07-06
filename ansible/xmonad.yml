@@ -1,0 +1,10 @@
+- name: Xmonad
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+      - name: install xmonad
+        apt: name=xmonad state=present
+      - name: install xmonad-contrib
+        apt: name=libghc-xmonad-contrib-dev state=present
+      - include: tasks/stow.yml tostow=xmonad
+

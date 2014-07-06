@@ -1,0 +1,8 @@
+  - name: fetch dotfiles
+    git: repo=https://github.com/Tritlo/dotfiles
+         dest={{ansible_env.HOME}}/dotfiles
+         update=no
+  - name: make sure submodules are up to date
+    command: git -C {{ansible_env.HOME}}/dotfiles submodule init
+  - name: make sure submodules are up to date
+    command: git -C {{ansible_env.HOME}}/dotfiles submodule update

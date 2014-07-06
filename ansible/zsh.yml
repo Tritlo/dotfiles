@@ -1,0 +1,11 @@
+- name: Zsh
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+      - name: install zsh
+        apt: name=zsh state=present
+      - name: install oh-my-zsh
+        git: repo=https://github.com/robbyrussell/oh-my-zsh
+            dest={{ansible_env.HOME}}/.oh-my-zsh
+      - include: tasks/stow.yml tostow=zsh
+

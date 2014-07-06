@@ -275,10 +275,10 @@ myEventHook = fullscreenEventHook
 main =  do
 replace
 --conky <- spawnPipe "conky -c /home/tritlo/.conkyrc"
-dunst <- spawnPipe "dunst" -- Notification daemon
-btsync <- spawnPipe "btsync --config .btsync.conf"
+{-dunst <- spawnPipe "dunst" -- Notification daemon-}
+btsync <- spawnPipe "btsync --config /home/tritlo/.btsync.conf restart"
 xmproc <- spawnPipe "xmobar /home/tritlo/.xmobarrc" --Status bar
-xflux <- spawnPipe "killall -q xflux; xflux -l 64 -g -22" --Make display better
+--xflux <- spawnPipe "killall -q xflux; xflux -l 64 -g -22" --Make display better
 stalonetray <- spawnPipe "sleep 10; killall -q stalonetray; stalonetray" -- Tray
 sound <- spawnPipe "sleep 15; killall -q gnome-sound-applet; gnome-sound-applet" -- Audio keys
 primeind <- spawnPipe "sleep 15; ps -ax | grep prime-indicator | grep -v grep | awk '{print $1}' | xargs kill; prime-indicator" -- nvidia switching
