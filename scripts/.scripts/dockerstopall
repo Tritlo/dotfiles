@@ -1,0 +1,2 @@
+#!/bin/bash
+docker.io ps -a | grep -v CONTAINER | awk '{print $1}'| xargs docker.io stop 

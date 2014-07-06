@@ -1,0 +1,14 @@
+- name: Vim
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+      - include: tasks/stow.yml tostow=vim
+      - name: install vim
+        apt: name=vim-gtk state=present
+      - name: install vundle
+        git: repo=https://github.com/gmarik/Vundle.vim.git
+             dest={{ansible_env.HOME}}/.vim/bundle/Vundle.vim
+      - name: install vim plugins
+        command: gvim +PluginInstall +qall
+      - name: compile YouCompleteMe
+        command: chdir={{ansible_env.HOME}}/.vim/bundle/YouCompleteMe ./install.sh --clang-completer
