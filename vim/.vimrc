@@ -1,4 +1,5 @@
 " set the runtime path to include Vundle and initialize 
+filetype off
 if has("win32")
     set rtp+=~/vimfiles/bundle/Vundle.vim
     let path='~/vimfiles/bundle'
@@ -20,52 +21,47 @@ endif
 " install Vundle with
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-" Required
 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim' " Required
+
 " The colorschemes
 Plugin 'tomasr/molokai'
 Plugin 'flazz/vim-colorschemes'
 
-" Aw yiss
-Plugin 'scrooloose/nerdtree'
-" Commenter
-Plugin 'scrooloose/nerdcommenter'
-"status bar
-Plugin 'bling/vim-airline'
-" Dat syntax highlighter
-Plugin 'scrooloose/syntastic'
-" git integration
-Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree' " file browser
+Plugin 'scrooloose/nerdcommenter' " Commenter
+Plugin 'bling/vim-airline' "status bar
+Plugin 'scrooloose/syntastic' " Dat syntax highlighter
+Plugin 'tpope/vim-fugitive' " git integration
+
 
 
 " misc
-Plugin 'fs111/pydoc.vim'
+Plugin 'fs111/pydoc.vim' " enables :Pydoc command in python programs
 Plugin 'tinymode.vim' " continuous key presses
-Plugin 'vim-scripts/Tail-Bundle'
+Plugin 'rking/ag.vim' " better grep, search for term in project.
 
 " filetype plugins
 Plugin 'jnwhiteh/vim-golang'
 Plugin 'pangloss/vim-javascript'
 Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'thiderman/vim-supervisor' " also some functionality
 Plugin 'nginx.vim'
 Plugin 'elzr/vim-json'
 Plugin 'tpope/vim-markdown'
-
-Plugin 'sjl/gundo.vim'
-Plugin 'tpope/vim-sleuth'
-Plugin 'edsono/vim-matchit'
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
-
 Plugin 'petRUShka/vim-opencl'
 
-Plugin 'nathanaelkane/vim-indent-guides'
+" supervisor files and supervisor ctl
+Plugin 'thiderman/vim-supervisor' " also some functionality
+Plugin 'vim-scripts/Tail-Bundle' " works for other tail files as well
 
-autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
-autocmd BufRead,BufNewFile Dockerfile set filetype=Dockerfile
-autocmd BufRead,BufNewFile *.go set filetype=go
+Plugin 'sjl/gundo.vim'     " bound to <Leader>gu, displays the undo tree (so that i use it)
+Plugin 'edsono/vim-matchit' " better % matching, including html tags
+
+Plugin 'SirVer/ultisnips' " inserts snippets
+Plugin 'honza/vim-snippets' " lots of predefined snippets
+
+Plugin 'nathanaelkane/vim-indent-guides' " toggleable with <Leader>ig
+
 
 if has("unix")
     " unix only plugins go here
@@ -86,6 +82,7 @@ if has('gui_running')
     " these take longer to load
     " File finder
     Plugin 'kien/ctrlp.vim'
+    Plugin 'tpope/vim-sleuth' " automatically detects indent settings
 
     "git gutter
     Plugin 'airblade/vim-gitgutter'
@@ -100,6 +97,11 @@ endif
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
+autocmd BufRead,BufNewFile Dockerfile set filetype=Dockerfile
+autocmd BufRead,BufNewFile *.go set filetype=go
+
 set omnifunc=syntaxcomplete#Complete
 
 set hidden " do not remove buffers that are hidden
@@ -126,6 +128,7 @@ let g:syntastic_c_check_header = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_complete_in_comments = 1
 
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
@@ -280,6 +283,7 @@ nnoremap <Leader>e :e<Space>
 nnoremap  <Leader>th :tabprev<CR>
 nnoremap  <Leader>tl :tabnext<CR>
 nnoremap  <Leader>tn :tabnew<CR>
+nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
 " quit
@@ -299,8 +303,6 @@ inoremap <C-x><C-s> <ESC>:w<CR>i
 
 
 "let g:UltiSnipsExpandTrigger="<c-j>"
-"let g:UltiSnipsJumpForwardTrigger="<c-j>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " list buffers
 if has("unix")
@@ -317,6 +319,8 @@ endif
 
 
 let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "let $XIKI_DIR="/home/tritlo/Workspace/xiki"
 "source $XIKI_DIR/etc/vim/xiki.vim
