@@ -1,4 +1,5 @@
 " set the runtime path to include Vundle and initialize 
+
 filetype off
 if has("win32")
     set rtp+=~/vimfiles/bundle/Vundle.vim
@@ -35,9 +36,10 @@ Plugin 'scrooloose/syntastic' " Dat syntax highlighter
 Plugin 'tpope/vim-fugitive' " git integration
 
 
+Plugin 'basepi/vim-conque' " terminal inside buffer
 
-" misc
-Plugin 'fs111/pydoc.vim' " enables :Pydoc command in python programs
+
+"" misc
 Plugin 'tinymode.vim' " continuous key presses
 Plugin 'rking/ag.vim' " better grep, search for term in project.
 
@@ -47,6 +49,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'nginx.vim'
 Plugin 'elzr/vim-json'
+Plugin 'godlygeek/tabular' " for markdown
 Plugin 'tpope/vim-markdown'
 Plugin 'petRUShka/vim-opencl'
 
@@ -80,6 +83,7 @@ if has('gui_running')
     " autocmd BufRead,BufNewFile *.cl set filetype=opencl
 
     " these take longer to load
+    Plugin 'klen/python-mode'
     " File finder
     Plugin 'kien/ctrlp.vim'
     Plugin 'tpope/vim-sleuth' " automatically detects indent settings
@@ -184,10 +188,11 @@ if has("unix")
     if !exists('g:airline_symbols')
       let g:airline_symbols = {}
     endif
-
-    let g:airline_left_sep = '»'
+    let g:airline#extensions#tabline#left_sep = '▶'
+    let g:airline#extensions#tabline#left_alt_sep = '|'
+    "let g:airline_left_sep = '»'
     let g:airline_left_sep = '▶'
-    let g:airline_right_sep = '«'
+    "let g:airline_right_sep = '«'
     let g:airline_right_sep = '◀'
     let g:airline_symbols.linenr = '␤'
     let g:airline_symbols.branch = '⎇'
@@ -202,12 +207,20 @@ let mapleader=" "
 " key bindings
 " file browsing
 nmap <silent> <Leader>f :NERDTreeToggle<CR>
-nnoremap <Leader>g :GundoToggle<CR>
+nnoremap <Leader>gu :GundoToggle<CR>
 nnoremap <Leader>tb :TagbarToggle<CR>
 nnoremap <Leader>ig :IndentGuidesToggle<CR>
 nnoremap <F8> :TagbarToggle<CR>
 inoremap <F8> <ESC>:TagbarToggle<CR>i
 
+nnoremap <Leader>tc :ConqueTerm bash<CR>
+nnoremap <Leader>ts :ConqueTermSplit bash<CR>
+nnoremap <Leader>tv :ConqueTermVSplit bash<CR>
+nnoremap <Leader>tt :ConqueTermTab bash<CR>
+
+
+" map the leader to : so that all commands are just a space away.
+nnoremap <Leader> :
 
 nnoremap <Leader>wq :wq<Space>
 
@@ -316,6 +329,29 @@ if has('gui_running')
     inoremap <M-x> <Esc>:
 endif
 
+
+let g:pymode_breakpoint_bind = '<leader>pb'
+let g:pymode_run_bind = '<leader>pr'
+nnoremap <Leader>pl :PymodeLintToggle<CR>
+let g:pymode_rope_completion = 0
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_on_fly = 0
+let g:pymode_lint_unmodified = 0
+let g:pymode_folding = 0
+
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'markdown' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \ 'mail' : 1,
+      \ 'conque_term' : 1
+      \}
 
 
 let g:UltiSnipsExpandTrigger="<c-j>"

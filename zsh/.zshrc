@@ -126,7 +126,7 @@ if [ -e /usr/local/bin/virtualenvwrapper_lazy.sh ]; then . /usr/local/bin/virtua
 unsetopt extendedglob
 
 export EDITOR=vim
-if echo $TERM | grep -vq 256color; then
+if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
     export TERM=$TERM-256color
 fi
 
