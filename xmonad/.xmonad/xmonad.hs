@@ -42,6 +42,7 @@ import XMonad.Layout.ThreeColumns
 import XMonad.Layout.Groups.Examples
 import XMonad.Layout.SubLayouts
 import XMonad.Layout.WindowNavigation
+import XMonad.Layout.NoBorders
 
 import XMonad.Actions.Submap
 
@@ -95,9 +96,9 @@ myLayoutHook =
      --maximize  $
      --minimize  $
      avoidStruts $
-     named "Tall" ( subTabbed (Tall 1 (3%100) (1%2)))  |||
-     named "Mirror Tall" (subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
-     named "Full" (subTabbed (Full)) |||
+     named "Tall" ( smartBorders (subTabbed (Tall 1 (3%100) (1%2))))  |||
+     named "Mirror Tall" (smartBorders (subTabbed (Mirror (Tall 1 (3%100) (1%2))))) |||
+     named "Full" (smartBorders (subTabbed (Full))) |||
      named "SmallTall" ( smartSpacing 10 $ subTabbed (Tall 1 (3%100) (1%2)))  |||
      named "SmallMirror" (smartSpacing 10 $ subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
      named "Float" (subTabbed (simplestFloat)) |||

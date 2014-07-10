@@ -299,8 +299,8 @@ nnoremap  <Leader>tn :tabnew<CR>
 nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
-" quit
-nnoremap <Leader>q :wqa<CR>
+"close quickfix
+nnoremap <Leader>qc :ccl<CR>
 
 " save
 " enable emacs save in insert,
