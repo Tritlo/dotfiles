@@ -81,7 +81,8 @@ Plugin 'Shougo/neocomplcache.vim'
 
 " emacs kill-ring in vim.
 " use with meta-p to scroll through yank history.
-Plugin 'maxbrunsfeld/vim-yankstack'
+" Does not work with the Icelandic key ð.
+" Plugin 'maxbrunsfeld/vim-yankstack'
 
 
 if has("unix")
@@ -405,7 +406,7 @@ endfunction
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+"autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 
 "let $XIKI_DIR="/home/tritlo/Workspace/xiki"
 "source $XIKI_DIR/etc/vim/xiki.vim

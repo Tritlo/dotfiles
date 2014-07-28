@@ -147,7 +147,7 @@ addPrefix p ms conf =
 
 --myTerm = "urxvtclient"
 myTerm = "gnome-terminal"
-editor = "emacsclient -a \"\" -c -n"
+editor = "emacsclient -a \"\" -c -n "
 simpleEditor ="gedit"
 fixMouse = "(sleep 1 && killall lxappearance)& lxappearance"
 

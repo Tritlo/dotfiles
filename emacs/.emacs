@@ -2,6 +2,7 @@
 (require 'package)
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages"))
 
 (package-initialize)
 
@@ -10,6 +11,8 @@
 
 (unless (fboundp 'evil-leader-mode)
   (package-install 'evil-leader))
+
+(require 'iso-transl)
 
 (require 'evil)
 (evil-mode 1)
@@ -38,6 +41,20 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'molokai t)
+
+(require 'org)
+(setq org-log-done t)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-agenda-files (list "~/org/heima.org" "~/org/trello.org" "~/org/want-to-do.org"
+                             "~/Dropbox/Dagbok/Journal/"))
+(setq org-archive-location "~/org/archive.org::")
+
+(setq org-agenda-file-regexp "\\`[^.].*\\.org'\\|[0-9]+")
+
+(setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program "chromium-new-window")
+
 
 
 
@@ -84,7 +101,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#222222" :foreground "#BEBFB7" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 128 :width normal :foundry "unknown" :family "Terminus")))))
+ '(default ((t (:inherit nil :stipple nil :background "#222222" :foreground "#BEBFB7" :inverse
+-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight norm
+al :height 128 :width normal :foundry "unknown" :family "Terminus")))))
+
 
 ; Load el4r, which loads Xiki
 ;(add-to-list 'load-path "/var/lib/gems/1.9.1/gems/trogdoro-el4r-1.0.10/data/emacs/site-lisp/")
@@ -94,3 +114,17 @@
 
 ; Don't create #... files when editing
 (setq make-backup-files nil)
+
+(unless (fboundp 'org-trello-mode)
+  (package-install 'org-trello))
+(require 'org-trello)
+
+(calendar-set-date-style 'iso)
+
+(setq diary-file "~/2014.md" )
+(setq org-agenda-include-diary t)
+
+(require 'org-journal)
+(setq org-journal-dir "~/Dropbox/Dagbok/Journal/")
+(setq org-journal-date-format "%Y-%m-%d")
+
