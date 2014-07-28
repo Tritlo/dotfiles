@@ -61,6 +61,13 @@ Plugin 'tpope/vim-markdown'
 " autocmd BufRead,BufNewFile *.cl set filetype=opencl
 Plugin 'petRUShka/vim-opencl'
 
+" a good mode
+" Plugin 'jceb/vim-orgmode'
+" Plugin 'tpope/vim-speeddating'
+Plugin 'hsitz/VimOrganizer'
+Plugin 'mattn/calendar-vim'
+
+
 " supervisor files and supervisor ctl
 Plugin 'thiderman/vim-supervisor' " also some functionality
 Plugin 'vim-scripts/Tail-Bundle' " works for other tail files as well
@@ -407,6 +414,15 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 "autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+let g:org_command_for_emacsclient = "emacsclient"
 
 "let $XIKI_DIR="/home/tritlo/Workspace/xiki"
 "source $XIKI_DIR/etc/vim/xiki.vim
+"
+let g:ft_ignore_pat = '\.org'
+" and then put these lines in vimrc somewhere after the line above
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au BufEnter *.org            call org#SetOrgFileType()
+let g:org_capture_file = '~/org/captures.org'
+command! OrgCapture :call org#CaptureBuffer()
+command! OrgCaptureFile :call org#OpenCaptureFile()
