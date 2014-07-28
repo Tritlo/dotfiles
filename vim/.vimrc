@@ -38,6 +38,9 @@ Plugin 'tpope/vim-fugitive' " git integration
 " mapped to leader leader.
 Plugin 'Lokaltog/vim-easymotion'
 
+" hard mode: have to use motions
+Plugin 'wikitopian/hardmode'
+
 
 "" misc
 Plugin 'tinymode.vim' " continuous key presses
@@ -401,6 +404,8 @@ endfunction
 " ensure closing of nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 
 "let $XIKI_DIR="/home/tritlo/Workspace/xiki"
 "source $XIKI_DIR/etc/vim/xiki.vim

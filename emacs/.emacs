@@ -5,6 +5,12 @@
 
 (package-initialize)
 
+(unless (fboundp 'evil-mode)
+  (package-install 'evil))
+
+(unless (fboundp 'evil-leader-mode)
+  (package-install 'evil-leader))
+
 (require 'evil)
 (evil-mode 1)
 (require 'evil-leader)
@@ -32,6 +38,8 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'molokai t)
+
+
 
 ;(setq required-package-list '(
 ;                  auto-complete
