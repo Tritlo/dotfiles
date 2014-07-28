@@ -11,8 +11,7 @@ else
 endif
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
-"
-"mana
+
 
 
 " let Vundle manage Vundle, required
@@ -35,8 +34,9 @@ Plugin 'bling/vim-airline' "status bar
 Plugin 'scrooloose/syntastic' " Dat syntax highlighter
 Plugin 'tpope/vim-fugitive' " git integration
 
-
-Plugin 'basepi/vim-conque' " terminal inside buffer
+" easy motion, to train motions better.
+" mapped to leader leader.
+Plugin 'Lokaltog/vim-easymotion'
 
 
 "" misc
@@ -51,6 +51,11 @@ Plugin 'nginx.vim'
 Plugin 'elzr/vim-json'
 Plugin 'godlygeek/tabular' " for markdown
 Plugin 'tpope/vim-markdown'
+" opencl.
+" remember to create
+" opencl.vim in ~/.vim/ftdetect/
+" containing the command
+" autocmd BufRead,BufNewFile *.cl set filetype=opencl
 Plugin 'petRUShka/vim-opencl'
 
 " supervisor files and supervisor ctl
@@ -66,6 +71,16 @@ Plugin 'honza/vim-snippets' " lots of predefined snippets
 Plugin 'nathanaelkane/vim-indent-guides' " toggleable with <Leader>ig
 
 
+" vimshell and deps.
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimshell.vim'
+Plugin 'Shougo/neocomplcache.vim'
+
+" emacs kill-ring in vim.
+" use with meta-p to scroll through yank history.
+Plugin 'maxbrunsfeld/vim-yankstack'
+
+
 if has("unix")
     " unix only plugins go here
     Plugin 'Valloric/YouCompleteMe'
@@ -76,13 +91,13 @@ endif
 
 " Thessi haegja a, viljum thad ekki i terminal
 if has('gui_running')
-    " opencl.
-    " remember to create
-    " opencl.vim in ~/.vim/ftdetect/
-    " containing the command
-    " autocmd BufRead,BufNewFile *.cl set filetype=opencl
 
     " these take longer to load
+    "
+    " local vimrc, loads .lvimrc files in reverse order, and applies those 
+    " settings. Like exrc, but hierarchical.
+    Plugin 'embear/vim-localvimrc'
+
     Plugin 'klen/python-mode'
     " File finder
     Plugin 'kien/ctrlp.vim'
@@ -94,7 +109,6 @@ if has('gui_running')
 
     if has("unix")
         " Code completion, tharf ad compile-a med cmake og libclang og e-d
-        "Plugin 'Valloric/YouCompleteMe'
 
     endif
 endif
@@ -105,6 +119,10 @@ filetype plugin indent on    " required
 autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
 autocmd BufRead,BufNewFile Dockerfile set filetype=Dockerfile
 autocmd BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile *.X68 setfiletype asm68k
+autocmd BufEnter \[vimshell\]* NeoComplCacheEnable
+autocmd BufLeave \[vimshell\]* NeoComplCacheDisable
+
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -115,15 +133,21 @@ syntax enable " syntax highlighting
 set laststatus=2 " always display status bar
 set encoding=utf-8
 " automatically indent
-set smartindent autoindent
+set smartindent autoindent copyindent shiftround
 " ignore case in searches/replaces, except if they contain uppercase letters.
 set smartcase ignorecase
 " Tab = 4 spaces, expand tabs into 4 spaces, and make a <BS> delete 4 spaces.
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 " read .exrc's in project folders.
 set exrc secure
+set wildmenu
+set wildmode=longest:full,full
 
-au BufRead,BufNewFile *.X68 setfiletype asm68k
+set wildignore=*.o,*.pyc,*.so,*.swp,*.zip " ignore these when expanding paths.
+set clipboard=unnamed " yank to clipboard
+set mouse=a " enable mouse support
+set ruler   " show cursor location in statusbar
+
 
 " use w!! to save a file that should have been opened with sudo!
 cmap w!! w !sudo tee > /dev/null %
@@ -132,7 +156,7 @@ let g:syntastic_c_check_header = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_complete_in_comments = 1
+" let g:ycm_complete_in_comments = 1
 
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
@@ -206,18 +230,17 @@ let mapleader=" "
 
 " key bindings
 " file browsing
-nmap <silent> <Leader>f :NERDTreeToggle<CR>
+nmap <silent> <Leader>f :NERDTreeFind<CR>
 nnoremap <Leader>gu :GundoToggle<CR>
 nnoremap <Leader>tb :TagbarToggle<CR>
 nnoremap <Leader>ig :IndentGuidesToggle<CR>
 nnoremap <F8> :TagbarToggle<CR>
 inoremap <F8> <ESC>:TagbarToggle<CR>i
 
-nnoremap <Leader>tc :ConqueTerm bash<CR>
-nnoremap <Leader>ts :ConqueTermSplit bash<CR>
-nnoremap <Leader>tv :ConqueTermVSplit bash<CR>
-nnoremap <Leader>tt :ConqueTermTab bash<CR>
 
+"Shifting keeps us in visual mode
+vnoremap < <gv
+vnoremap > >gv
 
 " map the leader to : so that all commands are just a space away.
 nnoremap <Leader> :
@@ -299,6 +322,10 @@ nnoremap  <Leader>tn :tabnew<CR>
 nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
+nnoremap <Leader>tt :VimShellCreate<Cr>
+" nnoremap <Leader>u :Unite<Cr>
+
+
 "close quickfix
 nnoremap <Leader>qc :ccl<CR>
 
@@ -309,7 +336,8 @@ nnoremap <C-x><C-s> :w<CR>
 inoremap <C-x><C-s> <ESC>:w<CR>i
 " done on save
 " nnoremap <C-c><C-c> :SyntasticCheck<CR>
-"
+
+" Reminder: Jumplist with ctrl-i and ctrl-o.
 
 "" YouCompleteMe
 "let g:ycm_key_list_previous_completion=['<Up>']
@@ -345,6 +373,7 @@ let g:ycm_filetype_blacklist = {
       \ 'notes' : 1,
       \ 'markdown' : 1,
       \ 'unite' : 1,
+      \ 'vimshell' : 1,
       \ 'text' : 1,
       \ 'vimwiki' : 1,
       \ 'pandoc' : 1,
@@ -357,6 +386,21 @@ let g:ycm_filetype_blacklist = {
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" run search replace on all files in quickfix list (e.g. after Ag find)
+command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(values(buffer_numbers))
+endfunction
+
+" ensure closing of nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 
 "let $XIKI_DIR="/home/tritlo/Workspace/xiki"
 "source $XIKI_DIR/etc/vim/xiki.vim
