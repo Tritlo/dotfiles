@@ -1,6 +1,6 @@
 " set the runtime path to include Vundle and initialize 
-
 filetype off
+
 if has("win32")
     set rtp+=~/vimfiles/bundle/Vundle.vim
     let path='~/vimfiles/bundle'
@@ -12,15 +12,12 @@ endif
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-
-
 " let Vundle manage Vundle, required
 " use PluginInstall to install these plugins
 " and PluginClean to clean.
 " requires Vundle to be installed,
 " install Vundle with
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
 
 Plugin 'gmarik/Vundle.vim' " Required
 
@@ -89,8 +86,7 @@ Plugin 'Shougo/neocomplcache.vim'
 " emacs kill-ring in vim.
 " use with meta-p to scroll through yank history.
 " Does not work with the Icelandic key ð.
-" Plugin 'maxbrunsfeld/vim-yankstack'
-
+Plugin 'maxbrunsfeld/vim-yankstack'
 
 if has("unix")
     " unix only plugins go here
@@ -123,7 +119,6 @@ if has('gui_running')
 
     endif
 endif
-
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -303,6 +298,12 @@ call tinymode#Map("winsize","<","wincmd <")
 call tinymode#Map("winsize",">","wincmd >")
 call tinymode#ModeMsg("winsize","Change window size +/-, </>")
 
+call tinymode#EnterMap("yankstack","<Leader>pj","j")
+call tinymode#EnterMap("yankstack","<Leader>pk","k")
+call tinymode#Map("yankstack","j","normal \<Plug>yankstack_substitute_newer_paste")
+call tinymode#Map("yankstack","k","normal \<Plug>yankstack_substitute_older_paste")
+call tinymode#ModeMsg("yankstack","Scroll through yankstack with j/k")
+
 "move
 nnoremap <Leader>wH :winc H<CR>
 nnoremap <Leader>wJ :winc J<CR>
@@ -426,3 +427,5 @@ au BufEnter *.org            call org#SetOrgFileType()
 let g:org_capture_file = '~/org/captures.org'
 command! OrgCapture :call org#CaptureBuffer()
 command! OrgCaptureFile :call org#OpenCaptureFile()
+
+let g:yankstack_map_keys = 0
