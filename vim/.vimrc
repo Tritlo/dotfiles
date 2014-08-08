@@ -149,7 +149,9 @@ set omnifunc=syntaxcomplete#Complete
 " Native settings
 set cryptmethod=blowfish " Set encryption method. Encrypt files with :X.
 " Unencrypt with an empyt key.
-set hlsearch
+set hlsearch " highlight search matches
+set incsearch " starts search before enter
+set autoread " reads files again if they have been changed outside of vim
 set hidden " do not remove buffers that are hidden
 set nocompatible " no vi mode here
 set number " display line numbers
@@ -171,6 +173,41 @@ set wildignore=*.o,*.pyc,*.so,*.swp,*.zip " ignore these when expanding paths.
 set clipboard=unnamed " yank to clipboard
 set mouse=a " enable mouse support
 set ruler   " show cursor location in statusbar
+
+" stuff from vim-sensible
+set showcmd
+
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+
+if &history < 1000
+  set history=1000
+endif
+if &tabpagemax < 50
+  set tabpagemax=50
+endif
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+set sessionoptions-=options
+" set fileformat+=mac
+
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux'
+  set t_Co=16
+endif
+
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
 
 
 " use w!! to save a file that should have been opened with sudo!
