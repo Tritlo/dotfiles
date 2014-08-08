@@ -54,8 +54,9 @@ plugins+=(docker)
 plugins+=(web-search)
 plugins+=(pip)
 plugins+=(django)
-#plugins+=(virtualenvwrapper)
-plugins+=(vi-mode history-substring-search zsh-autosuggestions zsh-syntax-highlighting)
+# plugins+=(virtualenvwrapper)
+# plugins+=(vi-mode)
+plugins+=(history-substring-search zsh-autosuggestions zsh-syntax-highlighting)
 
 . $ZSH/oh-my-zsh.sh
 

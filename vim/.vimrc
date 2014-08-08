@@ -26,7 +26,9 @@ Plugin 'tomasr/molokai'
 Plugin 'flazz/vim-colorschemes'
 
 Plugin 'scrooloose/nerdtree' " file browser
-Plugin 'scrooloose/nerdcommenter' " Commenter
+"Plugin 'scrooloose/nerdcommenter' " Commenter
+Plugin 'tpope/vim-commentary'
+
 Plugin 'bling/vim-airline' "status bar
 Plugin 'scrooloose/syntastic' " Dat syntax highlighter
 Plugin 'tpope/vim-fugitive' " git integration
@@ -35,13 +37,24 @@ Plugin 'tpope/vim-fugitive' " git integration
 " mapped to leader leader.
 Plugin 'Lokaltog/vim-easymotion'
 
-" hard mode: have to use motions
-Plugin 'wikitopian/hardmode'
 
+" use cs to change surrounding, ds to delete surrounding and ys to insert surrounding
+Plugin 'tpope/vim-surround' 
+" repeat last command, . on steroids
+Plugin 'tpope/vim-repeat'
+
+" enable readline bindings in vim (i.e. c-a to go to start of line in insert
+" and command line mode, c-e end of line, c-f and c-b a letter forward and
+" backward and m-f and m-b for a word worard and backward
+Plugin 'tpope/vim-rsi'
+
+" supercharges the * command (search for word under cursor)
+Plugin 'ironhouzi/vim-stim'
 
 "" misc
 Plugin 'tinymode.vim' " continuous key presses
 Plugin 'rking/ag.vim' " better grep, search for term in project.
+
 
 " filetype plugins
 Plugin 'jnwhiteh/vim-golang'
@@ -51,6 +64,7 @@ Plugin 'nginx.vim'
 Plugin 'elzr/vim-json'
 Plugin 'godlygeek/tabular' " for markdown
 Plugin 'tpope/vim-markdown'
+Plugin 'nelstrom/vim-markdown-folding'
 " opencl.
 " remember to create
 " opencl.vim in ~/.vim/ftdetect/
@@ -132,6 +146,10 @@ autocmd BufLeave \[vimshell\]* NeoComplCacheDisable
 
 set omnifunc=syntaxcomplete#Complete
 
+" Native settings
+set cryptmethod=blowfish " Set encryption method. Encrypt files with :X.
+" Unencrypt with an empyt key.
+set hlsearch
 set hidden " do not remove buffers that are hidden
 set nocompatible " no vi mode here
 set number " display line numbers
@@ -413,12 +431,11 @@ endfunction
 " ensure closing of nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-"autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+nnoremap <leader>h :set hlsearch!<CR>
 let g:org_command_for_emacsclient = "emacsclient"
 
-"let $XIKI_DIR="/home/tritlo/Workspace/xiki"
-"source $XIKI_DIR/etc/vim/xiki.vim
+" let $XIKI_DIR="/home/tritlo/Workspace/xiki"
+" source $XIKI_DIR/etc/vim/xiki.vim
 "
 let g:ft_ignore_pat = '\.org'
 " and then put these lines in vimrc somewhere after the line above
@@ -427,5 +444,15 @@ au BufEnter *.org            call org#SetOrgFileType()
 let g:org_capture_file = '~/org/captures.org'
 command! OrgCapture :call org#CaptureBuffer()
 command! OrgCaptureFile :call org#OpenCaptureFile()
-
 let g:yankstack_map_keys = 0
+let g:markdown_fold_style = 'nested'
+
+" Save fold information and cursor location
+autocmd BufWinLeave *.* mkview!
+autocmd BufWinEnter *.* silent loadview
+
+nmap <Leader>c<Space> gc
+vmap <Leader>c<Space> gc
+
+nmap <leader>cy "*y<CR>gv"+y<CR>
+vmap <leader>cy "*y<CR>gv"+y<CR>
