@@ -156,6 +156,8 @@ aliases = {
   ATAG = "WINDOW SERVER";
   UNSET = "set -clear";
   RESET = "set -default";
+  vm_add = "/^statusbar prompt add -after input -alignment right vim_mode";
+  vm_del = "/^statusbar prompt remove vim_mode";
 };
 
 statusbar = {
@@ -220,6 +222,7 @@ statusbar = {
         act = { priority = "10"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
+        vim_windows = { };
       };
     };
 
@@ -240,19 +243,6 @@ statusbar = {
 
     # we treat input line as yet another statusbar :) It's possible to
     # add other items before or after the input line item.
-    prompt = {
-      type = "root";
-      placement = "bottom";
-      # we want to be at the bottom always
-      position = "100";
-      visible = "always";
-      items = {
-        prompt = { priority = "-1"; };
-        prompt_empty = { priority = "-1"; };
-        # treated specially, this is the real input line.
-        input = { priority = "10"; };
-      };
-    };
 
     # topicbar
     topic = {
@@ -267,6 +257,14 @@ statusbar = {
         topicbarend = { priority = "100"; alignment = "right"; };
       };
     };
+    prompt = {
+      items = {
+        uberprompt = { priority = "-1"; };
+        input = { priority = "10"; };
+        vim_mode = { alignment = "right"; };
+      };
+      position = "100";
+    };
   };
 };
 settings = {
@@ -277,4 +275,10 @@ settings = {
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "fe-common/core" = { theme = "revolutionary"; };
+  "perl/core/scripts" = {
+    uberprompt_load_hook = "/^vm_add";
+    uberprompt_unload_hook = "/^vm_del";
+    uberprompt_format = "$*$uber> ";
+    uberprompt_format_empty = "$*> ";
+  };
 };
