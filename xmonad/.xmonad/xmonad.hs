@@ -148,6 +148,7 @@ addPrefix p ms conf =
 --myTerm = "urxvtclient"
 myTerm = "gnome-terminal"
 editor = "emacsclient -a \"\" -c -n "
+ircopen = "screen -mdqR irssi irssi"
 simpleEditor ="gedit"
 fixMouse = "(sleep 1 && killall lxappearance)& lxappearance"
 
@@ -162,7 +163,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     , ((modm                , xK_s), (spawn audioController))
     , ((modm .|. shiftMask  , xK_s), (spawn musicPlayer))
     , ((modm                , xK_v), (spawn emailclient))
-    , ((modm                , xK_c ), (spawn editor))
+    , ((modm                , xK_c ), (spawn ircopen))
     , ((modm .|. shiftMask  , xK_g), (spawn simpleEditor))
     {-
     , ((modm .|. controlMask, xK_h), sendMessage $ pullGroup L)
