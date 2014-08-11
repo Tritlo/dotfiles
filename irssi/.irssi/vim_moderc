@@ -1,0 +1,8 @@
+map <C-H> <BS>
+map bl :bnext
+map bh :bprev
+map bd :bd
+map <Space>bl :bnext
+map <Space>bh :bprev
+map <Space>bd :bd
+map ZZ /quit

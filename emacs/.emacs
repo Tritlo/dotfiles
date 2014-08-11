@@ -19,9 +19,6 @@
 (require 'evil-leader)
 (global-evil-leader-mode)
 
-(evil-leader/set-leader "<SPC>")
-(evil-leader/set-key
-    "e" 'find-file)
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -94,6 +91,7 @@
  '(inhibit-startup-screen t)
  '(initial-buffer-choice nil)
  '(initial-scratch-message nil)
+ '(initial-scratch-buffer nil)
  '(linum-format "%4i")
  '(remote-shell-program "ssh"))
 (custom-set-faces
@@ -128,3 +126,35 @@ al :height 128 :width normal :foundry "unknown" :family "Terminus")))))
 (setq org-journal-dir "~/Dropbox/Dagbok/Journal/")
 (setq org-journal-date-format "%Y-%m-%d")
 
+
+(setq my-skippable-buffers '("*Messages*" "*scratch*" "*Help*"))
+
+(defun my-change-buffer (change-buffer)
+    "Call CHANGE-BUFFER until current buffer is not in `my-skippable-buffers'."
+      (let ((initial (current-buffer)))
+            (funcall change-buffer)
+                (let ((first-change (current-buffer)))
+                        (catch 'loop
+                                       (while (member (buffer-name) my-skippable-buffers)
+                                                        (funcall change-buffer)
+                                                                  (when (eq (current-buffer) first-change)
+                                                                                (switch-to-buffer initial)
+                                                                                            (throw 'loop t)))))))
+
+(defun my-next-buffer ()
+    "`next-buffer' that skips `my-skippable-buffers'."
+      (interactive)
+        (my-change-buffer 'next-buffer))
+
+(defun my-previous-buffer ()
+    "`previous-buffer' that skips `my-skippable-buffers'."
+      (interactive)
+        (my-change-buffer 'previous-buffer))
+
+
+(evil-leader/set-leader "<SPC>")
+(evil-leader/set-key
+    "e" 'find-file
+    "bl" 'my-next-buffer
+    "bh" 'my-previous-buffer
+    "bd" 'kill-this-buffer)

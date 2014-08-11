@@ -1,7 +1,7 @@
 #!/bin/sh
 # Make emacs open calendar if no argument is given
 if [ "$#" -eq 0 ]; then
-    emacsclient -a "" -c -n 
+    emacsclient -a "" -c -n -s emacs
 else
-    emacsclient -a "" -c -n $*
+    emacsclient -a "" -c -n -s emacs $*
 fi
