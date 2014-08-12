@@ -127,7 +127,7 @@ gestures = M.fromList
 --browserCmd = "emacsclient -a \"\" -c -n -e \"(w3m)\""
 --browserCmd = "firefox-ux -new-window"
 --altbrowserCmd = "env GTK2_RC_FILES=/usr/share/themes/Adwaita/gtk-2.0/gtkrc iceweasel -new-window"
-browserCmd = "firefox"
+browserCmd = "google-chrome-beta"
 altbrowserCmd = "chromium-browser"
 audioController = "gnome-control-center sound"
 musicPlayer = "spotify-start"

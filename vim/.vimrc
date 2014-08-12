@@ -46,7 +46,7 @@ Plugin 'tpope/vim-repeat'
 " enable readline bindings in vim (i.e. c-a to go to start of line in insert
 " and command line mode, c-e end of line, c-f and c-b a letter forward and
 " backward and m-f and m-b for a word worard and backward
-Plugin 'tpope/vim-rsi'
+Plugin 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
 
 " supercharges the * command (search for word under cursor)
 Plugin 'ironhouzi/vim-stim'
