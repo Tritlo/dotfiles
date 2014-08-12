@@ -280,5 +280,6 @@ settings = {
     uberprompt_unload_hook = "/^vm_del";
     uberprompt_format = "$*$uber> ";
     uberprompt_format_empty = "$*> ";
+    tmux_away_active = "yes";
   };
 };
