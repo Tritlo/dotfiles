@@ -283,3 +283,4 @@ settings = {
     tmux_away_active = "yes";
   };
 };
+logs = { };

@@ -148,7 +148,7 @@ addPrefix p ms conf =
 --myTerm = "urxvtclient"
 myTerm = "gnome-terminal"
 editor = "emacsclient -a \"\" -c -n "
-ircopen = "gnome-terminal  -x zsh -c 'tmux new -s irssi irssi || tmux attach -t irssi'"
+ircopen = "/home/tritlo/.scripts/gtmuxirssi"
 simpleEditor ="gedit"
 fixMouse = "(sleep 1 && killall lxappearance)& lxappearance"
 

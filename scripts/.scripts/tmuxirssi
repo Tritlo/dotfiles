@@ -1,0 +1,2 @@
+#!/bin/bash
+bash -l -c 'tmux -q new -s irssi irssi || tmux attach -t irssi'
