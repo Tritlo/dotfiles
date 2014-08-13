@@ -265,13 +265,6 @@ statusbar = {
       };
       position = "100";
     };
-    awl_0 = {
-      items = {
-        barstart = { priority = "100"; };
-        awl_0 = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
   };
 };
 settings = {
@@ -291,7 +284,6 @@ settings = {
     awl_shared_sbar = "OFF";
     awl_block = "20";
     awl_viewer = "yes";
-    nicklist_automode = "on";
     nicklist_height = "28";
     nicklist_width = "20";
   };
@@ -299,7 +291,8 @@ settings = {
 logs = { };
 windows = {
   1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
-  2 = {
+  2 = { name = "hilight"; sticky = "yes"; };
+  3 = {
     items = (
       {
         type = "CHANNEL";
@@ -309,7 +302,7 @@ windows = {
       }
     );
   };
-  3 = {
+  4 = {
     items = (
       {
         type = "CHANNEL";
@@ -319,7 +312,6 @@ windows = {
       }
     );
   };
-  4 = { name = "hilight"; sticky = "yes"; };
 };
 mainwindows = {
   1 = { first_line = "6"; lines = "48"; };

@@ -4,10 +4,10 @@ tmux has-session -t irssi &> /dev/null
 
 if [ $? != 0 ]
   then
-    bash -l -c 'tmux -q  new-session -s irssi -n irssi -d irssi'
+    bash -l -c "tmux -q  new-session -s irssi -n irssi -d 'irssi && tmux -q kill-session -t irssi'"
     tmux splitw -h -l 20 -t irssi 'cat ~/.irssi/nicklistfifo'
     # tmux resize-pane -t 1 -x 20
-    tmux splitw -v -p 50 -t irssi 'perl ~/.irssi/scripts/adv_windowlist.pl'
+    tmux splitw -v -p 30 -t irssi 'perl ~/.irssi/scripts/adv_windowlist.pl'
     tmux select-pane -t 0
     # TODO:
     # - Fix nicklistfifo pane

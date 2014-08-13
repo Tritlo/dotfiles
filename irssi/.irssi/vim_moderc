@@ -6,3 +6,5 @@ map <Space>bl :bnext
 map <Space>bh :bprev
 map <Space>bd :bd
 map ZZ /quit
+map <C-K> /eval /nicklist scroll -10
+map <C-J> /eval /nicklist scroll +10

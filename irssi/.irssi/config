@@ -284,9 +284,9 @@ settings = {
     awl_shared_sbar = "OFF";
     awl_block = "20";
     awl_viewer = "yes";
-    nicklist_automode = "FIFO";
-    nicklist_height = "28";
+    nicklist_height = "39";
     nicklist_width = "20";
+    nicklist_automode = "FIFO";
   };
 };
 logs = { };
@@ -316,5 +316,5 @@ windows = {
 };
 mainwindows = {
   1 = { first_line = "6"; lines = "48"; };
-  4 = { first_line = "1"; lines = "5"; };
+  2 = { first_line = "1"; lines = "5"; };
 };
