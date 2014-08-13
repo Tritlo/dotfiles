@@ -220,6 +220,7 @@ statusbar = {
         window = { };
         window_empty = { };
         lag = { priority = "-1"; };
+        act = { priority = "10"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
@@ -274,7 +275,11 @@ settings = {
     nick = "tritlo";
   };
   "fe-text" = { actlist_sort = "refnum"; };
-  "fe-common/core" = { theme = "revolutionary"; };
+  "fe-common/core" = {
+    theme = "revolutionary";
+    autolog_path = "~/.irclogs/%Y/$tag/$0.%m-%d.log";
+    autolog = "yes";
+  };
   "perl/core/scripts" = {
     uberprompt_load_hook = "/^vm_add";
     uberprompt_unload_hook = "/^vm_del";
@@ -284,8 +289,10 @@ settings = {
     awl_shared_sbar = "OFF";
     awl_block = "20";
     awl_viewer = "yes";
-    nicklist_height = "28";
+    nicklist_height = "35";
     nicklist_width = "20";
+    nicklist_automode = "FIFO";
+    awl_mouse = "yes";
   };
 };
 logs = { };
@@ -315,5 +322,8 @@ windows = {
 };
 mainwindows = {
   1 = { first_line = "6"; lines = "48"; };
-  4 = { first_line = "1"; lines = "5"; };
+  2 = { first_line = "1"; lines = "5"; };
 };
+keyboard = ( 
+  { key = "meta-[M"; id = "command"; data = "mouse_xterm"; }
+);
