@@ -105,7 +105,8 @@ chatnets = {
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
-  { name = "#IntegralTuring"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#IntegralTuring"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#TeamRocket"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -219,7 +220,6 @@ statusbar = {
         window = { };
         window_empty = { };
         lag = { priority = "-1"; };
-        act = { priority = "10"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
@@ -265,6 +265,13 @@ statusbar = {
       };
       position = "100";
     };
+    awl_0 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_0 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
   };
 };
 settings = {
@@ -281,6 +288,40 @@ settings = {
     uberprompt_format = "$*$uber> ";
     uberprompt_format_empty = "$*> ";
     tmux_away_active = "yes";
+    awl_shared_sbar = "OFF";
+    awl_block = "20";
+    awl_viewer = "yes";
+    nicklist_automode = "on";
+    nicklist_height = "28";
+    nicklist_width = "20";
   };
 };
 logs = { };
+windows = {
+  1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
+  2 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#IntegralTuring";
+        tag = "freenode";
+      }
+    );
+  };
+  3 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#TeamRocket";
+        tag = "freenode";
+      }
+    );
+  };
+  4 = { name = "hilight"; sticky = "yes"; };
+};
+mainwindows = {
+  1 = { first_line = "6"; lines = "48"; };
+  4 = { first_line = "1"; lines = "5"; };
+};
