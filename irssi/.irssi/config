@@ -32,6 +32,14 @@ servers = (
     ssl_verify = "yes";
     ssl_capath = "/etc/ssl/certs";
     autoconnect = "yes";
+  },
+  {
+    address = "irc.esper.net";
+    chatnet = "EsperNet";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_verify = "no";
+    autoconnect = "yes";
   }
 );
 
@@ -100,13 +108,15 @@ chatnets = {
   SILC = { type = "SILC"; };
   Ubuntu = { type = "IRC"; };
   freenode = { type = "IRC"; };
+  EsperNet = { type = "IRC"; };
 };
 
 channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
   { name = "#IntegralTuring"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#TeamRocket"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#TeamRocket"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#KSPOfficial"; chatnet = "EsperNet"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -289,7 +299,7 @@ settings = {
     awl_shared_sbar = "OFF";
     awl_block = "20";
     awl_viewer = "yes";
-    nicklist_height = "39";
+    nicklist_height = "28";
     nicklist_width = "20";
     nicklist_automode = "FIFO";
     awl_mouse = "yes";
