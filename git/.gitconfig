@@ -8,5 +8,9 @@
 [merge]
 	conflictstyle = diff3
 	tool = gvimdiff
+	summary = true
 [core]
 	excludesfile = /home/tritlo/.gitignore_global
+[gui]
+	fontui = -family \"Droid Sans Mono\" -size -12 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Droid Sans Mono\" -size -12 -weight normal -slant roman -underline 0 -overstrike 0

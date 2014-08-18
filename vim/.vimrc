@@ -51,6 +51,7 @@ Plugin 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as
 " supercharges the * command (search for word under cursor)
 Plugin 'ironhouzi/vim-stim'
 
+
 "" misc
 Plugin 'tinymode.vim' " continuous key presses
 Plugin 'rking/ag.vim' " better grep, search for term in project.
