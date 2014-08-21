@@ -1,2 +1,3 @@
 #!/bin/bash
-gnome-terminal -x /home/tritlo/.scripts/tmuxirssi
+# gnome-terminal -x /home/tritlo/.scripts/tmuxirssi
+firefox https://glowing-bear.github.io/glowing-bear/ & disown

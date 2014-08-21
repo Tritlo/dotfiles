@@ -1,6 +1,7 @@
 #!/bin/bash
 # bash -l -c 'tmux -q new -s irssi irssi || tmux attach -t irssi'
-ssh mpg.is -t tmux -u a -t irssi
+#ssh mpg.is -t tmux -u a -t weechat
+firefox https://glowing-bear.github.io/glowing-bear/ & disown
 # tmux has-session -t irssi &> /dev/null
 
 # if [ $? != 0 ]

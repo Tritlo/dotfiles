@@ -37,6 +37,18 @@ Plugin 'tpope/vim-fugitive' " git integration
 " mapped to leader leader.
 Plugin 'Lokaltog/vim-easymotion'
 
+" clojure
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-leiningen'
+
+Plugin 'vim-voom/VOoM' " outline viewer
+Plugin 'vim-scripts/utl.vim' " better vim url handling
+
+"vim notes
+Plugin 'xolox/vim-shell'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-notes'
 
 " use cs to change surrounding, ds to delete surrounding and ys to insert surrounding
 Plugin 'tpope/vim-surround' 
@@ -288,6 +300,7 @@ endif
 
 " space is pretty easy to reach:
 let mapleader=" "
+let maplocalleader="\\"
 
 
 " key bindings
@@ -400,8 +413,8 @@ nnoremap <Leader>qc :ccl<CR>
 " save
 " enable emacs save in insert,
 " this overwrites in-line spell check;
-nnoremap <C-x><C-s> :w<CR>
-inoremap <C-x><C-s> <ESC>:w<CR>i
+" nnoremap <C-x><C-s> :w<CR>
+" inoremap <C-x><C-s> <ESC>:w<CR>i
 " done on save
 " nnoremap <C-c><C-c> :SyntasticCheck<CR>
 
@@ -420,10 +433,10 @@ if has("unix")
     inoremap <F4> :!sakura & disown<CR>
 endif
 
-if has('gui_running')
-    nnoremap <M-x> :
-    inoremap <M-x> <Esc>:
-endif
+" if has('gui_running')
+"     nnoremap <M-x> :
+"     inoremap <M-x> <Esc>:
+" endif
 
 
 let g:pymode_breakpoint_bind = '<leader>pb'
@@ -450,6 +463,9 @@ let g:ycm_filetype_blacklist = {
       \ 'conque_term' : 1
       \}
 
+
+let g:yankstack_map_keys = 0
+let g:markdown_fold_style = 'nested'
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -482,8 +498,6 @@ au BufEnter *.org            call org#SetOrgFileType()
 let g:org_capture_file = '~/org/captures.org'
 command! OrgCapture :call org#CaptureBuffer()
 command! OrgCaptureFile :call org#OpenCaptureFile()
-let g:yankstack_map_keys = 0
-let g:markdown_fold_style = 'nested'
 
 " Save fold information and cursor location
 autocmd BufWinLeave *.* mkview!
@@ -492,5 +506,27 @@ autocmd BufWinEnter *.* silent loadview
 nmap <Leader>c<Space> gc
 vmap <Leader>c<Space> gc
 
-nmap <leader>cy "*y<CR>gv"+y<CR>
-vmap <leader>cy "*y<CR>gv"+y<CR>
+nmap <leader>cy "+y
+vmap <leader>cy "+y<CR>
+nmap <leader>cp "+p<CR>
+
+" vim-notes
+let g:notes_directories = ['~/Dropbox/Notes']
+let g:notes_suffix = '.md'
+" no replacing!
+let g:notes_smart_quotes = 0
+let g:notes_unicode_enabled = 0
+
+vnoremap <leader>ne :NoteFromSelectedText<CR>
+vnoremap <leader>ns :SplitNoteFromSelectedText<CR>
+vnoremap <leader>nt :TabNoteFromSelectedText<CR>
+vnoremap <leader>nm :NoteToMarkdown<CR>
+vnoremap <leader>nh :NoteToHtml<CR>
+vnoremap <leader>nd :DeleteNote<CR>
+nnoremap <leader>nn :Note<Space>
+nnoremap <leader>ns :SearchNotes<CR>
+nnoremap <leader>nv :execute 'VoomToggle' &ft<CR>
+
+let g:shell_mappings_enabled = 0
+
+
