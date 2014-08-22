@@ -1,17 +1,16 @@
 #!/bin/bash
 # bash -l -c 'tmux -q new -s irssi irssi || tmux attach -t irssi'
-tmux has-session -t irssi &> /dev/null
+#ssh mpg.is -t tmux -u a -t weechat
+firefox https://glowing-bear.github.io/glowing-bear/ & disown
+# tmux has-session -t irssi &> /dev/null
 
-if [ $? != 0 ]
-  then
-    bash -l -c "tmux -q  new-session -s irssi -n irssi -d 'irssi && tmux -q kill-session -t irssi'"
-    tmux splitw -h -l 20 -t irssi 'cat ~/.irssi/nicklistfifo'
-    # tmux resize-pane -t 1 -x 20
-    tmux splitw -v -p 30 -t irssi 'perl ~/.irssi/scripts/adv_windowlist.pl'
-    tmux select-pane -t 0
-    # TODO:
-    # - Fix nicklistfifo pane
-    # - in irssi: autostart nicklist fifo
-fi
-tmux attach -t irssi
+# if [ $? != 0 ]
+#   then
+#     bash -l -c "tmux -q  new-session -s irssi -n irssi -d 'irssi && tmux -q kill-session -t irssi'"
+#     tmux splitw -h -l 20 -t irssi 'cat ~/.irssi/nicklistfifo'
+#     # tmux resize-pane -t 1 -x 20
+#     tmux splitw -v -p 30 -t irssi 'perl ~/.irssi/scripts/adv_windowlist.pl'
+#     tmux select-pane -t 0
+# fi
+# tmux attach -t irssi
 

@@ -288,9 +288,9 @@ circscroll <- spawnPipe "/home/tritlo/.scripts/circscroll.sh"
 dropbox <- spawnPipe "sleep 20; dropbox start"
 --not needed with nm-cli
 networkm <- spawnPipe "sleep 20; killall -q nm-applet; nm-applet;"
-gnomesettings <- spawnPipe "sleep 20; killall -q gnome-settings-daemon; gnome-settings-daemon;" --Brightness and audio keys.
+gnomesettings <- spawnPipe "sleep 2e; killall -q gnome-settings-daemon; gnome-settings-daemon;" --Brightness and audio keys.
 --wicd <- spawnPipe "sleep 15; killall -q wicd-client;  wicd-client -t;"
---redshift <- spawnPipe "sleep 15; killall -q redshift-gtk; redshift-gtk -l 64:-22"
+redshift <- spawnPipe "sleep 15; killall -q redshift-gtk; redshift-gtk -c /home/tritlo/.config/redshift.conf;"
 --redshift <- spawnPipe "sleep 15; killall -q gtk-redshift ; gtk-redshift -l 64:-22"
 xmonad $ ewmh defaultConfig {
 manageHook = manageDocks <+> myManageHook,
