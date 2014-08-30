@@ -49,11 +49,12 @@ ZSH_THEME="flazz"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=()
-plugins+=(git)
+plugins+=(git ssh-agent)
 plugins+=(docker)
 plugins+=(web-search)
 plugins+=(pip)
 plugins+=(django)
+plugins+=(lein)
 # plugins+=(virtualenvwrapper)
 # plugins+=(vi-mode)
 plugins+=(history-substring-search zsh-autosuggestions zsh-syntax-highlighting)

@@ -37,18 +37,7 @@ Plugin 'tpope/vim-fugitive' " git integration
 " mapped to leader leader.
 Plugin 'Lokaltog/vim-easymotion'
 
-" clojure
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-leiningen'
 
-Plugin 'vim-voom/VOoM' " outline viewer
-Plugin 'vim-scripts/utl.vim' " better vim url handling
-
-"vim notes
-Plugin 'xolox/vim-shell'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
 
 " use cs to change surrounding, ds to delete surrounding and ys to insert surrounding
 Plugin 'tpope/vim-surround' 
@@ -75,7 +64,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'nginx.vim'
 Plugin 'elzr/vim-json'
-Plugin 'godlygeek/tabular' " for markdown
+" Plugin 'godlygeek/tabular' " for markdown
 Plugin 'tpope/vim-markdown'
 Plugin 'nelstrom/vim-markdown-folding'
 " opencl.
@@ -110,6 +99,14 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
 Plugin 'Shougo/neocomplcache.vim'
 
+
+" clojure
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-leiningen'
+
+Plugin 'vim-voom/VOoM' " outline viewer
+Plugin 'vim-scripts/utl.vim' " better vim url handling
 " emacs kill-ring in vim.
 " use with meta-p to scroll through yank history.
 " Does not work with the Icelandic key ð.
@@ -125,8 +122,12 @@ endif
 
 " Thessi haegja a, viljum thad ekki i terminal
 if has('gui_running')
-
     " these take longer to load
+
+    "vim notes
+    Plugin 'xolox/vim-shell'
+    Plugin 'xolox/vim-misc'
+    Plugin 'xolox/vim-notes'
     "
     " local vimrc, loads .lvimrc files in reverse order, and applies those 
     " settings. Like exrc, but hierarchical.

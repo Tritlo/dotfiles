@@ -17,6 +17,7 @@ Config { font = "xft:Terminus-9"
              --, Run XMonadLog
              --, Run MPD [] 10
              , Run Com "/bin/bash" ["-c", "bash ~/.scripts/gmail.sh"] "gmail" 3000
+             , Run Com "/bin/bash" ["-c", "bash ~/.scripts/curruser.sh"] "user" 300000
              , Run Kbd [("us","en")]
              --, Run Volume "default" "Master" [] 5
              --, Run Volume "default" "Master" ["-C", "#B5BD68", "-c", "#CC6666"] 5
@@ -32,5 +33,5 @@ Config { font = "xft:Terminus-9"
        --, pickBroadest = True
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " Cpu/Mem: %cpu%/%memory% %wlan0wi%: %wlan0%  } %UnsafeStdinReader% {%gmail% %battery% %kbd% %date% "
+       , template = "<action=dmenu_run >Cpu/Mem: %cpu%/%memory%</action> %wlan0wi%: %wlan0%  } %UnsafeStdinReader% {%gmail% %battery% %kbd% <action=chromium-new-window --app-id=mojepfklcankkmikonjlnidiooanmpbb >%date%</action> %user%"
        }
