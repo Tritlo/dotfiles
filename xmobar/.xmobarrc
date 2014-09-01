@@ -33,5 +33,5 @@ Config { font = "xft:Terminus-9"
        --, pickBroadest = True
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<action=dmenu_run >Cpu/Mem: %cpu%/%memory%</action> %wlan0wi%: %wlan0%  } %UnsafeStdinReader% {%gmail% %battery% %kbd% <action=chromium-new-window --app-id=mojepfklcankkmikonjlnidiooanmpbb >%date%</action> %user%"
+       , template = "<action=dmenu_run >Cpu/Mem: %cpu%/%memory%</action> %wlan0wi%: %wlan0%  } %UnsafeStdinReader% {%gmail% %battery% %kbd% <action=chromium-browser --app-id=mojepfklcankkmikonjlnidiooanmpbb >%date%</action> %user%"
        }

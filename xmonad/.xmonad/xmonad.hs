@@ -243,6 +243,7 @@ myManageHook =  composeAll
     [ manageHook defaultConfig
     , className =? "Unity-2d-panel" --> doIgnore
     , className =? "gimp" --> doFloat
+    , title =? "Sunrise Calendar" --> doFloat
     ]
 
 myRed = "#CC6666"
@@ -290,7 +291,7 @@ dropbox <- spawnPipe "sleep 20; dropbox start"
 networkm <- spawnPipe "sleep 20; killall -q nm-applet; nm-applet;"
 gnomesettings <- spawnPipe "sleep 2e; killall -q gnome-settings-daemon; gnome-settings-daemon;" --Brightness and audio keys.
 --wicd <- spawnPipe "sleep 15; killall -q wicd-client;  wicd-client -t;"
-redshift <- spawnPipe "sleep 15; killall -q redshift-gtk; redshift-gtk -c /home/tritlo/.config/redshift.conf;"
+redshift <- spawnPipe "sleep 15; killall -q redshift; redshift-gtk -c /home/tritlo/.config/redshift.conf;"
 --redshift <- spawnPipe "sleep 15; killall -q gtk-redshift ; gtk-redshift -l 64:-22"
 xmonad $ ewmh defaultConfig {
 manageHook = manageDocks <+> myManageHook,
