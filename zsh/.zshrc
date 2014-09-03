@@ -50,7 +50,8 @@ ZSH_THEME="flazz"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=()
 plugins+=(git)
-plugins+=(gpg-agent ssh-agent)
+#plugins+=(gpg-agent)
+# plugins+=(ssh-agent)
 plugins+=(docker)
 plugins+=(web-search)
 plugins+=(pip)
@@ -134,6 +135,10 @@ if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
 fi
 
 if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi
+
+if [ -f $(which keychain 2> /dev/null) ]; then
+    keychain --nogui --quiet mpg;
+fi
 
 #Updated installed packages if havent done so for 5 min
 #if [[ -e $(find "$HOME/.nix-installed-pkgs" -amin 15) ]]; then
