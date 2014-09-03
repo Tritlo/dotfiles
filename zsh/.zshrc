@@ -138,6 +138,7 @@ if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.n
 
 if [ -f $(which keychain 2> /dev/null) ]; then
     keychain --nogui --quiet mpg;
+    keychain --nogui --quiet id_rsa;
 fi
 
 #Updated installed packages if havent done so for 5 min
