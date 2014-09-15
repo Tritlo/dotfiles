@@ -50,8 +50,8 @@ ZSH_THEME="flazz"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=()
 plugins+=(git)
-#plugins+=(gpg-agent)
-# plugins+=(ssh-agent)
+plugins+=(gpg-agent)
+plugins+=(ssh-agent)
 plugins+=(docker)
 plugins+=(web-search)
 plugins+=(pip)
@@ -137,8 +137,8 @@ fi
 if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi
 
 if [ -f $(which keychain 2> /dev/null) ]; then
-    keychain --nogui --quiet mpg;
-    keychain --nogui --quiet id_rsa;
+    keychain --inherit any -Q --quiet mpg;
+    keychain --inherit any -Q --quiet ID/id_rsa;
 fi
 
 #Updated installed packages if havent done so for 5 min

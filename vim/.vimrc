@@ -1,154 +1,9 @@
-" set the runtime path to include Vundle and initialize 
-filetype off
 
-if has("win32")
-    set rtp+=~/vimfiles/bundle/Vundle.vim
-    let path='~/vimfiles/bundle'
-    call vundle#begin(path)
-else
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-endif
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-" use PluginInstall to install these plugins
-" and PluginClean to clean.
-" requires Vundle to be installed,
-" install Vundle with
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-Plugin 'gmarik/Vundle.vim' " Required
-
-" The colorschemes
-Plugin 'tomasr/molokai'
-Plugin 'flazz/vim-colorschemes'
-
-Plugin 'scrooloose/nerdtree' " file browser
-"Plugin 'scrooloose/nerdcommenter' " Commenter
-Plugin 'tpope/vim-commentary'
-
-Plugin 'bling/vim-airline' "status bar
-Plugin 'scrooloose/syntastic' " Dat syntax highlighter
-Plugin 'tpope/vim-fugitive' " git integration
-
-" easy motion, to train motions better.
-" mapped to leader leader.
-Plugin 'Lokaltog/vim-easymotion'
+so ~/.vimrc.plugins
 
 
-
-" use cs to change surrounding, ds to delete surrounding and ys to insert surrounding
-Plugin 'tpope/vim-surround' 
-" repeat last command, . on steroids
-Plugin 'tpope/vim-repeat'
-
-" enable readline bindings in vim (i.e. c-a to go to start of line in insert
-" and command line mode, c-e end of line, c-f and c-b a letter forward and
-" backward and m-f and m-b for a word worard and backward
-Plugin 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
-
-" supercharges the * command (search for word under cursor)
-Plugin 'ironhouzi/vim-stim'
-
-
-"" misc
-Plugin 'tinymode.vim' " continuous key presses
-Plugin 'rking/ag.vim' " better grep, search for term in project.
-
-
-" filetype plugins
-Plugin 'jnwhiteh/vim-golang'
-Plugin 'pangloss/vim-javascript'
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'nginx.vim'
-Plugin 'elzr/vim-json'
-" Plugin 'godlygeek/tabular' " for markdown
-Plugin 'tpope/vim-markdown'
-Plugin 'nelstrom/vim-markdown-folding'
-" opencl.
-" remember to create
-" opencl.vim in ~/.vim/ftdetect/
-" containing the command
-" autocmd BufRead,BufNewFile *.cl set filetype=opencl
-Plugin 'petRUShka/vim-opencl'
-
-" a good mode
-" Plugin 'jceb/vim-orgmode'
-" Plugin 'tpope/vim-speeddating'
-Plugin 'hsitz/VimOrganizer'
-Plugin 'mattn/calendar-vim'
-
-
-" supervisor files and supervisor ctl
-Plugin 'thiderman/vim-supervisor' " also some functionality
-Plugin 'vim-scripts/Tail-Bundle' " works for other tail files as well
-
-Plugin 'sjl/gundo.vim'     " bound to <Leader>gu, displays the undo tree (so that i use it)
-Plugin 'edsono/vim-matchit' " better % matching, including html tags
-
-Plugin 'SirVer/ultisnips' " inserts snippets
-Plugin 'honza/vim-snippets' " lots of predefined snippets
-
-Plugin 'nathanaelkane/vim-indent-guides' " toggleable with <Leader>ig
-
-
-" vimshell and deps.
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/vimshell.vim'
-Plugin 'Shougo/neocomplcache.vim'
-
-
-" clojure
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-leiningen'
-
-Plugin 'vim-voom/VOoM' " outline viewer
-Plugin 'vim-scripts/utl.vim' " better vim url handling
-" emacs kill-ring in vim.
-" use with meta-p to scroll through yank history.
-" Does not work with the Icelandic key ð.
-Plugin 'maxbrunsfeld/vim-yankstack'
-
-if has("unix")
-    " unix only plugins go here
-    Plugin 'Valloric/YouCompleteMe'
-    " Tharf exuberant ctags
-    Plugin 'jeetsukumaran/vim-gazetteer'
-    Plugin 'majutsushi/tagbar'
-endif
-
-" Thessi haegja a, viljum thad ekki i terminal
-if has('gui_running')
-    " these take longer to load
-
-    "vim notes
-    Plugin 'xolox/vim-shell'
-    Plugin 'xolox/vim-misc'
-    Plugin 'xolox/vim-notes'
-    "
-    " local vimrc, loads .lvimrc files in reverse order, and applies those 
-    " settings. Like exrc, but hierarchical.
-    Plugin 'embear/vim-localvimrc'
-
-    Plugin 'klen/python-mode'
-    " File finder
-    Plugin 'kien/ctrlp.vim'
-    Plugin 'tpope/vim-sleuth' " automatically detects indent settings
-
-    "git gutter
-    Plugin 'airblade/vim-gitgutter'
-    " Ser medhondlun
-
-    if has("unix")
-        " Code completion, tharf ad compile-a med cmake og libclang og e-d
-
-    endif
-endif
-call vundle#end()            " required
-filetype plugin indent on    " required
+colorscheme pablo
+silent! colorscheme molokai
 
 autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
 autocmd BufRead,BufNewFile Dockerfile set filetype=Dockerfile
@@ -227,21 +82,12 @@ endif
 " use w!! to save a file that should have been opened with sudo!
 cmap w!! w !sudo tee > /dev/null %
 
-let g:syntastic_c_check_header = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:ycm_confirm_extra_conf = 0
-" let g:ycm_complete_in_comments = 1
-
-let g:indent_guides_guide_size=1
-let g:indent_guides_start_level=2
-let g:indent_guides_enable_on_vim_startup=1
 " let g:molokai_original = 1
 if has("unix")
     let g:rehash256 = 1
     set t_Co=256
 endif
-colorscheme molokai
+
 if has('gui_running')
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
@@ -253,6 +99,7 @@ if has('gui_running')
         set guifont=Terminus\ 13
     endif
     let g:ctrlp_extensions = ['gazetteer']
+    silent! colorscheme molokai
 
     "toggle tagbar
 endif
@@ -352,27 +199,6 @@ nnoremap <Leader>wz :winc z<CR>
 "noremap <Leader>w+ :winc +<CR>
 "noremap <Leader>w< :winc <<CR>
 "noremap <Leader>w> :winc ><CR>
-
-"continuous resize
-call tinymode#EnterMap("winsize","<C-W>+","+")
-call tinymode#EnterMap("winsize","<C-W>-","-")
-call tinymode#EnterMap("winsize","<Leader>w+","+")
-call tinymode#EnterMap("winsize","<Leader>w-","-")
-call tinymode#Map("winsize","+","wincmd +")
-call tinymode#Map("winsize","-","wincmd -")
-call tinymode#EnterMap("winsize","<C-W><","<")
-call tinymode#EnterMap("winsize","<C-W>>",">")
-call tinymode#EnterMap("winsize","<Leader>w<","<")
-call tinymode#EnterMap("winsize","<Leader>w>",">")
-call tinymode#Map("winsize","<","wincmd <")
-call tinymode#Map("winsize",">","wincmd >")
-call tinymode#ModeMsg("winsize","Change window size +/-, </>")
-
-call tinymode#EnterMap("yankstack","<Leader>pj","j")
-call tinymode#EnterMap("yankstack","<Leader>pk","k")
-call tinymode#Map("yankstack","j","normal \<Plug>yankstack_substitute_newer_paste")
-call tinymode#Map("yankstack","k","normal \<Plug>yankstack_substitute_older_paste")
-call tinymode#ModeMsg("yankstack","Scroll through yankstack with j/k")
 
 "move
 nnoremap <Leader>wH :winc H<CR>
@@ -484,7 +310,6 @@ function! QuickfixFilenames()
 endfunction
 
 " ensure closing of nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 nnoremap <leader>h :set hlsearch!<CR>
 let g:org_command_for_emacsclient = "emacsclient"
@@ -497,8 +322,6 @@ let g:ft_ignore_pat = '\.org'
 au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
 au BufEnter *.org            call org#SetOrgFileType()
 let g:org_capture_file = '~/org/captures.org'
-command! OrgCapture :call org#CaptureBuffer()
-command! OrgCaptureFile :call org#OpenCaptureFile()
 
 " Save fold information and cursor location
 autocmd BufWinLeave *.* mkview!

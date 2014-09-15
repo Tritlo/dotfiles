@@ -13,5 +13,5 @@ if [ "$mails" -eq "0" ]; then
 fi
 
 browser=$(grep ^Exec= /usr/share/applications/`xdg-mime query default x-scheme-handler/https`| head -1 | sed 's/^Exec=//' | sed 's/%.//')
-echo "<action=$browser --new-window https://mail.google.com/ >$display</action>"
+echo "<action=chromium-browser --show-app-list >$display</action>"
 
