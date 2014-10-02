@@ -1,9 +1,13 @@
-
 so ~/.vimrc.plugins
 
+if has('gui_running')
+    silent! colorscheme molokai
+else
+    colorscheme pablo
+    let g:airline_theme="luna"
+endif
 
-colorscheme pablo
-silent! colorscheme molokai
+
 
 autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
 autocmd BufRead,BufNewFile Dockerfile set filetype=Dockerfile
@@ -16,7 +20,7 @@ autocmd BufLeave \[vimshell\]* NeoComplCacheDisable
 set omnifunc=syntaxcomplete#Complete
 
 " Native settings
-set cryptmethod=blowfish " Set encryption method. Encrypt files with :X.
+silent! set cryptmethod=blowfish " Set encryption method. Encrypt files with :X.
 " Unencrypt with an empyt key.
 set hlsearch " highlight search matches
 set incsearch " starts search before enter
@@ -105,7 +109,7 @@ if has('gui_running')
 endif
 
 " show line showing location of character 80
-set colorcolumn=80
+silent! set colorcolumn=80
 highlight ColorColumn ctermbg=238 guibg=#505040
 
 " search highlighting

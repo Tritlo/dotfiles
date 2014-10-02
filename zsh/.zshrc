@@ -50,10 +50,10 @@ ZSH_THEME="flazz"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=()
 plugins+=(git)
-plugins+=(gpg-agent)
-plugins+=(ssh-agent)
+# plugins+=(gpg-agent)
+# plugins+=(ssh-agent)
 plugins+=(docker)
-plugins+=(web-search)
+# plugins+=(web-search)
 plugins+=(pip)
 plugins+=(django)
 plugins+=(lein)
@@ -134,14 +134,5 @@ if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
     export TERM=$TERM-256color
 fi
 
-if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi
+#if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi
 
-if [ -f $(which keychain 2> /dev/null) ]; then
-    keychain --inherit any -Q --quiet mpg;
-    keychain --inherit any -Q --quiet ID/id_rsa;
-fi
-
-#Updated installed packages if havent done so for 5 min
-#if [[ -e $(find "$HOME/.nix-installed-pkgs" -amin 15) ]]; then
-    #nix-env -q > $HOME/.nix-installed-pkgs
-#fi

@@ -77,7 +77,7 @@ no_shrink false
 
 # parent_bg [<bool>]         # whether to use pseudo-transparency 
                              # (looks better when reparented into smth like FvwmButtons)
-    parent_bg false
+parent_bg false
 
 # pixmap_bg <path_to_xpm>    # use pixmap from specified xpm file for (tiled) background
 # pixmap_bg /home/user/.stalonetraybg.xpm
