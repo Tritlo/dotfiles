@@ -284,16 +284,18 @@ replace
 btsync <- spawnPipe "btsync --config /home/tritlo/.btsync.conf restart"
 xmproc <- spawnPipe "xmobar /home/tritlo/.xmobarrc" --Status bar
 --xflux <- spawnPipe "killall -q xflux; xflux -l 64 -g -22" --Make display better
-stalonetray <- spawnPipe "killall -q stalonetray; sleep 15; stalonetray "-- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && stalonetray || stalonetray -c /home/tritlo/.stalonetrayhomerc" -- Tray
+--stalonetray <- spawnPipe "killall -q stalonetray; sleep 15; stalonetray "-- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && stalonetray || stalonetray -c /home/tritlo/.stalonetrayhomerc" -- Tray
+systray <- spawnPipe "killall -q trayer; sleep 15; /home/tritlo/.scripts/startsystray"
 sound <- spawnPipe " killall -q gnome-sound-applet; sleep 20; gnome-sound-applet" -- Audio keys
-stalonetray <- spawnPipe "killall -q naturalscrolling; sleep 20; naturalscrolling"-- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && stalonetray || stalonetray -c /home/tritlo/.stalonetrayhomerc" -- Tray
+--natscroll <- spawnPipe "killall -q naturalscrolling; sleep 20; naturalscrolling"-- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && stalonetray || stalonetray -c /home/tritlo/.stalonetrayhomerc" -- Tray
 primeind <- spawnPipe " ps -ax | grep prime-indicator | grep -v grep | awk '{print $1}' | xargs kill; sleep 20; prime-indicator" -- nvidia switching
 circscroll <- spawnPipe "/home/tritlo/.scripts/circscroll.sh"
 kbsettings  <- spawnPipe "/home/tritlo/.scripts/kbsettings.sh"
+kbsettingsAgain  <- spawnPipe "sleep 30; /home/tritlo/.scripts/kbsettings.sh"
 dropbox <- spawnPipe "sleep 20; dropbox start"
 --not needed with nm-cli
 networkm <- spawnPipe "killall -q nm-applet; sleep 20; nm-applet;"
-gnomesettings <- spawnPipe "killall -q gnome-settings-daemon; sleep 20; gnome-setttings-daemon" -- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && gnome-settings-daemon;" --Brightness and audio keys.
+gnomesettings <- spawnPipe "killall -q gnome-settings-daemon; sleep 20; gnome-settings-daemon;" -- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && gnome-settings-daemon;" --Brightness and audio keys.
 --wicd <- spawnPipe "sleep 15; killall -q wicd-client;  wicd-client -t;"
 redshift <- spawnPipe " killall -q redshift; sleep 15; redshift-gtk -c /home/tritlo/.config/redshift.conf;"
 --redshift <- spawnPipe "sleep 15; killall -q gtk-redshift ; gtk-redshift -l 64:-22"
