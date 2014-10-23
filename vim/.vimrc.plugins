@@ -67,6 +67,8 @@ Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 " autocmd BufRead,BufNewFile *.cl set filetype=opencl
 Plug 'petRUShka/vim-opencl', {'for':'opencl'}
 
+Plug 'kchmck/vim-coffee-script', {'for':'coffee'}
+
 " a good mode
 " Plug 'jceb/vim-orgmode'
 " Plug 'tpope/vim-speeddating'

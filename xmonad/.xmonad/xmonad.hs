@@ -7,6 +7,8 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.Replace
 import System.IO
 
+--import XMonad.Layout.BinarySpacePartition as BSP
+
 import XMonad.Hooks.DynamicLog
 
 --laga matlab
@@ -82,7 +84,10 @@ layoutPrinter str ="<action=xdotool key super+b >"++str++"</action>"
 --wspaces = ["main", "web","code","laer","facebook"]
 gridLayout = Grid
 spiralLayout = spiral (1 % 1)
-spaceLayouts = ["Tall", "Mirror Tall","Full"]
+
+--bspLayout = spacing 15 BSP.emptyBSP
+
+spaceLayouts = ["Tall", "Mirror Tall","Full" ] -- "BSP"]
 smallLayouts = ["SmallTall","SmallMirror","Float"]
 bLayouts = ["Tabs", "Grid", "Spiral"]
              {-"Float", "Three Col", "Three Col Mid",-}
@@ -107,7 +112,8 @@ myLayoutHook =
      named "Tabs" (subTabbed (simpleTabbedBottom)) |||
      named "IMGBFloat" ( mouseResize $ minimize $ maximize $ imageButtonDeco shrinkText defaultThemeWithImageButtons simplestFloat) |||
      named "Three Col" (subTabbed (ThreeCol 1 (3%100) (1%2))) |||
-     named "Three Col Mid" (subTabbed (ThreeColMid 1 (3%100) (1%2)))
+     named "Three Col Mid" (subTabbed (ThreeColMid 1 (3%100) (1%2)))  -- |||
+     --named "BSP" bspLayout
 
 
 
@@ -161,8 +167,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     -- Default programs
     , ((modm                , xK_f), (spawn browserCmd))
     , ((modm .|. shiftMask  , xK_f), (spawn altbrowserCmd ))
-    , ((modm                , xK_s), (spawn audioController))
-    , ((modm .|. shiftMask  , xK_s), (spawn musicPlayer))
+    -- , ((modm                , xK_s), (spawn audioController))
+    -- , ((modm .|. shiftMask  , xK_s), (spawn musicPlayer))
     , ((modm                , xK_v), (spawn emailclient))
     , ((modm                , xK_c ), (spawn ircopen))
     , ((modm .|. shiftMask  , xK_g), (spawn simpleEditor))
@@ -172,6 +178,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     , ((modm .|. controlMask, xK_k), sendMessage $ pullGroup U)
     , ((modm .|. controlMask, xK_j), sendMessage $ pullGroup D)
     -}
+
+    --,((myModMask               , xK_s     ), sendMessage $ BSP.Swap)
+    --,((myModMask .|. altMask   , xK_l     ), sendMessage $ BSP.ExpandTowards BSP.R)
+    --,((myModMask .|. altMask   , xK_h     ), sendMessage $ BSP.ExpandTowards BSP.L)
+    --,((myModMask .|. altMask   , xK_j     ), sendMessage $ BSP.ExpandTowards BSP.D)
+    --,((myModMask .|. altMask   , xK_k     ), sendMessage $ BSP.ExpandTowards BSP.U)
+    --,((myModMask .|. altMask .|. controlMask , xK_l), sendMessage $ BSP.ShrinkFrom BSP.R)
+    --,((myModMask .|. altMask .|. controlMask , xK_h), sendMessage $ BSP.ShrinkFrom BSP.L)
+    --,((myModMask .|. altMask .|. controlMask , xK_j), sendMessage $ BSP.ShrinkFrom BSP.D)
+    --,((myModMask .|. altMask .|. controlMask , xK_k), sendMessage $ BSP.ShrinkFrom BSP.U)
+    --,((myModMask .|. altMask   , xK_r     ), sendMessage BSP.Rotate)
+
     , ((modm .|. controlMask, xK_s), submap $ defaultSublMap conf)
     , ((modm .|. controlMask, xK_h), sendMessage $ pushWindow L)
     , ((modm .|. controlMask, xK_l), sendMessage $ pushWindow R)

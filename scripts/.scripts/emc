@@ -1,7 +1,16 @@
-#!/bin/sh
-# Make emacs open calendar if no argument is given
-if [ "$#" -eq 0 ]; then
-    emacsclient -a "" -c -n -s emacs
+#!/bin/bash
+USERID=`id -u `
+if test -e /tmp/emacs$USERID/server
+then
+	echo "Ready."
 else
-    emacsclient -a "" -c -n -s emacs $*
+	echo "Starting server."
+	/etc/init.d/emacs start
+        while [ ! -e "/tmp/emacs$USERID/server" ] ; do sleep 1 ; done
+fi
+
+if [ "$#" -eq 0 ]; then
+  emacsclient -c -a "" -n
+else
+  emacsclient -c -a ""  -n $* 
 fi

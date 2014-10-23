@@ -1,0 +1,3 @@
+#!/bin/bash
+
+trayer --monitor primary --edge top --widthtype request --transparent true --alpha 200 --height 18 --expand true --align right --distancefrom right --distance 300
