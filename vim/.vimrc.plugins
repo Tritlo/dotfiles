@@ -28,7 +28,7 @@ Plug 'tpope/vim-fugitive' " git integration
 
 " easy motion, to train motions better.
 " mapped to leader leader.
-Plug 'Lokaltog/vim-easymotion'
+" Plug 'Lokaltog/vim-easymotion'
 
 
 

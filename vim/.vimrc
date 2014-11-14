@@ -166,8 +166,8 @@ inoremap <F8> <ESC>:TagbarToggle<CR>i
 
 
 "Shifting keeps us in visual mode
-vnoremap < <gv
-vnoremap > >gv
+" vnoremap < <gv
+" vnoremap > >gv
 
 " map the leader to : so that all commands are just a space away.
 nnoremap <Leader> :
