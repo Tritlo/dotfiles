@@ -1,18 +1,18 @@
-(defvar Mine-pre-extensions
+(defvar auctex-pre-extensions
   '(
-    ;; pre extension Mines go here
+    ;; pre extension auctexs go here
     )
   "List of all extensions to load before the packages.")
 
-(defvar Mine-post-extensions
+(defvar auctex-post-extensions
   '(
-    ;; post extension Mines go here
+    ;; post extension auctexs go here
     )
   "List of all extensions to load after the packages.")
 
-;; For each extension, define a function Mine/init-<extension-Mine>
+;; For each extension, define a function auctex/init-<extension-auctex>
 ;;
-;; (defun Mine/init-my-extension ()
+;; (defun auctex/init-my-extension ()
 ;;   "Initialize my extension"
 ;;   )
 ;;
