@@ -18,6 +18,7 @@ Plug 'gmarik/Vundle.vim' " Required
 Plug 'tomasr/molokai'
 Plug 'flazz/vim-colorschemes'
 
+
 Plug 'scrooloose/nerdtree', {'on':'NERDTreeFind'} " file browser
 "Plug 'scrooloose/nerdcommenter' " Commenter
 Plug 'tpope/vim-commentary'
@@ -48,10 +49,11 @@ Plug 'ironhouzi/vim-stim'
 
 "" misc
 Plug 'tinymode.vim' " continuous key presses
-Plug 'rking/ag.vim' " better grep, search for term in project.
+Plug 'rking/ag.vim', {'on':'Ag'} " better grep, search for term in project.
 
 
 " filetype plugins
+Plug 'wting/rust.vim'
 Plug 'jnwhiteh/vim-golang'
 Plug 'pangloss/vim-javascript'
 Plug 'ekalinin/Dockerfile.vim'
@@ -72,15 +74,15 @@ Plug 'kchmck/vim-coffee-script', {'for':'coffee'}
 " a good mode
 " Plug 'jceb/vim-orgmode'
 " Plug 'tpope/vim-speeddating'
-Plug 'hsitz/VimOrganizer'
-Plug 'mattn/calendar-vim'
+" Plug 'hsitz/VimOrganizer'
+" Plug 'mattn/calendar-vim'
 
 
 " supervisor files and supervisor ctl
 Plug 'thiderman/vim-supervisor' " also some functionality
 Plug 'vim-scripts/Tail-Bundle' " works for other tail files as well
 
-Plug 'sjl/gundo.vim'     " bound to <Leader>gu, displays the undo tree (so that i use it)
+Plug 'sjl/gundo.vim', {'on':'GundoToggle'}     " bound to <Leader>gu, displays the undo tree (so that i use it)
 Plug 'edsono/vim-matchit' " better % matching, including html tags
 
 Plug 'SirVer/ultisnips' " inserts snippets
@@ -91,7 +93,7 @@ Plug 'nathanaelkane/vim-indent-guides' " toggleable with <Leader>ig
 
 " vimshell and deps.
 Plug 'Shougo/vimproc.vim'
-Plug 'Shougo/vimshell.vim'
+Plug 'Shougo/vimshell.vim' , {'on': 'VimShellCreate'}
 Plug 'Shougo/neocomplcache.vim'
 
 
@@ -116,7 +118,7 @@ if has("unix")
     Plug 'Valloric/YouCompleteMe'
     " Tharf exuberant ctags
     Plug 'jeetsukumaran/vim-gazetteer'
-    Plug 'majutsushi/tagbar'
+    Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 endif
 
 " Thessi haegja a, viljum thad ekki i terminal
@@ -124,15 +126,15 @@ if has('gui_running')
     " these take longer to load
 
     "vim notes
-    Plug 'xolox/vim-shell'
-    Plug 'xolox/vim-misc'
-    Plug 'xolox/vim-notes'
+    " Plug 'xolox/vim-shell'
+    " Plug 'xolox/vim-misc'
+    " Plug 'xolox/vim-notes'
     "
     " local vimrc, loads .lvimrc files in reverse order, and applies those 
     " settings. Like exrc, but hierarchical.
     Plug 'embear/vim-localvimrc'
 
-    Plug 'klen/python-mode'
+    Plug 'klen/python-mode', {'for' : 'python'}
     " File finder
     Plug 'kien/ctrlp.vim'
     Plug 'tpope/vim-sleuth' " automatically detects indent settings
@@ -183,6 +185,7 @@ command! OrgCaptureFile :call org#OpenCaptureFile()
 let g:syntastic_c_check_header = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 0
 let g:ycm_confirm_extra_conf = 0
 " let g:ycm_complete_in_comments = 1
 

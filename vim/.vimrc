@@ -235,6 +235,7 @@ nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
 nnoremap <Leader>tt :VimShellCreate<Cr>
+nnoremap <leader>s :SyntasticToggleMode<CR>
 " nnoremap <Leader>u :Unite<Cr>
 
 
@@ -356,5 +357,4 @@ nnoremap <leader>ns :SearchNotes<CR>
 nnoremap <leader>nv :execute 'VoomToggle' &ft<CR>
 
 let g:shell_mappings_enabled = 0
-
 
