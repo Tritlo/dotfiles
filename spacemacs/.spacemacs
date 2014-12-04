@@ -10,7 +10,7 @@
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
  dotspacemacs-configuration-layer-path '()
  ;; List of configuration layers to load.
- dotspacemacs-configuration-layers '(auctex)
+ dotspacemacs-configuration-layers '(auctex nlinum)
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
 )
@@ -37,6 +37,11 @@
  ;; specified with an installed package.
  ;; Not used for now.
  dotspacemacs-default-package-repository nil
+
+ ;; Mitt
+ global-linum-mode t
+ 
+ vc-follow-symlinks t
 )
 
 ;; Initialization Hooks
@@ -50,7 +55,9 @@
 (defun dotspacemacs/config ()
   "This is were you can ultimately override default Spacemacs configuration.
 This function is called at the very end of Spacemacs initialization."
+  (progn
     (setq powerline-default-separator 'arrow)
+  )
 )
 
 ;; Custom variables
