@@ -87,8 +87,8 @@ spiralLayout = spiral (1 % 1)
 
 --bspLayout = spacing 15 BSP.emptyBSP
 
-spaceLayouts = ["Tall", "Mirror Tall","Full" ] -- "BSP"]
-smallLayouts = ["SmallTall","SmallMirror","Float"]
+spaceLayouts = ["SmallTall", "SmallMirror","Full" ] -- "BSP"]
+smallLayouts = ["Tall","Mirror Tall","Float"]
 bLayouts = ["Tabs", "Grid", "Spiral"]
              {-"Float", "Three Col", "Three Col Mid",-}
               {-"i3","Tall Tabs","Groups Tall Tabs" ]-}
@@ -300,6 +300,7 @@ replace
 --conky <- spawnPipe "conky -c /home/tritlo/.conkyrc"
 {-dunst <- spawnPipe "dunst" -- Notification daemon-}
 btsync <- spawnPipe "btsync --config /home/tritlo/.btsync.conf restart"
+randwallpap <- spawnpipe "while 1; do randwallpaper; sleep 300; done;"
 xmproc <- spawnPipe "xmobar /home/tritlo/.xmobarrc" --Status bar
 --xflux <- spawnPipe "killall -q xflux; xflux -l 64 -g -22" --Make display better
 --stalonetray <- spawnPipe "killall -q stalonetray; sleep 15; stalonetray "-- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && stalonetray || stalonetray -c /home/tritlo/.stalonetrayhomerc" -- Tray
