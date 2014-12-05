@@ -1,18 +1,18 @@
-(defvar nlinum-pre-extensions
+(defvar rainbow-mode-pre-extensions
   '(
-    ;; pre extension nlinums go here
+    ;; pre extension rainbow-modes go here
     )
   "List of all extensions to load before the packages.")
 
-(defvar nlinum-post-extensions
+(defvar rainbow-mode-post-extensions
   '(
-    ;; post extension nlinums go here
+    ;; post extension rainbow-modes go here
     )
   "List of all extensions to load after the packages.")
 
-;; For each extension, define a function nlinum/init-<extension-nlinum>
+;; For each extension, define a function rainbow-mode/init-<extension-rainbow-mode>
 ;;
-;; (defun nlinum/init-my-extension ()
+;; (defun rainbow-mode/init-my-extension ()
 ;;   "Initialize my extension"
 ;;   )
 ;;
