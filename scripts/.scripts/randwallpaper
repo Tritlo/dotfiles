@@ -1,0 +1,7 @@
+#!/bin/bash
+
+WPDIR="$HOME/Pictures/Use"
+
+wpfile=$(ls "$WPDIR"/* | sort -R | head -n 1)
+echo "chose $wpfile"
+gsettings set org.gnome.desktop.background picture-uri "file://$wpfile"
