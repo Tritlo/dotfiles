@@ -170,7 +170,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     -- , ((modm                , xK_s), (spawn audioController))
     -- , ((modm .|. shiftMask  , xK_s), (spawn musicPlayer))
     , ((modm                , xK_v), (spawn emailclient))
-    , ((modm                , xK_c ), (spawn ircopen))
+    , ((modm                , xK_c ), (spawn editor))
     , ((modm .|. shiftMask  , xK_g), (spawn simpleEditor))
     {-
     , ((modm .|. controlMask, xK_h), sendMessage $ pullGroup L)

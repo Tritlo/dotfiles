@@ -10,7 +10,7 @@
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
  dotspacemacs-configuration-layer-path '()
  ;; List of configuration layers to load.
- dotspacemacs-configuration-layers '(auctex paradox rainbow-mode)
+ dotspacemacs-configuration-layers '(auctex paradox rainbow-mode highlight-indentation)
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
 )
@@ -40,8 +40,11 @@
 
  ;; Mitt
  ;;global-linum-mode t
- 
+ electric-pair-mode t
  vc-follow-symlinks t
+ fci-rule-column 80
+ 
+ 
 )
 
 ;; Initialization Hooks
@@ -56,7 +59,16 @@
   "This is were you can ultimately override default Spacemacs configuration.
 This function is called at the very end of Spacemacs initialization."
   (progn
-    (setq powerline-default-separator 'arrow)
+    (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+    (define-globalized-minor-mode global-highlight-indentation-mode highlight-indentation-mode (lambda () (highlight-indentation-mode 1)))
+    (global-fci-mode 1)
+    (setq
+     powerline-default-separator 'arrow
+     indent-guide-recursive t
+     )
+    (global-linum-mode t)
+    (indent-guide-global-mode t)
+    (global-highlight-indentation-mode 1)
   )
 )
 
