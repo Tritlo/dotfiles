@@ -74,6 +74,7 @@ This function is called at the very end of Spacemacs initialization."
     (global-highlight-indentation-mode 1)
     ;; Fix override of the substitute key
     (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
+    (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
   )
 )
 
