@@ -40,7 +40,8 @@
 
  ;; Mitt
  ;;global-linum-mode t
- electric-pair-mode t
+ 
+ ;;electric-pair-mode t
  vc-follow-symlinks t
  fci-rule-column 80
  
@@ -62,6 +63,8 @@ This function is called at the very end of Spacemacs initialization."
     (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
     (define-globalized-minor-mode global-highlight-indentation-mode highlight-indentation-mode (lambda () (highlight-indentation-mode 1)))
     (global-fci-mode 1)
+    (global-evil-surround-mode 1)
+    (electric-pair-mode 0)
     (setq
      powerline-default-separator 'arrow
      indent-guide-recursive t
@@ -69,6 +72,8 @@ This function is called at the very end of Spacemacs initialization."
     (global-linum-mode t)
     (indent-guide-global-mode t)
     (global-highlight-indentation-mode 1)
+    ;; Fix override of the substitute key
+    (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
   )
 )
 
