@@ -10,7 +10,13 @@
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
  dotspacemacs-configuration-layer-path '()
  ;; List of configuration layers to load.
- dotspacemacs-configuration-layers '(auctex paradox rainbow-mode highlight-indentation filetypes)
+ dotspacemacs-configuration-layers '(paradox rainbow-mode
+                                            highlight-indentation
+                                            filetypes python github
+                                            ;ess haskell
+                                            myauctex
+                                            ;auctex
+                                            )
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
 )
@@ -64,11 +70,11 @@ This function is called at the very end of Spacemacs initialization."
     (define-globalized-minor-mode global-highlight-indentation-mode highlight-indentation-mode (lambda () (highlight-indentation-mode 1)))
     (global-fci-mode 1)
     (global-evil-surround-mode 1)
-    (electric-pair-mode 1)
+    (electric-pair-mode 0)
     (setq
      powerline-default-separator 'arrow
-     indent-guide-recursive t
-     )
+     indent-guide-recursive t)
+    
     (global-linum-mode t)
     (indent-guide-global-mode 1)
     (global-highlight-indentation-mode 1)
@@ -76,6 +82,10 @@ This function is called at the very end of Spacemacs initialization."
     (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
     (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
     
+    
+    (put 'if 'lisp-indent-function nil)
+    (put 'when 'lisp-indent-function 1)
+    (put 'unless 'lisp-indent-function 1)
     (evil-leader/set-key
         "ef" 'find-file
         "te" 'electric-pair-mode
@@ -84,11 +94,8 @@ This function is called at the very end of Spacemacs initialization."
         "tif" 'global-fci-mode
         "bl" 'switch-to-next-buffer
         "bh" 'switch-to-prev-buffer
-        "bn" 'new-empty-buffer
-        )
-      
-  )
-)
+        "bn" 'new-empty-buffer) 
+  ))
 
 ;; Custom variables
 ;; ----------------
@@ -102,11 +109,14 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(LaTeX-command "latex -shell-escape")
  '(ac-ispell-requires 4)
  '(ahs-case-fold-search nil)
  '(ahs-default-range (quote ahs-range-whole-buffer))
  '(ahs-idle-interval 0.25)
+ '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
+ '(hy-indent-specform (quote (("for" . 1) ("for*" . 1) ("while" . 1) ("except" . 1) ("catch" . 1) ("let" . 1) ("when" . 1) ("unless" . 1))))
  '(paradox-github-token t)
  '(ring-bell-function (quote ignore) t))
 (custom-set-faces

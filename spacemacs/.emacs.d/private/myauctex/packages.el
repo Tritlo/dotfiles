@@ -1,4 +1,4 @@
-(defvar auctex-packages
+(defvar myauctex-packages
   '(
     ;; package auctexs go here
     auctex
@@ -6,19 +6,17 @@
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
 
-(defvar auctex-excluded-packages '()
+(defvar myauctex-excluded-packages '()
   "List of packages to exclude.")
 
-(defun auctex/init-auctex ()
+(defun myauctex/init-myauctex ()
   (use-package tex
-      :ensure auctex
-      :init
+    :ensure auctex
+    :init
       (progn
         (setq-default LaTeX-command "latex -shell-escape")
         (setq-default Tex-PDF-mode t)
-        )
-      )
-   )
+        )))
 ;; For each package, define a function auctex/init-<package-auctex>
 ;;
 ;; (defun auctex/init-my-package ()
