@@ -64,23 +64,27 @@ This function is called at the very end of Spacemacs initialization."
     (define-globalized-minor-mode global-highlight-indentation-mode highlight-indentation-mode (lambda () (highlight-indentation-mode 1)))
     (global-fci-mode 1)
     (global-evil-surround-mode 1)
-    (electric-pair-mode 0)
+    (electric-pair-mode 1)
     (setq
      powerline-default-separator 'arrow
      indent-guide-recursive t
      )
     (global-linum-mode t)
-    (indent-guide-global-mode t)
+    (indent-guide-global-mode 1)
     (global-highlight-indentation-mode 1)
     ;; Fix override of the substitute key
     (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
     (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
+    
     (evil-leader/set-key
         "ef" 'find-file
         "te" 'electric-pair-mode
+        "tig" 'indent-guide-global-mode
+        "tih" 'global-highlight-indentation-mode
+        "tif" 'global-fci-mode
         "bl" 'switch-to-next-buffer
         "bh" 'switch-to-prev-buffer
-        "bn" 'new-file
+        "bn" 'new-empty-buffer
         )
       
   )
