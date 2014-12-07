@@ -75,6 +75,14 @@ This function is called at the very end of Spacemacs initialization."
     ;; Fix override of the substitute key
     (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
     (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
+    (evil-leader/set-key
+        "ef" 'find-file
+        "te" 'electric-pair-mode
+        "bl" 'switch-to-next-buffer
+        "bh" 'switch-to-prev-buffer
+        "bn" 'new-file
+        )
+      
   )
 )
 
