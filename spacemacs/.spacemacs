@@ -13,6 +13,7 @@
  dotspacemacs-configuration-layers '(paradox rainbow-mode
                                             highlight-indentation
                                             filetypes python github
+                                            themes-megapack
                                             ;ess haskell
                                             myauctex
                                             ;auctex
@@ -69,7 +70,6 @@ This function is called at the very end of Spacemacs initialization."
     (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
     (define-globalized-minor-mode global-highlight-indentation-mode highlight-indentation-mode (lambda () (highlight-indentation-mode 1)))
     (global-fci-mode 1)
-    (global-evil-surround-mode 1)
     (electric-pair-mode 0)
     (setq
      powerline-default-separator 'arrow
@@ -78,10 +78,9 @@ This function is called at the very end of Spacemacs initialization."
     (global-linum-mode t)
     (indent-guide-global-mode 1)
     (global-highlight-indentation-mode 1)
-    ;; Fix override of the substitute key
+    ;; Fix override of the substitute key. This is already fixed upstream.
     (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
     (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
-    
     
     (put 'if 'lisp-indent-function nil)
     (put 'when 'lisp-indent-function 1)
@@ -92,6 +91,7 @@ This function is called at the very end of Spacemacs initialization."
         "tig" 'indent-guide-global-mode
         "tih" 'global-highlight-indentation-mode
         "tif" 'global-fci-mode
+        "bb" 'ido-switch-buffer 
         "bl" 'switch-to-next-buffer
         "bh" 'switch-to-prev-buffer
         "bn" 'new-empty-buffer) 
