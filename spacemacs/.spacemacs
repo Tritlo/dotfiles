@@ -12,14 +12,14 @@
  ;; List of configuration layers to load.
  dotspacemacs-configuration-layers '(paradox rainbow-mode
                                             highlight-indentation
-                                            filetypes python github
+                                            filetypes python git
                                             themes-megapack
                                             ;ess haskell
                                             myauctex
                                             ;auctex
                                             )
  ;; A list of packages and/or extensions that will not be install and loaded.
- dotspacemacs-excluded-packages '()
+ dotspacemacs-excluded-packages '(jedi)
 )
 
 ;; Settings
@@ -32,7 +32,7 @@
  ;; the commands bound to the current keystrokes.
  dotspacemacs-guide-key-delay 0.4
  ;; If non nil the frame is maximized when Emacs starts up (Emacs 24.4+ only)
- dotspacemacs-fullscreen-at-startup t 
+ dotspacemacs-fullscreen-at-startup nil
  ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth scrolling
  ;; overrides the default behavior of Emacs which recenters the point when
  ;; it reaches the top or bottom of the screen
