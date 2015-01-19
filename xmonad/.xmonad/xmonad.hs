@@ -101,8 +101,8 @@ myLayoutHook =
      --maximize  $
      --minimize  $
      avoidStruts $
-     named "SmallTall" ( smartSpacing 10 $ subTabbed (Tall 1 (3%100) (1%2)))  |||
-     named "SmallMirror" (smartSpacing 10 $ subTabbed (Mirror (Tall 1 (3%100) (1%2)))) |||
+     named "SmallTall" (smartBorders (subTabbed $  smartSpacing 10 (Tall 1 (3%100) (1%2))))  |||
+     named "SmallMirror" (smartBorders (subTabbed $  smartSpacing 10 (Mirror (Tall 1 (3%100) (1%2))))) |||
      named "Tall" ( smartBorders (subTabbed (Tall 1 (3%100) (1%2))))  |||
      named "Mirror Tall" (smartBorders (subTabbed (Mirror (Tall 1 (3%100) (1%2))))) |||
      named "Full" (smartBorders (subTabbed (Full))) |||
@@ -168,7 +168,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     , ((modm                , xK_f), (spawn browserCmd))
     , ((modm .|. shiftMask  , xK_f), (spawn altbrowserCmd ))
     -- , ((modm                , xK_s), (spawn audioController))
-    -- , ((modm .|. shiftMask  , xK_s), (spawn musicPlayer))
+      -- , ((modm .|. shiftMask  , xK_s), (spawn musicPlayer))
+    
+    , ((modm                , xK_s), (spawn "mumble"))
     , ((modm                , xK_v), (spawn emailclient))
     , ((modm                , xK_c ), (spawn editor))
     , ((modm .|. shiftMask  , xK_g), (spawn simpleEditor))

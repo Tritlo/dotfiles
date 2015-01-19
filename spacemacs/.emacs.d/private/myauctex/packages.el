@@ -16,6 +16,7 @@ which require an initialization must be listed explicitly in the list.")
       (progn
         (setq-default LaTeX-command "latex -shell-escape")
         (setq-default Tex-PDF-mode t)
+        (ispell-change-dictionary "is")
         )))
 ;; For each package, define a function auctex/init-<package-auctex>
 ;;

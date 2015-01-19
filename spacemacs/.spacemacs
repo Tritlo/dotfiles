@@ -9,16 +9,20 @@
  ;; List of additional paths where to look for configuration layers.
  ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
  dotspacemacs-configuration-layer-path '()
- dotspacemacs-configuration-layers '(paradox rainbow-mode
+ ;; List of configuration layers to load.
+ dotspacemacs-configuration-layers '(        rainbow-mode
                                              highlight-indentation
                                              filetypes python git
                                              themes-megapack
-                                             ;ess haskell
+                                             org-mode
+                                             winpoint
+                                             ;nlinum
+                                             ;paradox
+                                             ;ess
+                                             haskell
                                              myauctex
                                              ;auctex
                                              )
- ;; List of configuration layers to load.
- dotspacemacs-configuration-layers '()
  ;; A list of packages and/or extensions that will not be install and loaded.
  dotspacemacs-excluded-packages '()
 )
@@ -76,8 +80,9 @@
 (defun dotspacemacs/init ()
   "User initialization for Spacemacs. This function is called at the very
  startup."
-  
- ;(setq git-enable-github-support t)
+(setq-default 
+  ; git-enable-github-support t
+  git-magit-status-fullscreen t)
 )
 
 (defun dotspacemacs/config ()
@@ -91,29 +96,39 @@ This function is called at the very end of Spacemacs initialization."
     (setq
      powerline-default-separator 'arrow
      indent-guide-recursive t)
-    
+
+    (winpoint-mode t)
     (global-linum-mode t)
     (indent-guide-global-mode 1)
+    (smartparens-global-mode 1)
     (global-highlight-indentation-mode 1)
     ;; Fix override of the substitute key. This is already fixed upstream.
     (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
     (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
+
+    ;; Why would I want to scroll?
+    (define-key evil-insert-state-map "\C-e" 'end-of-line)
+    ; (define-key evil-normal-state-map "\C-e" 'end-of-line)
+    ; (define-key evil-visual-state-map "\C-e" 'end-of-line)
     
     (put 'if 'lisp-indent-function nil)
     (put 'when 'lisp-indent-function 1)
     (put 'unless 'lisp-indent-function 1)
     (evil-leader/set-key
-        "ef" 'find-file
+        ;; "ef" 'find-file ; Already implemented with SPC f f 
         "te" 'electric-pair-mode
-        "tig" 'indent-guide-global-mode
-        "tih" 'global-highlight-indentation-mode
-        "tif" 'global-fci-mode
+        "thi" 'indent-guide-global-mode
+        "thh" 'global-highlight-indentation-mode
+        "thp" 'global-fci-mode
         "bb" 'ido-switch-buffer 
         "bl" 'switch-to-next-buffer
         "bh" 'switch-to-prev-buffer
-        "bn" 'new-empty-buffer) 
+        "bd" 'kill-buffer-ask
+        "bn" 'new-empty-buffer)
     )
+
 )
+
 
 ;; Custom variables
 ;; ----------------
@@ -135,6 +150,8 @@ This function is called at the very end of Spacemacs initialization."
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
  '(hy-indent-specform (quote (("for" . 1) ("for*" . 1) ("while" . 1) ("except" . 1) ("catch" . 1) ("let" . 1) ("when" . 1) ("unless" . 1))))
+ '(linum-format (quote dynamic))
+ '(linum-relative-format "%3s")
  '(paradox-github-token t)
  '(ring-bell-function (quote ignore) t))
 (custom-set-faces
@@ -142,6 +159,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:background nil))))
+ '(variable-pitch ((t (:family "default")))))
 
 

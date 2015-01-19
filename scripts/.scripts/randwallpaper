@@ -2,6 +2,11 @@
 
 WPDIR="$HOME/Pictures/Use"
 
-wpfile=$(ls "$WPDIR"/* | sort -R | head -n 1)
+if [ ! -z $1 ]
+then
+    wpfile=$1;
+else
+    wpfile=$(ls "$WPDIR"/* | sort -R | head -n 1)
+fi
 echo "chose $wpfile"
 gsettings set org.gnome.desktop.background picture-uri "file://$wpfile"

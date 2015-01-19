@@ -1,9 +1,8 @@
 #!/bin/bash
-
 DEFAULTTIME=300
 while true
     do
         /home/tritlo/.scripts/randwallpaper > /dev/null
-        sleep ${1-300}
+        /home/tritlo/.scripts/waittime 
     done
 
