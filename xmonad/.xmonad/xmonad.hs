@@ -7,7 +7,7 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.Replace
 import System.IO
 
---import XMonad.Layout.BinarySpacePartition as BSP
+import XMonad.Layout.BinarySpacePartition as BSP
 
 import XMonad.Hooks.DynamicLog
 
@@ -87,7 +87,7 @@ spiralLayout = spiral (1 % 1)
 
 --bspLayout = spacing 15 BSP.emptyBSP
 
-spaceLayouts = ["SmallTall", "SmallMirror","Full" ] -- "BSP"]
+spaceLayouts = ["SmallBSP","SmallTall", "SmallMirror","Full" ] -- "BSP"]
 smallLayouts = ["Tall","Mirror Tall","Float"]
 bLayouts = ["Tabs", "Grid", "Spiral"]
              {-"Float", "Three Col", "Three Col Mid",-}
@@ -101,6 +101,7 @@ myLayoutHook =
      --maximize  $
      --minimize  $
      avoidStruts $
+     named "SmallBSP" (smartBorders (subTabbed  (smartSpacing 10 (emptyBSP))))  |||
      named "SmallTall" (smartBorders (subTabbed $  smartSpacing 10 (Tall 1 (3%100) (1%2))))  |||
      named "SmallMirror" (smartBorders (subTabbed $  smartSpacing 10 (Mirror (Tall 1 (3%100) (1%2))))) |||
      named "Tall" ( smartBorders (subTabbed (Tall 1 (3%100) (1%2))))  |||
@@ -159,6 +160,7 @@ ircopen = "/home/tritlo/.scripts/gtmuxirssi"
 simpleEditor ="gedit"
 fixMouse = "(sleep 1 && killall lxappearance)& lxappearance"
 
+altMask = mod1Mask
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
 	(
     [
@@ -170,7 +172,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     -- , ((modm                , xK_s), (spawn audioController))
       -- , ((modm .|. shiftMask  , xK_s), (spawn musicPlayer))
     
-    , ((modm                , xK_s), (spawn "mumble"))
+    , ((modm  .|. shiftMask , xK_s), (spawn "mumble"))
     , ((modm                , xK_v), (spawn emailclient))
     , ((modm                , xK_c ), (spawn editor))
     , ((modm .|. shiftMask  , xK_g), (spawn simpleEditor))
@@ -180,6 +182,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     , ((modm .|. controlMask, xK_k), sendMessage $ pullGroup U)
     , ((modm .|. controlMask, xK_j), sendMessage $ pullGroup D)
     -}
+    , ((modm .|. altMask,               xK_l     ), sendMessage $ BSP.ExpandTowards R)
+    , ((modm .|. altMask,               xK_h     ), sendMessage $ BSP.ExpandTowards L)
+    , ((modm .|. altMask,               xK_j     ), sendMessage $ BSP.ExpandTowards D)
+    , ((modm .|. altMask,               xK_k     ), sendMessage $ BSP.ExpandTowards U)
+    , ((modm .|. altMask .|. controlMask , xK_l     ), sendMessage $ BSP.ShrinkFrom R)
+    , ((modm .|. altMask .|. controlMask , xK_h     ), sendMessage $ BSP.ShrinkFrom L)
+    , ((modm .|. altMask .|. controlMask , xK_j     ), sendMessage $ BSP.ShrinkFrom D)
+    , ((modm .|. altMask .|. controlMask , xK_k     ), sendMessage $ BSP.ShrinkFrom U)
+    , ((modm,                           xK_r     ), sendMessage Rotate)
+    , ((modm,                           xK_s     ), sendMessage BSP.Swap)
 
     --,((myModMask               , xK_s     ), sendMessage $ BSP.Swap)
     --,((myModMask .|. altMask   , xK_l     ), sendMessage $ BSP.ExpandTowards BSP.R)
@@ -296,6 +308,7 @@ myStartupHook = do
     dynamicLogWithPP myPP >>= xmonadPropLog-}
 
 myEventHook = fullscreenEventHook
+
 
 main =  do
 replace
