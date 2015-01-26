@@ -15,7 +15,7 @@
                                              filetypes python git
                                              themes-megapack
                                              org-mode
-                                             winpoint
+                                             ;winpoint
                                              ;nlinum
                                              ;paradox
                                              ;ess
@@ -97,7 +97,6 @@ This function is called at the very end of Spacemacs initialization."
      powerline-default-separator 'arrow
      indent-guide-recursive t)
 
-    (winpoint-mode t)
     (global-linum-mode t)
     (indent-guide-global-mode 1)
     (smartparens-global-mode 1)
@@ -120,12 +119,13 @@ This function is called at the very end of Spacemacs initialization."
         "thi" 'indent-guide-global-mode
         "thh" 'global-highlight-indentation-mode
         "thp" 'global-fci-mode
-        "bb" 'ido-switch-buffer 
+        "bb" 'ad-Orig-switch-to-buffer 
         "bl" 'switch-to-next-buffer
         "bh" 'switch-to-prev-buffer
         "bd" 'kill-buffer-ask
         "bn" 'new-empty-buffer)
     )
+    (setq ispell-dictionary "is")
 
 )
 

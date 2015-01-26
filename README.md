@@ -9,3 +9,10 @@ go to the appropriate place in the filesystem
 
 use stow to place symlinks to files into home directory
 
+
+Remember to clone with
+
+    git clone --recursive
+
+for those zsh plugins
+
