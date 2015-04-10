@@ -14,7 +14,7 @@
                                              highlight-indentation
                                              filetypes python git
                                              themes-megapack
-                                             org-mode
+                                             ; org-mode
                                              ;winpoint
                                              ;nlinum
                                              ;paradox

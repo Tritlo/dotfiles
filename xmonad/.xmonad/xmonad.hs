@@ -134,8 +134,10 @@ gestures = M.fromList
 --browserCmd = "emacsclient -a \"\" -c -n -e \"(w3m)\""
 --browserCmd = "firefox-ux -new-window"
 --altbrowserCmd = "env GTK2_RC_FILES=/usr/share/themes/Adwaita/gtk-2.0/gtkrc iceweasel -new-window"
-browserCmd = "google-chrome-beta"
-altbrowserCmd = "chromium-browser"
+--browserCmd = "google-chrome-beta"
+--altbrowserCmd = "chromium-browser"
+browserCmd = "chromium-browser"
+altbrowserCmd = "firefox"
 audioController = "gnome-control-center sound"
 musicPlayer = "spotify-start"
 lockCmd = "gnome-screensaver-command -l"
@@ -228,7 +230,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
 	{-, ((modm                , xK_u), (spawn fixMouse))-}
 	, ((modm .|. shiftMask  , xK_u), restart "/home/tritlo/.scripts/obtoxmd" True)
     -- Workspaces
-	, ((modm                , xK_space), (cycleThroughLayouts spaceLayouts))
+    , ((modm  .|. shiftMask , xK_space), (cycleThroughLayouts spaceLayouts))
     , ((modm                , xK_x), increaseNMasterGroups)
     , ((modm .|. shiftMask  , xK_x), decreaseNMasterGroups)
 	, ((modm                , xK_space), (spawn changeKbLayout))
@@ -318,7 +320,7 @@ main =  do
 replace
 --conky <- spawnPipe "conky -c /home/tritlo/.conkyrc"
 {-dunst <- spawnPipe "dunst" -- Notification daemon-}
-btsync <- spawnPipe "btsync --config /home/tritlo/.btsync.conf restart"
+-- btsync <- spawnPipe "btsync --config /home/tritlo/.btsync.conf restart"
 --randwallpap <- spawnPipe "killall -q wallch; sleep 30; wallch"
 xmproc <- spawnPipe "xmobar /home/tritlo/.xmobarrc" --Status bar
 --xflux <- spawnPipe "killall -q xflux; xflux -l 64 -g -22" --Make display better
@@ -333,6 +335,7 @@ kbsettingsAgain  <- spawnPipe "sleep 30; /home/tritlo/.scripts/kbsettings.sh"
 dropbox <- spawnPipe "sleep 20; dropbox start"
 --not needed with nm-cli
 networkm <- spawnPipe "killall -q nm-applet; sleep 20; nm-applet;"
+-- nitrogen <- spawnPipe "sleep 30; nitrogen --restore;" -- Wallpaper
 gnomesettings <- spawnPipe "killall -q gnome-settings-daemon; sleep 20; gnome-settings-daemon;" -- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && gnome-settings-daemon;" --Brightness and audio keys.
 --wicd <- spawnPipe "sleep 15; killall -q wicd-client;  wicd-client -t;"
 redshift <- spawnPipe " killall -q redshift; sleep 15; redshift-gtk -c /home/tritlo/.config/redshift.conf;"
