@@ -10,15 +10,15 @@
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
-   dotspacemacs-configuration-layers '( highlight-indentation
-                                        filetypes
+   dotspacemacs-configuration-layers '(
+                                        ;filetypes
                                         git
                                         themes-megapack
                                         finance
                                         auto-completion
                                         syntax-check
-                                        (colors :variables
-                                                colors-enable-rainbow-identifiers t
+                                        (colors :variables ; toggle with t C i
+                                                colors-enable-rainbow-identifiers t 
                                                 ;colors-enable-nyan-cat-progress-bar t
                                                 )
                                         ; org-mode
@@ -28,6 +28,7 @@
                                         ansible
                                         markdown
                                         dockerfile
+                                        ;highlight-indentation
                                         ;myauctex
                                         auctex
                                        )
@@ -155,7 +156,7 @@ layers configuration."
    ;     "thi" 'indent-guide-global-mode
    ;     "thh" 'global-highlight-indentation-mode
     ;    "thp" 'global-fci-mode
-        ;"bb" 'switch-to-buffer 
+        ;"bb" 'switch-to-buffer  ; doesn't work in xmonad and 24.4, use b s instead
         ;"bl" 'switch-to-next-buffer
         ;"bh" 'switch-to-prev-buffer
         ;"bd" 'kill-buffer-ask
@@ -188,7 +189,9 @@ layers configuration."
     
     
    (fancy-battery-mode)
+   ; off by default, toggle with t C i
    (remove-hook 'prog-mode-hook #'rainbow-identifiers-mode)
+   (remove-hook 'erlang-mode-hook #'rainbow-identifiers-mode)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
