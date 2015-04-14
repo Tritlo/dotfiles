@@ -10,19 +10,24 @@
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
-   dotspacemacs-configuration-layers '( rainbow-mode
-                                        highlight-indentation
-                                        filetypes python git
+   dotspacemacs-configuration-layers '( highlight-indentation
+                                        filetypes
+                                        git
                                         themes-megapack
-                                        markdown
                                         finance
-
+                                        auto-completion
+                                        syntax-check
+                                        (colors :variables
+                                                colors-enable-rainbow-identifiers t
+                                                ;colors-enable-nyan-cat-progress-bar t
+                                                )
                                         ; org-mode
-                                        ;winpoint
-                                        ;nlinum
-                                        ;paradox
                                         ;ess
                                         haskell
+                                        python
+                                        ansible
+                                        markdown
+                                        dockerfile
                                         ;myauctex
                                         auctex
                                        )
@@ -60,7 +65,8 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '(;"Source Code Pro"
+                               "Terminus"
                                :size 13
                                :weight normal
                                :width normal
@@ -144,17 +150,16 @@ layers configuration."
    ;(global-highlight-indentation-mode 1)
    (global-fci-mode 1)
    (electric-pair-mode 0)
-   (evil-leader/set-key
-   ;     ;; "ef" 'find-file ; Already implemented with SPC f f 
-        "te" 'electric-pair-mode
+   ;; (evil-leader/set-key
+   ;;       "te" 'electric-pair-mode)
    ;     "thi" 'indent-guide-global-mode
    ;     "thh" 'global-highlight-indentation-mode
     ;    "thp" 'global-fci-mode
-        "bb" 'ad-Orig-switch-to-buffer 
-        "bl" 'switch-to-next-buffer
-        "bh" 'switch-to-prev-buffer
-        "bd" 'kill-buffer-ask
-        "bn" 'new-empty-buffer)
+        ;"bb" 'switch-to-buffer 
+        ;"bl" 'switch-to-next-buffer
+        ;"bh" 'switch-to-prev-buffer
+        ;"bd" 'kill-buffer-ask
+        ;"bn" 'new-empty-buffer)
   ; (progn
   ;   (setq
     
@@ -167,10 +172,10 @@ layers configuration."
   ;   (put 'when 'lisp-indent-function 1)
   ;   (put 'unless 'lisp-indent-function 1)
   ;   )
-    (setq ispell-dictionary "is")
-    (setq-default
-     LaTeX-command "latex -shell-escape"
-     Tex-PDF-mode t)
+   (setq ispell-dictionary "is")
+   (setq-default
+    LaTeX-command "latex -shell-escape"
+    Tex-PDF-mode t)
     
     ;; (add-hook 'haskell-mode-hook
     ;;           (lambda ()
@@ -179,6 +184,11 @@ layers configuration."
     ;;   (kbd "RET") nil
     ;;   (kbd "RET") 'haskell-indentation-newline-and-indent
     ;;   )
+   (setq powerline-default-separator 'arrow-fade)
+    
+    
+   (fancy-battery-mode)
+   (remove-hook 'prog-mode-hook #'rainbow-identifiers-mode)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -188,17 +198,27 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(LaTeX-command "latex -shell-escape")
+ '(LaTeX-command "latex -shell-escape" t)
  '(ac-ispell-requires 4)
  '(ahs-case-fold-search nil)
  '(ahs-default-range (quote ahs-range-whole-buffer))
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
- '(hy-indent-specform (quote (("for" . 1) ("for*" . 1) ("while" . 1) ("except" . 1) ("catch" . 1) ("let" . 1) ("when" . 1) ("unless" . 1))))
+ '(hy-indent-specform
+   (quote
+    (("for" . 1)
+     ("for*" . 1)
+     ("while" . 1)
+     ("except" . 1)
+     ("catch" . 1)
+     ("let" . 1)
+     ("when" . 1)
+     ("unless" . 1))))
  '(linum-format (quote dynamic))
  '(linum-relative-format "%3s")
  '(paradox-github-token t)
+ '(powerline-default-separator (quote arrow-fade))
  '(ring-bell-function (quote ignore) t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

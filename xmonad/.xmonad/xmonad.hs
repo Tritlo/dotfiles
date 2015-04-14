@@ -305,15 +305,14 @@ myPP = xmobarPP { ppCurrent = xmobarColor "#b9ca4a" "" . wrap "[" "]",
 -}
 
 myStartupHook :: X()
-myStartupHook = do
-    setWMName "LG3D"
+myStartupHook = ewmhDesktopsStartup <+> setWMName "LG3D"
 
 --Android-studio
 {-myLogHook = do
     takeTopFocus
     dynamicLogWithPP myPP >>= xmonadPropLog-}
 
-myEventHook = fullscreenEventHook
+myEventHook = fullscreenEventHook <+> ewmhDesktopsEventHook
 
 
 main =  do
@@ -357,6 +356,7 @@ modMask = mod4Mask, --super key
 --must be here so xmproc is defined
 logHook = do
     takeTopFocus
+    ewmhDesktopsLogHook
     dynamicLogWithPP  xmobarPP { ppCurrent = xmobarColor myGreen "" . wrap "[" "]",
                   ppTitle = xmobarColor myGreen "" . shorten 90,
                   ppOutput = hPutStrLn xmproc,
