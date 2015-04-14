@@ -186,12 +186,20 @@ layers configuration."
     ;;   (kbd "RET") 'haskell-indentation-newline-and-indent
     ;;   )
    (setq powerline-default-separator 'arrow-fade)
-    
-    
    (fancy-battery-mode)
-   ; off by default, toggle with t C i
-   (remove-hook 'prog-mode-hook #'rainbow-identifiers-mode)
-   (remove-hook 'erlang-mode-hook #'rainbow-identifiers-mode)
+   ; on by default, toggle with t C i
+   
+   ;(remove-hook 'prog-mode-hook #'rainbow-identifiers-mode)
+   ;(remove-hook 'erlang-mode-hook #'rainbow-identifiers-mode)
+
+   (defun colors/toggle-indentifiers ()
+     (interactive)
+     (if (and (boundp 'rainbow-identifiers-mode)
+                (symbol-value rainbow-identifiers-mode))
+        (rainbow-identifiers-mode -1)
+       (rainbow-identifiers-mode)))
+   
+    (evil-leader/set-key "tCi" 'colors/toggle-indentifiers)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -202,7 +210,7 @@ layers configuration."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(LaTeX-command "latex -shell-escape" t)
- '(ac-ispell-requires 4)
+ '(ac-ispell-requires 4 t)
  '(ahs-case-fold-search nil)
  '(ahs-default-range (quote ahs-range-whole-buffer))
  '(ahs-idle-interval 0.25)
