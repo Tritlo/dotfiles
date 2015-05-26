@@ -16,6 +16,7 @@
                                         themes-megapack
                                         finance
                                         auto-completion
+                                        wakatime
                                         syntax-check
                                         (colors :variables ; toggle with t C i
                                                 colors-enable-rainbow-identifiers t 
@@ -25,6 +26,11 @@
                                         ;ess
                                         haskell
                                         python
+                                        html
+                                        javascript
+                                        clojure
+                                        go
+                                        extra-langs
                                         ansible
                                         markdown
                                         dockerfile
@@ -199,7 +205,8 @@ layers configuration."
         (rainbow-identifiers-mode -1)
        (rainbow-identifiers-mode)))
    
-    (evil-leader/set-key "tCi" 'colors/toggle-indentifiers)
+   (evil-leader/set-key "tCi" 'colors/toggle-indentifiers)
+   (rainbow-mode)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -226,17 +233,19 @@ layers configuration."
      ("let" . 1)
      ("when" . 1)
      ("unless" . 1))))
- '(linum-format (quote dynamic))
+ '(linum-format (quote dynamic) t)
  '(linum-relative-format "%3s")
  '(paradox-github-token t)
  '(powerline-default-separator (quote arrow-fade))
- '(ring-bell-function (quote ignore) t))
+ '(ring-bell-function (quote ignore) t)
+ '(wakatime-api-key "***REMOVED***")
+ '(wakatime-cli-path "/usr/local/bin/wakatime"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background nil))))
+ '(default ((t (:background nil :family "Terminus" :foundry "xos4" :slant normal :weight normal :height 105 :width normal))))
  '(variable-pitch ((t (:family "default")))))
 
 

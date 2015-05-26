@@ -157,7 +157,7 @@ addPrefix p ms conf =
 --myTerm = "urxvtclient"
 --myTerm = "sakura"
 myTerm = "gnome-terminal"
-editor = "emacsclient -a \"\" -c -n "
+editor = "XMODIFIERS= emacsclient -c -n  || emacs & disown"
 ircopen = "/home/tritlo/.scripts/gtmuxirssi"
 simpleEditor ="gedit"
 fixMouse = "(sleep 1 && killall lxappearance)& lxappearance"

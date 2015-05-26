@@ -16,7 +16,7 @@ Plug 'gmarik/Vundle.vim' " Required
 
 " The colorschemes
 Plug 'tomasr/molokai'
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 
 
 Plug 'scrooloose/nerdtree', {'on':'NERDTreeFind'} " file browser
@@ -44,7 +44,7 @@ Plug 'tpope/vim-repeat'
 Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
 
 " supercharges the * command (search for word under cursor)
-Plug 'ironhouzi/vim-stim'
+" Plug 'ironhouzi/vim-stim'
 
 
 "" misc
@@ -53,9 +53,9 @@ Plug 'rking/ag.vim', {'on':'Ag'} " better grep, search for term in project.
 
 
 " filetype plugins
-Plug 'wting/rust.vim'
-Plug 'jnwhiteh/vim-golang'
-Plug 'pangloss/vim-javascript'
+Plug 'wting/rust.vim', {'for': 'rust'}
+Plug 'jnwhiteh/vim-golang', {'for' : 'go'}
+Plug 'pangloss/vim-javascript', {'for' : 'javascript'}
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'nginx.vim', {'for': 'nginx'}
 Plug 'elzr/vim-json'
@@ -80,34 +80,34 @@ Plug 'kchmck/vim-coffee-script', {'for':'coffee'}
 
 " supervisor files and supervisor ctl
 Plug 'thiderman/vim-supervisor' " also some functionality
-Plug 'vim-scripts/Tail-Bundle' " works for other tail files as well
+" Plug 'vim-scripts/Tail-Bundle' " works for other tail files as well
 
 Plug 'sjl/gundo.vim', {'on':'GundoToggle'}     " bound to <Leader>gu, displays the undo tree (so that i use it)
 Plug 'edsono/vim-matchit' " better % matching, including html tags
 
-Plug 'SirVer/ultisnips' " inserts snippets
-Plug 'honza/vim-snippets' " lots of predefined snippets
+" Plug 'SirVer/ultisnips' " inserts snippets
+" Plug 'honza/vim-snippets' " lots of predefined snippets
 
 Plug 'nathanaelkane/vim-indent-guides' " toggleable with <Leader>ig
 
 
 " vimshell and deps.
-Plug 'Shougo/vimproc.vim'
-Plug 'Shougo/vimshell.vim' , {'on': 'VimShellCreate'}
-Plug 'Shougo/neocomplcache.vim'
+" Plug 'Shougo/vimproc.vim'
+" Plug 'Shougo/vimshell.vim' , {'on': 'VimShellCreate'}
+" Plug 'Shougo/neocomplcache.vim'
 
 
 " clojure
-Plug 'tpope/vim-dispatch', {'for':'clojure'}
-Plug 'tpope/vim-fireplace', {'for':'clojure'}
-Plug 'tpope/vim-leiningen', {'for':'clojure'}
+" Plug 'tpope/vim-dispatch', {'for':'clojure'}
+" Plug 'tpope/vim-fireplace', {'for':'clojure'}
+" Plug 'tpope/vim-leiningen', {'for':'clojure'}
 
 " Latex
 
 Plug 'git://git.code.sf.net/p/vim-latex/vim-latex', {'for':'latex'}
 
-Plug 'vim-voom/VOoM' " outline viewer
-Plug 'vim-scripts/utl.vim' " better vim url handling
+" Plug 'vim-voom/VOoM' " outline viewer
+" Plug 'vim-scripts/utl.vim' " better vim url handling
 " emacs kill-ring in vim.
 " use with meta-p to scroll through yank history.
 " Does not work with the Icelandic key ð.

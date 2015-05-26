@@ -86,6 +86,9 @@ if [ -f ~/.zaliases ]; then
 fi
 
 
+. $HOME/.oh-my-zsh/custom/plugins/zsh-directory-history/directory-history.plugin.zsh
+
+
 
 . $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/autosuggestions.zsh
 zle-line-init() {
@@ -120,6 +123,13 @@ AUTOSUGGESTION_HIGHLIGHT_CURSOR=0
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
+
+#bindkey '\e[A' directory-history-search-backward
+#bindkey '\e[B' directory-history-search-forward
+
+bindkey '^j' history-substring-search-up
+bindkey '^k' history-substring-search-down
+
 bindkey -a 'k' history-beginning-search-backward
 bindkey -a 'j' history-beginning-search-forward
 bindkey '^?' backward-delete-char
@@ -137,3 +147,9 @@ fi
 
 #if [ -e /home/tritlo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/tritlo/.nix-profile/etc/profile.d/nix.sh; fi
 
+
+source ~/.xsh
+
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
