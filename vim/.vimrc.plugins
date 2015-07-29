@@ -1,4 +1,6 @@
 " set the runtime path to include Vundle and initialize 
+"
+
 filetype off
 
 call plug#begin('~/.vim/plugged')
@@ -46,6 +48,8 @@ Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as �
 " supercharges the * command (search for word under cursor)
 " Plug 'ironhouzi/vim-stim'
 
+" Wakatime timetracking
+Plug 'wakatime/vim-wakatime'
 
 "" misc
 Plug 'tinymode.vim' " continuous key presses
@@ -62,6 +66,12 @@ Plug 'elzr/vim-json'
 " Plug 'godlygeek/tabular' " for markdown
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
+
+Plug 'jiangmiao/auto-pairs'
+
+" JSX
+Plug 'mxw/vim-jsx' ", {'for': 'javascript'}
+Plug 'jaxbot/syntastic-react' ", {'for': 'javascript'}
 " opencl.
 " remember to create
 " opencl.vim in ~/.vim/ftdetect/
@@ -71,11 +81,6 @@ Plug 'petRUShka/vim-opencl', {'for':'opencl'}
 
 Plug 'kchmck/vim-coffee-script', {'for':'coffee'}
 
-" a good mode
-" Plug 'jceb/vim-orgmode'
-" Plug 'tpope/vim-speeddating'
-" Plug 'hsitz/VimOrganizer'
-" Plug 'mattn/calendar-vim'
 
 
 " supervisor files and supervisor ctl
@@ -113,13 +118,6 @@ Plug 'git://git.code.sf.net/p/vim-latex/vim-latex', {'for':'latex'}
 " Does not work with the Icelandic key ð.
 Plug 'maxbrunsfeld/vim-yankstack'
 
-if has("unix")
-    " unix only plugins go here
-    Plug 'Valloric/YouCompleteMe'
-    " Tharf exuberant ctags
-    Plug 'jeetsukumaran/vim-gazetteer'
-    Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
-endif
 
 " Thessi haegja a, viljum thad ekki i terminal
 if has('gui_running')
@@ -144,8 +142,12 @@ if has('gui_running')
     " Ser medhondlun
 
     if has("unix")
+        " unix only plugins go here
         " Code completion, tharf ad compile-a med cmake og libclang og e-d
-
+        Plug 'Valloric/YouCompleteMe'
+        " Tharf exuberant ctags
+        Plug 'jeetsukumaran/vim-gazetteer'
+        Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
     endif
 endif
 call plug#end()
@@ -182,15 +184,91 @@ command! OrgCapture :call org#CaptureBuffer()
 command! OrgCaptureFile :call org#OpenCaptureFile()
 
 
+if has("unix")
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
+    let g:airline#extensions#tabline#left_sep = '▶'
+    let g:airline#extensions#tabline#left_alt_sep = '|'
+    "let g:airline_left_sep = '»'
+    let g:airline_left_sep = '▶'
+    "let g:airline_right_sep = '«'
+    let g:airline_right_sep = '◀'
+    let g:airline_symbols.linenr = '␤'
+    let g:airline_symbols.branch = '⎇'
+    let g:airline_symbols.paste = 'ρ'
+    let g:airline_symbols.whitespace = 'Ξ'
+endif
+
+
+" YouCompleteMe
+"let g:ycm_key_list_previous_completion=['<Up>']
+let g:ycm_key_list_select_completion=['<C-j>',"<tab>"]
+let g:ycm_key_list_previous_completion=['<C-k>']
+
+
+
+"let g:UltiSnipsExpandTrigger="<c-j>"
+
+
+let g:wakatime_PythonBinary = '/usr/bin/python'
+let g:pymode_breakpoint_bind = '<leader>pb'
+let g:pymode_run_bind = '<leader>pr'
+nnoremap <Leader>pl :PymodeLintToggle<CR>
+let g:pymode_rope_completion = 0
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_on_fly = 0
+let g:pymode_lint_unmodified = 0
+let g:pymode_folding = 0
+
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'markdown' : 1,
+      \ 'unite' : 1,
+      \ 'vimshell' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \ 'mail' : 1,
+      \ 'conque_term' : 1
+      \}
+
+
+let g:yankstack_map_keys = 0
+let g:markdown_fold_style = 'nested'
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"
+
+let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_c_check_header = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 0
 let g:ycm_confirm_extra_conf = 0
-" let g:ycm_complete_in_comments = 1
 
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 let g:indent_guides_enable_on_vim_startup=1
 
+let g:shell_mappings_enabled = 0
+
 colorscheme molokai
+
+if has('gui_running')
+    let g:ctrlp_extensions = ['gazetteer']
+    let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+    let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+    let g:ctrlp_gazetteer_ctags_bin = "ctags-exuberant"
+    let g:ctrlp_gazetteer_types = {
+        \   'javascript' :{
+        \       'bin' : 'jsctags',
+        \       'args' : '-f -',
+        \   }
+        \ }
+endif

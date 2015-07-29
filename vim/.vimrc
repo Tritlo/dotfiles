@@ -1,10 +1,16 @@
 so ~/.vimrc.plugins
 
+set tags=./tags,.tags;
+
+function CreateTags()
+    exec ':!git rev-parse --show-toplevel && cd $(git rev-parse --show-toplevel) && git ls-files | ctags -f .tags -L-'
+endfunction
+
 if has('gui_running')
     silent! colorscheme molokai
 else
-    colorscheme pablo
     let g:airline_theme="luna"
+    colorscheme pablo
 endif
 
 
@@ -12,6 +18,8 @@ endif
 autocmd BufRead,BufNewFile .xmobarrc set filetype=haskell
 autocmd BufRead,BufNewFile Dockerfile set filetype=Dockerfile
 autocmd BufRead,BufNewFile *.go set filetype=go
+autocmd BufEnter,BufRead,BufNewFile *.jsx set filetype=javascript
+autocmd BufRead,BufNewFile *.djhtml set filetype=html
 au BufRead,BufNewFile *.X68 setfiletype asm68k
 autocmd BufEnter \[vimshell\]* NeoComplCacheEnable
 autocmd BufLeave \[vimshell\]* NeoComplCacheDisable
@@ -100,9 +108,8 @@ if has('gui_running')
     if has("win32")
         set guifont=Terminus:h14
     else
-        set guifont=Terminus\ 13
+        set guifont=Terminus\ 11
     endif
-    let g:ctrlp_extensions = ['gazetteer']
     silent! colorscheme molokai
 
     "toggle tagbar
@@ -134,21 +141,6 @@ command Lc !pdflatex -shell-escape %
 command Lv !evince %:r.pdf & disown
 command La !pdflatex -shell-escape % && evince %:r.pdf & disown
 
-if has("unix")
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
-    let g:airline#extensions#tabline#left_sep = '▶'
-    let g:airline#extensions#tabline#left_alt_sep = '|'
-    "let g:airline_left_sep = '»'
-    let g:airline_left_sep = '▶'
-    "let g:airline_right_sep = '«'
-    let g:airline_right_sep = '◀'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.whitespace = 'Ξ'
-endif
 
 " space is pretty easy to reach:
 let mapleader=" "
@@ -158,12 +150,16 @@ let maplocalleader="\\"
 " key bindings
 " file browsing
 nmap <silent> <Leader>f :NERDTreeFind<CR>
-nnoremap <Leader>gu :GundoToggle<CR>
+nnoremap <Leader>tg :GundoToggle<CR>
 nnoremap <Leader>tb :TagbarToggle<CR>
-nnoremap <Leader>ig :IndentGuidesToggle<CR>
-nnoremap <F8> :TagbarToggle<CR>
-inoremap <F8> <ESC>:TagbarToggle<CR>i
+nnoremap <Leader>tf :NERDTreeToggle<CR>
+nnoremap <Leader>ti :IndentGuidesToggle<CR>
+" nnoremap <F8> :TagbarToggle<CR>
+" inoremap <F8> <ESC>:TagbarToggle<CR>i
 
+nnoremap <Leader>gz :CtrlPGazetteer<CR>
+
+nnoremap <Leader>gt :call CreateTags()<CR>
 
 "Shifting keeps us in visual mode
 " vnoremap < <gv
@@ -234,8 +230,8 @@ nnoremap  <Leader>tn :tabnew<CR>
 nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
-nnoremap <Leader>tt :VimShellCreate<Cr>
-nnoremap <leader>s :SyntasticToggleMode<CR>
+" nnoremap <Leader>tt :VimShellCreate<Cr>
+nnoremap <leader>ts :SyntasticToggleMode<CR>
 " nnoremap <Leader>u :Unite<Cr>
 
 
@@ -252,11 +248,6 @@ nnoremap <Leader>qc :ccl<CR>
 
 " Reminder: Jumplist with ctrl-i and ctrl-o.
 
-"" YouCompleteMe
-"let g:ycm_key_list_previous_completion=['<Up>']
-
-
-"let g:UltiSnipsExpandTrigger="<c-j>"
 
 " list buffers
 if has("unix")
@@ -270,38 +261,6 @@ endif
 "     inoremap <M-x> <Esc>:
 " endif
 
-
-let g:pymode_breakpoint_bind = '<leader>pb'
-let g:pymode_run_bind = '<leader>pr'
-nnoremap <Leader>pl :PymodeLintToggle<CR>
-let g:pymode_rope_completion = 0
-let g:pymode_lint_cwindow = 0
-let g:pymode_lint_on_fly = 0
-let g:pymode_lint_unmodified = 0
-let g:pymode_folding = 0
-
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'qf' : 1,
-      \ 'notes' : 1,
-      \ 'markdown' : 1,
-      \ 'unite' : 1,
-      \ 'vimshell' : 1,
-      \ 'text' : 1,
-      \ 'vimwiki' : 1,
-      \ 'pandoc' : 1,
-      \ 'infolog' : 1,
-      \ 'mail' : 1,
-      \ 'conque_term' : 1
-      \}
-
-
-let g:yankstack_map_keys = 0
-let g:markdown_fold_style = 'nested'
-
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " run search replace on all files in quickfix list (e.g. after Ag find)
 command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
@@ -317,44 +276,20 @@ endfunction
 " ensure closing of nerdtree
 
 nnoremap <leader>h :set hlsearch!<CR>
-let g:org_command_for_emacsclient = "emacsclient"
 
 " let $XIKI_DIR="/home/tritlo/Workspace/xiki"
 " source $XIKI_DIR/etc/vim/xiki.vim
 "
-let g:ft_ignore_pat = '\.org'
-" and then put these lines in vimrc somewhere after the line above
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-au BufEnter *.org            call org#SetOrgFileType()
-let g:org_capture_file = '~/org/captures.org'
+"
 
 " Save fold information and cursor location
 autocmd BufWinLeave *.* mkview!
 autocmd BufWinEnter *.* silent loadview
 
-nmap <Leader>c<Space> gc
-vmap <Leader>c<Space> gc
+" nmap <leader>c<Space> gc
+" vmap <leader>c<Space> gc
 
 nmap <leader>cy "+y
 vmap <leader>cy "+y<CR>
 nmap <leader>cp "+p<CR>
-
-" vim-notes
-let g:notes_directories = ['~/Dropbox/Notes']
-let g:notes_suffix = '.md'
-" no replacing!
-let g:notes_smart_quotes = 0
-let g:notes_unicode_enabled = 0
-
-vnoremap <leader>ne :NoteFromSelectedText<CR>
-vnoremap <leader>ns :SplitNoteFromSelectedText<CR>
-vnoremap <leader>nt :TabNoteFromSelectedText<CR>
-vnoremap <leader>nm :NoteToMarkdown<CR>
-vnoremap <leader>nh :NoteToHtml<CR>
-vnoremap <leader>nd :DeleteNote<CR>
-nnoremap <leader>nn :Note<Space>
-nnoremap <leader>ns :SearchNotes<CR>
-nnoremap <leader>nv :execute 'VoomToggle' &ft<CR>
-
-let g:shell_mappings_enabled = 0
 
