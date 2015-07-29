@@ -12,31 +12,32 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers '(
                                         ;filetypes
+                                        wakatime
+                                       
                                         git
                                         themes-megapack
                                         finance
                                         auto-completion
-                                        wakatime
                                         syntax-check
-                                        (colors :variables ; toggle with t C i
-                                                colors-enable-rainbow-identifiers t 
-                                                ;colors-enable-nyan-cat-progress-bar t
-                                                )
+                                        ; (colors :variables ; toggle with t C i
+                                        ;         colors-enable-rainbow-identifiers t 
+                                        ;         ;colors-enable-nyan-cat-progress-bar t
+                                        ;         )
                                         ; org-mode
                                         ;ess
-                                        haskell
+                                        ; haskell
                                         python
                                         html
                                         javascript
-                                        clojure
-                                        go
+                                        ; clojure
+                                        ; go
                                         extra-langs
-                                        ansible
-                                        markdown
-                                        dockerfile
-                                        ;highlight-indentation
-                                        ;myauctex
+                                        ; ansible
+                                        ; markdown
+                                        ; dockerfile
                                         auctex
+                                        vim-empty-lines
+                                        ; evil-commentary
                                        )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -63,7 +64,7 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '( monokai
+   dotspacemacs-themes '(monokai
                          solarized-light
                          solarized-dark
                          leuven
@@ -71,10 +72,10 @@ before layers configuration."
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
-   ;; size to make separators look not too crappy.
+   ;; size to make separators look not too crappy .
    dotspacemacs-default-font '(;"Source Code Pro"
                                "Terminus"
-                               :size 13
+                               :size 17
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -153,9 +154,8 @@ layers configuration."
    (global-linum-mode t)
    (smartparens-global-mode 1)
    (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
-   ;(define-globalized-minor-mode global-highlight-indentation-mode highlight-indentation-mode (lambda () (highlight-indentation-mode 1)))
-   ;(global-highlight-indentation-mode 1)
    (global-fci-mode 1)
+   (global-vim-empty-lines-mode 1)
    (electric-pair-mode 0)
    ;; (evil-leader/set-key
    ;;       "te" 'electric-pair-mode)
@@ -167,23 +167,10 @@ layers configuration."
         ;"bh" 'switch-to-prev-buffer
         ;"bd" 'kill-buffer-ask
         ;"bn" 'new-empty-buffer)
-  ; (progn
-  ;   (setq
-    
-  ;   ;(indent-guide-global-mode 1)
-  ;   ;; Fix override of the substitute key. This is already fixed upstream.
-
-  ;   ;; Why would I want to scroll?
-    
-  ;   (put 'if 'lisp-indent-function nil)
-  ;   (put 'when 'lisp-indent-function 1)
-  ;   (put 'unless 'lisp-indent-function 1)
-  ;   )
    (setq ispell-dictionary "is")
    (setq-default
     LaTeX-command "latex -shell-escape"
     Tex-PDF-mode t)
-    
     ;; (add-hook 'haskell-mode-hook
     ;;           (lambda ()
     ;;              (electric-indent-mode 0)))
@@ -194,9 +181,8 @@ layers configuration."
    (setq powerline-default-separator 'arrow-fade)
    (fancy-battery-mode)
    ; on by default, toggle with t C i
-   
-   ;(remove-hook 'prog-mode-hook #'rainbow-identifiers-mode)
-   ;(remove-hook 'erlang-mode-hook #'rainbow-identifiers-mode)
+   (remove-hook 'prog-mode-hook #'rainbow-identifiers-mode)
+   (remove-hook 'erlang-mode-hook #'rainbow-identifiers-mode)
 
    (defun colors/toggle-indentifiers ()
      (interactive)
@@ -204,7 +190,6 @@ layers configuration."
                 (symbol-value rainbow-identifiers-mode))
         (rainbow-identifiers-mode -1)
        (rainbow-identifiers-mode)))
-   
    (evil-leader/set-key "tCi" 'colors/toggle-indentifiers)
    (rainbow-mode)
 )
@@ -223,29 +208,20 @@ layers configuration."
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
- '(hy-indent-specform
-   (quote
-    (("for" . 1)
-     ("for*" . 1)
-     ("while" . 1)
-     ("except" . 1)
-     ("catch" . 1)
-     ("let" . 1)
-     ("when" . 1)
-     ("unless" . 1))))
+ ;; '(hy-indent-specform
+ ;;   (quote
+ ;;    (("for" . 1)
+ ;;     ("for*" . 1)
+ ;;     ("while" . 1)
+ ;;     ("except" . 1)
+ ;;     ("catch" . 1)
+ ;;     ("let" . 1)
+ ;;     ("when" . 1)
+ ;;     ("unless" . 1))))
  '(linum-format (quote dynamic) t)
  '(linum-relative-format "%3s")
  '(paradox-github-token t)
  '(powerline-default-separator (quote arrow-fade))
- '(ring-bell-function (quote ignore) t)
+ ;; '(ring-bell-function (quote ignore) t)
  '(wakatime-api-key "***REMOVED***")
  '(wakatime-cli-path "/usr/local/bin/wakatime"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:background nil :family "Terminus" :foundry "xos4" :slant normal :weight normal :height 105 :width normal))))
- '(variable-pitch ((t (:family "default")))))
-
-
