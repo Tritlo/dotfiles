@@ -69,6 +69,8 @@ Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 
 Plug 'jiangmiao/auto-pairs'
 
+" Beautify
+Plug 'maksimr/vim-jsbeautify', {'for': 'javascript'}
 " JSX
 Plug 'mxw/vim-jsx' ", {'for': 'javascript'}
 Plug 'jaxbot/syntastic-react' ", {'for': 'javascript'}
@@ -77,9 +79,9 @@ Plug 'jaxbot/syntastic-react' ", {'for': 'javascript'}
 " opencl.vim in ~/.vim/ftdetect/
 " containing the command
 " autocmd BufRead,BufNewFile *.cl set filetype=opencl
-Plug 'petRUShka/vim-opencl', {'for':'opencl'}
+Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
 
-Plug 'kchmck/vim-coffee-script', {'for':'coffee'}
+Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
 
 
 
@@ -155,26 +157,6 @@ call plug#end()
 filetype plugin indent on    " required
 
 
-"continuous resize
-call tinymode#EnterMap("winsize","<C-W>+","+")
-call tinymode#EnterMap("winsize","<C-W>-","-")
-call tinymode#EnterMap("winsize","<Leader>w+","+")
-call tinymode#EnterMap("winsize","<Leader>w-","-")
-call tinymode#Map("winsize","+","wincmd +")
-call tinymode#Map("winsize","-","wincmd -")
-call tinymode#EnterMap("winsize","<C-W><","<")
-call tinymode#EnterMap("winsize","<C-W>>",">")
-call tinymode#EnterMap("winsize","<Leader>w<","<")
-call tinymode#EnterMap("winsize","<Leader>w>",">")
-call tinymode#Map("winsize","<","wincmd <")
-call tinymode#Map("winsize",">","wincmd >")
-call tinymode#ModeMsg("winsize","Change window size +/-, </>")
-
-call tinymode#EnterMap("yankstack","<Leader>pj","j")
-call tinymode#EnterMap("yankstack","<Leader>pk","k")
-call tinymode#Map("yankstack","j","normal \<Plug>yankstack_substitute_newer_paste")
-call tinymode#Map("yankstack","k","normal \<Plug>yankstack_substitute_older_paste")
-call tinymode#ModeMsg("yankstack","Scroll through yankstack with j/k")
 
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -201,20 +183,10 @@ if has("unix")
 endif
 
 
-" YouCompleteMe
-"let g:ycm_key_list_previous_completion=['<Up>']
-let g:ycm_key_list_select_completion=['<C-j>',"<tab>"]
-let g:ycm_key_list_previous_completion=['<C-k>']
-
-
-
-"let g:UltiSnipsExpandTrigger="<c-j>"
-
 
 let g:wakatime_PythonBinary = '/usr/bin/python'
-let g:pymode_breakpoint_bind = '<leader>pb'
-let g:pymode_run_bind = '<leader>pr'
-nnoremap <Leader>pl :PymodeLintToggle<CR>
+
+
 let g:pymode_rope_completion = 0
 let g:pymode_lint_cwindow = 0
 let g:pymode_lint_on_fly = 0
@@ -240,9 +212,6 @@ let g:ycm_filetype_blacklist = {
 let g:yankstack_map_keys = 0
 let g:markdown_fold_style = 'nested'
 
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "
 
 let g:syntastic_javascript_checkers=['eslint']

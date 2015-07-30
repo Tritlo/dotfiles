@@ -6,6 +6,15 @@ function CreateTags()
     exec ':!git rev-parse --show-toplevel && cd $(git rev-parse --show-toplevel) && git ls-files | ctags -f .tags -L-'
 endfunction
 
+function! g:ToggleColorColumn()
+    if &colorcolumn != ''
+        setlocal colorcolumn&
+    else
+        setlocal colorcolumn=80
+    endif
+endfunction
+
+
 if has('gui_running')
     silent! colorscheme molokai
 else
@@ -154,6 +163,7 @@ nnoremap <Leader>tg :GundoToggle<CR>
 nnoremap <Leader>tb :TagbarToggle<CR>
 nnoremap <Leader>tf :NERDTreeToggle<CR>
 nnoremap <Leader>ti :IndentGuidesToggle<CR>
+nnoremap <silent> <Leader>tc :call g:ToggleColorColumn()<CR>
 " nnoremap <F8> :TagbarToggle<CR>
 " inoremap <F8> <ESC>:TagbarToggle<CR>i
 
@@ -235,8 +245,48 @@ nnoremap <leader>ts :SyntasticToggleMode<CR>
 " nnoremap <Leader>u :Unite<Cr>
 
 
+nnoremap <Leader>jb :call JsBeautify()<cr>
 "close quickfix
 nnoremap <Leader>qc :ccl<CR>
+
+let g:pymode_breakpoint_bind = '<leader>pb'
+let g:pymode_run_bind = '<leader>pr'
+nnoremap <Leader>pl :PymodeLintToggle<CR>
+
+" YouCompleteMe
+"let g:ycm_key_list_previous_completion=['<Up>']
+let g:ycm_key_list_select_completion=['<C-j>',"<tab>"]
+let g:ycm_key_list_previous_completion=['<C-k>']
+
+
+
+"let g:UltiSnipsExpandTrigger="<c-j>"
+"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+
+"continuous resize
+call tinymode#EnterMap("winsize","<C-W>+","+")
+call tinymode#EnterMap("winsize","<C-W>-","-")
+call tinymode#EnterMap("winsize","<Leader>w+","+")
+call tinymode#EnterMap("winsize","<Leader>w-","-")
+call tinymode#Map("winsize","+","wincmd +")
+call tinymode#Map("winsize","-","wincmd -")
+call tinymode#EnterMap("winsize","<C-W><","<")
+call tinymode#EnterMap("winsize","<C-W>>",">")
+call tinymode#EnterMap("winsize","<Leader>w<","<")
+call tinymode#EnterMap("winsize","<Leader>w>",">")
+call tinymode#Map("winsize","<","wincmd <")
+call tinymode#Map("winsize",">","wincmd >")
+call tinymode#ModeMsg("winsize","Change window size +/-, </>")
+
+call tinymode#EnterMap("yankstack","<Leader>pj","j")
+call tinymode#EnterMap("yankstack","<Leader>pk","k")
+call tinymode#Map("yankstack","j","normal \<Plug>yankstack_substitute_newer_paste")
+call tinymode#Map("yankstack","k","normal \<Plug>yankstack_substitute_older_paste")
+call tinymode#ModeMsg("yankstack","Scroll through yankstack with j/k")
 
 " save
 " enable emacs save in insert,
