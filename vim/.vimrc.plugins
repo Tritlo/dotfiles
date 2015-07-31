@@ -141,6 +141,9 @@ if has('gui_running')
 
     "git gutter
     Plug 'airblade/vim-gitgutter'
+    " vim-rooter is nice, but might be confusing
+    " during command line editing
+    Plug 'airblade/vim-rooter'
     " Ser medhondlun
 
     if has("unix")
@@ -183,6 +186,8 @@ if has("unix")
 endif
 
 
+" Have vim-rooter not echo the dir
+let g:rooter_silent_chdir = 1
 
 let g:wakatime_PythonBinary = '/usr/bin/python'
 
