@@ -21,7 +21,8 @@ Plug 'tomasr/molokai'
 " Plug 'flazz/vim-colorschemes'
 
 
-Plug 'scrooloose/nerdtree', {'on':'NERDTreeFind'} " file browser
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'} " file browser
+Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeFind'}
 "Plug 'scrooloose/nerdcommenter' " Commenter
 Plug 'tpope/vim-commentary'
 
@@ -67,7 +68,7 @@ Plug 'elzr/vim-json'
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 
 " Beautify
 Plug 'maksimr/vim-jsbeautify', {'for': 'javascript'}
