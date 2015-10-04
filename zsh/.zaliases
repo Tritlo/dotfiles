@@ -2,5 +2,6 @@ alias -s pdf=evince
 alias open=xdg-open
 alias tmux="tmux -2"
 alias vimr="gvim --remote-tab"
+alias svim="vim -u ~/.vimrc.config"
 alias jotunn="ssh mpg3@katla.rhi.hi.is -t 'ssh mpg3@jotunn.rhi.hi.is'"
 alias naut="nautilus . > /dev/null 2>&1 & disown"
