@@ -70,7 +70,7 @@ URxvt*scrollBar:                      false
 ! URxvt*backgroundPixmap:               file[;geom]
 ! URxvt*iconFile:                       file
 ! URxvt.font: -*-terminus-medium-*-*-*-*-140-*-*-*-*-iso8859-1
-URxvt.font: xft:Terminus:antialias=false:size=13
+URxvt.font: xft:Terminus:antialias=false:size=15 */
 ! URxvt*boldFont:                       fontname
 ! URxvt*italicFont:                     fontname
 ! URxvt*boldItalicFont:                 fontname
@@ -122,7 +122,6 @@ URxvt.font: xft:Terminus:antialias=false:size=13
 ! URxvt*matcher.pattern.*:              string
 ! URxvt*matcher.rend.*:                 string
 ! URxvt*remote-clipboard.fetch:         string
-! URxvt*remote-clipboard.store:         string
 ! URxvt*searchable-scrollback:          string
 ! URxvt*selection-autotransform.*:      string
 ! URxvt*selection-pastebin.cmd:         string
