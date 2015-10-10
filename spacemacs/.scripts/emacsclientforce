@@ -1,0 +1,2 @@
+#!/bin/sh
+emacsclient $@ || emacsclient $@ -e '(message "No File")'

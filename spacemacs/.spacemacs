@@ -180,7 +180,7 @@ before layers configuration."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'.
@@ -221,7 +221,7 @@ before layers configuration."
    )
    ;; agda
    (load-file (let ((coding-system-for-read 'utf-8))
-                (shell-command-to-string "agda-mode locate")))
+                (shell-command-to-string "/home/tritlo/.cabal/bin/agda-mode locate")))
 
    (setq agda2-include-dirs '("."
                               "/home/tritlo/Agda/stdlib/src/"
@@ -249,7 +249,9 @@ layers configuration."
   ; Better for terminus
   (setq powerline-default-separator 'arrow-fade)
   (fancy-battery-mode)
-
+  (eval-after-load "tex"
+    '(add-to-list 'TeX-command-list
+                  '("Arara" "arara %s" TeX-run-TeX nil t :help "Run Arara.")))
 )
 
 ;; Do not write anything past this comme
