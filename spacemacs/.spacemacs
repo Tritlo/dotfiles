@@ -28,6 +28,10 @@
         ;; themes-megapack
         syntax-checking
         spell-checking
+        (colors :variables colors-enable-rainbow-identifiers t)
+
+        ;; Fun
+        games
 
         ;; ----------------------------------------------------------------
         ;; Tools
@@ -44,11 +48,18 @@
         emacs-lisp
         (python :variables
                 python-test-runner 'pytest
-                python-enable-yapf-format-on-save t
+                ; python-enable-yapf-format-on-save t
                 )
         clojure
-        ;; haskell
-        ;; java
+        (c-c++ :variables
+               c-c++-enable-clang-support t
+               )
+        (haskell :variables
+                 haskell-enable-ghc-mod-support t
+                 ; haskell-enable-shm-support t
+                 )
+        agda
+        java
         html
         javascript
         extra-langs
@@ -72,8 +83,9 @@
         ;; ----------------------------------------------------------------
         ;; Vim
         ;; ----------------------------------------------------------------
-        vim-evil-commentary
-        vim-empty-lines
+        evil-commentary
+        unimpaired
+        ; vim-empty-lines
         ; vinegar
 
         ;; ----------------------------------------------------------------
@@ -86,7 +98,10 @@
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '()
+    dotspacemacs-additional-packages '(
+                                       flycheck-clojure
+                                       flycheck-pos-tip
+                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(
                                     evil-terminal-cursor-changer ; Fixes error when in terminal
@@ -196,7 +211,7 @@ before layers configuration."
    ;; point when it reaches the top or bottom of the screen.
    dotspacemacs-smooth-scrolling t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; Select a scope to highlight delimiters. Possible value is `all',
    ;; `current' or `nil'. Default is `all'
    dotspacemacs-highlight-delimiters 'all
@@ -212,6 +227,8 @@ before layers configuration."
    )
   ;; User initialization goes here
   ; (setq waktime-python-bin "/usr/bin/python")
+
+  ; Make sure emacs finds agda and ghc-mode etc.
   (add-to-list 'exec-path "~/.cabal/bin/")
 
   (setq-default
@@ -219,14 +236,6 @@ before layers configuration."
    fci-rule-column 80
    global-evil-search-highlight-persist nil
    )
-   ;; agda
-   (load-file (let ((coding-system-for-read 'utf-8))
-                (shell-command-to-string "/home/tritlo/.cabal/bin/agda-mode locate")))
-
-   (setq agda2-include-dirs '("."
-                              "/home/tritlo/Agda/stdlib/src/"
-                              ;"/home/tritlo/Agda/agda-prelude/src/"
-                              ))
  )
 
 (defun dotspacemacs/config ()
@@ -237,11 +246,30 @@ layers configuration."
   (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
   (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
 
+  ;;================ Haskell ==========================
+  ;; Use the stack ghc-mod file.
+  (add-to-list 'load-path "~/.stack/global-project/.stack-work/install/x86_64-linux/lts-3.12/7.10.2/share/x86_64-linux-ghc-7.10.2/ghc-mod-5.4.0.0/elisp/")
+  ;; ghc-mod keybinds
 
+  (spacemacs/declare-prefix-for-mode 'haskell-mode "mm" "haskell/ghc-mod")
+  (spacemacs/declare-prefix-for-mode 'haskell-mode "mm" "haskell/ghc-mod")
+  (evil-leader/set-key-for-mode 'haskell-mode
+    "mmt" 'ghc-insert-template-or-signature
+    "mmu" 'ghc-initial-code-from-signature
+    "mma" 'ghc-auto
+    "mmf" 'ghc-refine
+    "mme" 'ghc-expand-th
+    "mmn" 'ghc-goto-next-hole
+    "mmp" 'ghc-goto-prev-hole
+    "mm>"  'ghc-make-indent-deeper
+    "mm<"  'ghc-make-indent-shallower)
+
+  ;; ============================================================
+  (setq neo-theme 'ascii)
+  (setq neo-show-updir-line t)
   (evil-leader/set-key "tb" 'speedbar)
-
-  (electric-pair-mode 0)
   (global-linum-mode 1)
+  (global-subword-mode 1) ;; camelCaseWords
   ; (setq ispell-dictionary "is")
   ;; (setq-default
   ;;  LaTeX-command "latex -shell-escape"
@@ -252,6 +280,16 @@ layers configuration."
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("Arara" "arara %s" TeX-run-TeX nil t :help "Run Arara.")))
+
+  ;; clojure
+  (eval-after-load 'flycheck
+    '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+  (eval-after-load 'flycheck '(flycheck-clojure-setup))
+  (add-hook 'clojure-mode-hook #'flycheck-mode)
+  ;; (add-hook 'clojure-mode-hook #'subword-mode)
+
+  ;; agda
+  (setq agda2-include-dirs '("." "./stdlib/src"))
 )
 
 ;; Do not write anything past this comme
@@ -261,19 +299,50 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;; '(ahs-case-fold-search nil)
- ;; '(ahs-default-range (quote ahs-range-whole-buffer))
- ;; '(ahs-idle-interval 0.25)
- ;; '(ahs-idle-timer 0 t)
- ;; '(ahs-inhibit-face-list nil)
- ;; '(linum-format (quote dynamic))
- ;; '(linum-relative-format "%3s")
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#657b83")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#fdf6e3" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#586e75")
+ '(highlight-tail-colors
+   (quote
+    (("#eee8d5" . 0)
+     ("#B4C342" . 20)
+     ("#69CABF" . 30)
+     ("#69B7F0" . 50)
+     ("#DEB542" . 60)
+     ("#F2804F" . 70)
+     ("#F771AC" . 85)
+     ("#eee8d5" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
+ '(hl-fg-colors
+   (quote
+    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(magit-diff-use-overlays nil)
+ '(pos-tip-background-color "#eee8d5")
+ '(pos-tip-foreground-color "#586e75")
  '(powerline-default-separator (quote arrow-fade))
  '(ring-bell-function (quote ignore) t)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
+ '(term-default-bg-color "#fdf6e3")
+ '(term-default-fg-color "#657b83")
  '(wakatime-api-key "***REMOVED***")
  '(wakatime-cli-path "/usr/local/bin/wakatime")
  '(waktime-python-bin "/usr/bin/python")
- )
+ '(weechat-color-list
+   (quote
+    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

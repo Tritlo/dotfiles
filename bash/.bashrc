@@ -125,6 +125,3 @@ for f in $(command ls ~/.node-completion); do
 done
 # }}}
 
-
-source ~/.xsh
-
