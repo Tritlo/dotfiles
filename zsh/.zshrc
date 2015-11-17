@@ -18,12 +18,13 @@ POWERLEVEL9K_VCS_UNSTAGED_ICON=" " # \uf228
 POWERLEVEL9K_BACKGROUND_JOBS_ICON=" " # \uf22f
 # POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=$'\uf0ab '              # 
 # POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=$'\uf0aa '              # ↑
-# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="\e[44m\e[1m\e[33m $ \e[0m\e[34m▶\e[0m "
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%F{yellow}%K{blue}%} $ %{%f%k%F{blue}%}▶ "
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs status)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load)
 #POWERLEVEL9K_DISABLE_RPROMPT=true
 
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
@@ -35,8 +36,8 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 #POWERLEVEL9K_TIME_FORMAT="%D{%a %F %T}"
 POWERLEVEL9K_TIME_FORMAT="\Uf246 %D{%T}"
 
-# POWERLEVEL9K_SHOW_CHANGESET=true
-# POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
+POWERLEVEL9K_SHOW_CHANGESET=true
+POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
 
 export DEFAULT_USER=tritlo
 
@@ -44,8 +45,11 @@ source ~/.zgen.zsh
 
 if ! zgen saved; then
 
-    zgen load bhilburn/powerlevel9k
-    ln -s -f ~/.zgen/bhilburn/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
+    #zgen load bhilburn/powerlevel9k
+    #ln -s -f ~/.zgen/bhilburn/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
+    zgen load ~/powerlevel9k
+    ln -s -f ~/powerlevel9k/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
+
     #zgen prezto prompt theme 'skwp'
     zgen prezto prompt theme 'powerlevel9k'
     zgen prezto syntax-highlighting color 'yes'
@@ -89,6 +93,8 @@ bindkey "^I" expand-or-complete
 zle-line-init() {
     zle autosuggest-start
 }
+# We want to use HEAD^ in git
+unsetopt extendedglob
 zle -N zle-line-init
 AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=6'
 AUTOSUGGESTION_HIGHLIGHT_CURSOR=0
