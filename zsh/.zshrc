@@ -1,12 +1,8 @@
-if [ !  -f ~/.zgen.zsh ]; then
-    echo "zgen not found, downloading"
-    curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > ~/.zgen.zsh
-fi
-
+# ===  BEGIN POWERLEVEL9K ===
+#
 if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
     export TERM=$TERM-256color
 fi
-
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='▶'
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='◀'
@@ -41,8 +37,16 @@ POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
 
 export DEFAULT_USER=tritlo
 
-source ~/.zgen.zsh
+# === END POWERLEVEL9k ===
 
+# === ZGEN stuff ===
+if [ !  -f ~/.zgen/zgen.zsh ]; then
+    echo "zgen not found, downloading"
+    mkdir -p ~/.zgen
+    curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > ~/.zgen/zgen.zsh
+fi
+
+source ~/.zgen/zgen.zsh
 if ! zgen saved; then
 
     #zgen load bhilburn/powerlevel9k
@@ -66,15 +70,9 @@ if ! zgen saved; then
     zgen load tarruda/zsh-autosuggestions
 fi
 
-if [ -f ~/.zprofile ]; then
-    source ~/.zprofile
-fi
-
-if [ -f ~/.zaliases ]; then
-    source ~/.zaliases
-fi
 
 
+# === history-substring-search ===
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
@@ -86,6 +84,9 @@ bindkey -a 'k' history-beginning-search-backward
 bindkey -a 'j' history-beginning-search-forward
 bindkey '^?' backward-delete-char
 
+# === end history-substring-search===
+
+# === autosuggestion ===
 bindkey '^v' vi-forward-blank-word
 
 bindkey "^I" expand-or-complete
@@ -93,8 +94,19 @@ bindkey "^I" expand-or-complete
 zle-line-init() {
     zle autosuggest-start
 }
-# We want to use HEAD^ in git
-unsetopt extendedglob
 zle -N zle-line-init
 AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=6'
 AUTOSUGGESTION_HIGHLIGHT_CURSOR=0
+
+# === end autosuggestion ===
+
+# We want to use HEAD^ in git
+unsetopt extendedglob
+
+if [ -f ~/.zprofile ]; then
+    source ~/.zprofile
+fi
+
+if [ -f ~/.zaliases ]; then
+    source ~/.zaliases
+fi
