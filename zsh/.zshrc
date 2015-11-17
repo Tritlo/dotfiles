@@ -10,25 +10,30 @@ fi
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='▶'
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='◀'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_VCS_STASH_ICON=" " # \uf2c5              
+POWERLEVEL9K_HOME_ICON=" " # \uf28d
+POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=" " #\uf0ed               #  
+POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=" " #\uf0ee               # 
+POWERLEVEL9K_VCS_UNSTAGED_ICON=" " # \uf228
+POWERLEVEL9K_BACKGROUND_JOBS_ICON=" " # \uf22f
+# POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=$'\uf0ab '              # 
+# POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=$'\uf0aa '              # ↑
+# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="\e[44m\e[1m\e[33m $ \e[0m\e[34m▶\e[0m "
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir vcs status)
-POWERLEVEL9K_DISABLE_RPROMPT=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs status)
+#POWERLEVEL9K_DISABLE_RPROMPT=true
 
-#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir)
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs)
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 
-# POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-
-POWERLEVEL9K_STATUS_VERBOSE=false
+#POWERLEVEL9K_STATUS_VERBOSE=false
 
 #POWERLEVEL9K_TIME_FORMAT="%D{%a %F %T}"
-POWERLEVEL9K_TIME_FORMAT="%D{%T}"
+POWERLEVEL9K_TIME_FORMAT="\Uf246 %D{%T}"
 
 # POWERLEVEL9K_SHOW_CHANGESET=true
 # POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
@@ -39,8 +44,10 @@ source ~/.zgen.zsh
 
 if ! zgen saved; then
 
-    zgen load bhilburn/powerlevel9k  powerlevel9k.zsh-theme
+    zgen load bhilburn/powerlevel9k
+    ln -s -f ~/.zgen/bhilburn/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
     #zgen prezto prompt theme 'skwp'
+    zgen prezto prompt theme 'powerlevel9k'
     zgen prezto syntax-highlighting color 'yes'
 
     # prezto and modules

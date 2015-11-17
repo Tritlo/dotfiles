@@ -1,6 +1,5 @@
 [global_config]
   enabled_plugins = InactivityWatch, TestPlugin, ActivityWatch, TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  title_hide_sizetext = True
   title_inactive_fg_color = "#e3e3e3"
   handle_size = 0
   title_inactive_bg_color = "#393939"
@@ -22,7 +21,9 @@
     [[[child1]]]
       type = Terminal
       parent = window0
+      profile = default
     [[[window0]]]
       type = Window
       parent = ""
+      size=960, 500
 [plugins]
