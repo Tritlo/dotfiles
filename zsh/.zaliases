@@ -10,6 +10,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+alias minecraft='java -jar /opt/minecraft/Minecraft.jar'
 alias -s pdf=evince
 alias open=xdg-open
 alias tmux="tmux -2"

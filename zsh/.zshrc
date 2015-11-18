@@ -19,7 +19,7 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%F{yellow}%K{blue}%} $ %{%f%k%F{blue}%}▶ "
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir vcs virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load) # ram)
 #POWERLEVEL9K_DISABLE_RPROMPT=true
 
@@ -62,10 +62,8 @@ if ! zgen saved; then
         fc-cache -fv ~/.fonts
     fi
 
-    zgen load tritlo/powerlevel9k
-    
-    # If we haven't bootstrapped already, this will fail.
-    zgen prezto prompt theme 'powerlevel9k'
+    # Load skwp theme, in case powerlevel9k doesn't work.
+    zgen prezto prompt theme 'skwp'
     zgen prezto syntax-highlighting color 'yes'
 
     # prezto and modules
@@ -79,14 +77,8 @@ if ! zgen saved; then
     zgen prezto fasd
         
     zgen load tarruda/zsh-autosuggestions
+    zgen load tritlo/powerlevel9k powerlevel9k.zsh-theme
     
-    # We need to do this here, otherwise the zprezto prompt dir
-    # hasn't been loaded
-    if [ ! -f ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup ]; then
-        ln -s -f ~/.zgen/tritlo/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
-        echo "Powerlevel9K bootstrap complete, restarting shell"
-        zsh; exit
-    fi
 fi
 
 

@@ -1,3 +1,4 @@
+export VIRTUAL_ENV_DISABLE_PROMPT=false
 export PATH=$PATH:$HOME/.scripts
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
