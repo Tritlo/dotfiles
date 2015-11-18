@@ -6,6 +6,7 @@ fi
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='▶'
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='◀'
+POWERLEVEL9K_BATTERY_ICON=' ' # \uf2ca
 POWERLEVEL9K_VCS_STASH_ICON=" " # \uf2c5              
 POWERLEVEL9K_HOME_ICON=" " # \uf28d
 POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=" " #\uf0ed               #  
@@ -19,8 +20,8 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $ %{%b%f%k%F{blue}%}▶ %{%f%}"
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir vcs virtualenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load) # ram)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir vcs virtualenv battery)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load ram)
 #POWERLEVEL9K_DISABLE_RPROMPT=true
 
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
@@ -49,9 +50,9 @@ fi
 source ~/.zgen/zgen.zsh
 if ! zgen saved; then
     
-    # We're waiting on our fixes to be merger
-    #zgen load bhilburn/powerlevel9k
-    #ln -s -f ~/.zgen/bhilburn/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
+    # We're waiting on our fixes to be merged
+    # zgen load bhilburn/powerlevel9k
+    # ln -s -f ~/.zgen/bhilburn/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
     
     # Bootstrap fonts
     if [ ! -f ~/.fonts/fontawesome-regular.ttf ]; then
@@ -77,7 +78,7 @@ if ! zgen saved; then
     zgen prezto fasd
 
     zgen load tarruda/zsh-autosuggestions
-    zgen load tritlo/powerlevel9k powerlevel9k.zsh-theme
+    zgen load tritlo/powerlevel9k powerlevel9k.zsh-theme next
 fi
 
 

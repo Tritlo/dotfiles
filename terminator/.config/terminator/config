@@ -1,8 +1,10 @@
 [global_config]
   enabled_plugins = InactivityWatch, TestPlugin, ActivityWatch, TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   handle_size = 0
+  title_font = Terminus 9
   title_inactive_bg_color = "#393939"
   title_inactive_fg_color = "#e3e3e3"
+  title_use_system_font = False
 [keybindings]
 [layouts]
   [[default]]
@@ -17,7 +19,6 @@
 [plugins]
 [profiles]
   [[default]]
-    antialias = False
     background_color = "#2e3436"
     background_darkness = 0.91
     background_image = None
