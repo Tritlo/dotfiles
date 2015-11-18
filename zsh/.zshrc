@@ -51,8 +51,17 @@ if ! zgen saved; then
 
     #zgen load bhilburn/powerlevel9k
     #ln -s -f ~/.zgen/bhilburn/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
-    zgen load ~/powerlevel9k
-    ln -s -f ~/powerlevel9k/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
+    zgen load tritlo/powerlevel9k
+    ln -s -f ~/.zgen/tritlo/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
+    #zgen load ~/powerlevel9k
+    #ln -s -f ~/powerlevel9k/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
+    if [ ! -f ~/.fonts/fontawesome-regular.ttf ]; then
+        mkdir -p ~/.fonts/
+        wget -P ~/.fonts/ https://github.com/gabrielelana/awesome-terminal-fonts/raw/master/build/pomicons-regular.ttf\
+                          https://github.com/gabrielelana/awesome-terminal-fonts/raw/master/build/fontawesome-regular.ttf\
+                          https://github.com/gabrielelana/awesome-terminal-fonts/raw/master/build/octicons-regular.ttf
+        fc-cache -fv ~/.fonts
+    fi
 
     #zgen prezto prompt theme 'skwp'
     zgen prezto prompt theme 'powerlevel9k'
