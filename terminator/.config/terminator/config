@@ -1,29 +1,30 @@
 [global_config]
   enabled_plugins = InactivityWatch, TestPlugin, ActivityWatch, TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  title_inactive_fg_color = "#e3e3e3"
   handle_size = 0
   title_inactive_bg_color = "#393939"
+  title_inactive_fg_color = "#e3e3e3"
 [keybindings]
-[profiles]
-  [[default]]
-    use_system_font = False
-    font = Terminus 13
-    visible_bell = True
-    background_darkness = 0.91
-    urgent_bell = True
-    background_image = None
-    foreground_color = "#ffffff"
-    copy_on_selection = True
-    background_color = "#2e3436"
-    scrollback_infinite = True
 [layouts]
   [[default]]
     [[[child1]]]
-      type = Terminal
       parent = window0
       profile = default
+      type = Terminal
     [[[window0]]]
-      type = Window
       parent = ""
-      size=960, 500
+      size = 960, 500
+      type = Window
 [plugins]
+[profiles]
+  [[default]]
+    antialias = False
+    background_color = "#2e3436"
+    background_darkness = 0.91
+    background_image = None
+    copy_on_selection = True
+    font = Terminus 13
+    foreground_color = "#ffffff"
+    scrollback_infinite = True
+    urgent_bell = True
+    use_system_font = False
+    visible_bell = True

@@ -17,7 +17,7 @@ POWERLEVEL9K_BACKGROUND_JOBS_ICON=" " # \uf22f
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%F{yellow}%K{blue}%} $ %{%f%k%F{blue}%}▶ "
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $ %{%b%f%k%F{blue}%}▶ %{%f%}"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir vcs virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load) # ram)
@@ -75,10 +75,9 @@ if ! zgen saved; then
     zgen prezto history-substring-search
     zgen prezto completion
     zgen prezto fasd
-        
+
     zgen load tarruda/zsh-autosuggestions
     zgen load tritlo/powerlevel9k powerlevel9k.zsh-theme
-    
 fi
 
 
