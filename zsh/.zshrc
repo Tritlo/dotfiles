@@ -20,7 +20,7 @@ POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%F{yellow}%K{blue}%} $ %{%f%k%F{blue}%}▶ "
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load ram)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load) # ram)
 #POWERLEVEL9K_DISABLE_RPROMPT=true
 
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
@@ -41,20 +41,19 @@ export DEFAULT_USER=tritlo
 
 # === ZGEN stuff ===
 if [ !  -f ~/.zgen/zgen.zsh ]; then
-    echo "zgen not found, downloading"
+    echo "Zgen not found, bootstrapping."
     mkdir -p ~/.zgen
     curl -L https://raw.githubusercontent.com/tarjoilija/zgen/master/zgen.zsh > ~/.zgen/zgen.zsh
 fi
 
 source ~/.zgen/zgen.zsh
 if ! zgen saved; then
-
+    
+    # We're waiting on our fixes to be merger
     #zgen load bhilburn/powerlevel9k
     #ln -s -f ~/.zgen/bhilburn/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
-    zgen load tritlo/powerlevel9k
-    ln -s -f ~/.zgen/tritlo/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
-    #zgen load ~/powerlevel9k
-    #ln -s -f ~/powerlevel9k/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
+    
+    # Bootstrap fonts
     if [ ! -f ~/.fonts/fontawesome-regular.ttf ]; then
         mkdir -p ~/.fonts/
         wget -P ~/.fonts/ https://github.com/gabrielelana/awesome-terminal-fonts/raw/master/build/pomicons-regular.ttf\
@@ -63,12 +62,15 @@ if ! zgen saved; then
         fc-cache -fv ~/.fonts
     fi
 
-    #zgen prezto prompt theme 'skwp'
+    zgen load tritlo/powerlevel9k
+    
+    # If we haven't bootstrapped already, this will fail.
     zgen prezto prompt theme 'powerlevel9k'
     zgen prezto syntax-highlighting color 'yes'
 
     # prezto and modules
     zgen prezto
+
     zgen prezto git
     zgen prezto command-not-found
     zgen prezto syntax-highlighting
@@ -77,6 +79,14 @@ if ! zgen saved; then
     zgen prezto fasd
         
     zgen load tarruda/zsh-autosuggestions
+    
+    # We need to do this here, otherwise the zprezto prompt dir
+    # hasn't been loaded
+    if [ ! -f ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup ]; then
+        ln -s -f ~/.zgen/tritlo/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
+        echo "Powerlevel9K bootstrap complete, restarting shell"
+        zsh; exit
+    fi
 fi
 
 
