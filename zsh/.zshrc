@@ -6,21 +6,23 @@ fi
 POWERLEVEL9K_MODE='awesome-fontconfig'
 POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='▶'
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='◀'
+POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='>'
+POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='<'
+#POWERLEVEL9K_BATTERY_FOREGROUND="white"
 POWERLEVEL9K_BATTERY_ICON=' ' # \uf2ca
+#POWERLEVEL9K_BATTERY_DISCONNECTED='white'
 POWERLEVEL9K_VCS_STASH_ICON=" " # \uf2c5              
 POWERLEVEL9K_HOME_ICON=" " # \uf28d
 POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=" " #\uf0ed               #  
 POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=" " #\uf0ee               # 
 POWERLEVEL9K_VCS_UNSTAGED_ICON=" " # \uf228
 POWERLEVEL9K_BACKGROUND_JOBS_ICON=" " # \uf22f
-# POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=$'\uf0ab '              # 
-# POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=$'\uf0aa '              # ↑
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $ %{%b%f%k%F{blue}%}▶ %{%f%}"
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time dir vcs virtualenv battery)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time battery dir vcs virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load ram)
 #POWERLEVEL9K_DISABLE_RPROMPT=true
 
@@ -50,10 +52,6 @@ fi
 source ~/.zgen/zgen.zsh
 if ! zgen saved; then
     
-    # We're waiting on our fixes to be merged
-    # zgen load bhilburn/powerlevel9k
-    # ln -s -f ~/.zgen/bhilburn/powerlevel9k-master/powerlevel9k.zsh-theme ~/.zprezto/modules/prompt/functions/prompt_powerlevel9k_setup
-    
     # Bootstrap fonts
     if [ ! -f ~/.fonts/fontawesome-regular.ttf ]; then
         mkdir -p ~/.fonts/
@@ -62,6 +60,7 @@ if ! zgen saved; then
                           https://github.com/gabrielelana/awesome-terminal-fonts/raw/master/build/octicons-regular.ttf
         fc-cache -fv ~/.fonts
     fi
+    
 
     # Load skwp theme, in case powerlevel9k doesn't work.
     zgen prezto prompt theme 'skwp'
@@ -78,7 +77,11 @@ if ! zgen saved; then
     zgen prezto fasd
 
     zgen load tarruda/zsh-autosuggestions
-    zgen load tritlo/powerlevel9k powerlevel9k.zsh-theme next
+    if [[ ! $TERM =~ linux ]]; then 
+        #zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
+        zgen load tritlo/powerlevel9k powerlevel9k.zsh-theme allmyfixes
+    fi
+
 fi
 
 
@@ -121,3 +124,5 @@ fi
 if [ -f ~/.zaliases ]; then
     source ~/.zaliases
 fi
+# Set theme to skwp, this only matters if powerlevel9k.zsh-theme is not loaded.
+prompt skwp
