@@ -1,5 +1,15 @@
 # ===  BEGIN POWERLEVEL9K ===
 #
+#
+
+zsh_signal(){
+    local signal=$(nmcli device wifi | grep yes | awk '{print $8}')
+    local color='%F{yellow}'
+    [[ $signal -gt 75 ]] && color='%F{green}'
+    [[ $signal -lt 50 ]] && color='%F{red}'
+    echo -n "%{$color%}  $signal%{%f%}"
+}
+
 if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
     export TERM=$TERM-256color
 fi
@@ -10,7 +20,8 @@ POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='>'
 POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='<'
 #POWERLEVEL9K_BATTERY_FOREGROUND="white"
 POWERLEVEL9K_BATTERY_ICON=' ' # \uf2ca
-#POWERLEVEL9K_BATTERY_DISCONNECTED='white'
+POWERLEVEL9K_BATTERY_BACKGROUND='black'
+POWERLEVEL9K_BATTERY_DISCONNECTED='cyan'
 POWERLEVEL9K_VCS_STASH_ICON=" " # \uf2c5              
 POWERLEVEL9K_HOME_ICON=" " # \uf28d
 POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=" " #\uf0ed               #  
@@ -22,7 +33,10 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $ %{%b%f%k%F{blue}%}▶ %{%f%}"
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time battery dir vcs virtualenv)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time battery custom_command dir vcs virtualenv )
+POWERLEVEL9K_CUSTOM_COMMANDS=("zsh_signal")
+POWERLEVEL9K_CUSTOM_COMMAND_BACKGROUNDS=("black")
+POWERLEVEL9K_CUSTOM_COMMAND_FOREGROUNDS=("white")
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load ram)
 #POWERLEVEL9K_DISABLE_RPROMPT=true
 
