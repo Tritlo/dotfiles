@@ -23,9 +23,10 @@
     background_darkness = 0.91
     background_image = None
     copy_on_selection = True
-    font = Terminus 13
+    font = Hack 9
     foreground_color = "#ffffff"
     scrollback_infinite = True
+    show_titlebar = False
     urgent_bell = True
     use_system_font = False
     visible_bell = True

@@ -33,7 +33,6 @@ Plug 'tpope/vim-fugitive' " git integration
 " mapped to leader leader.
 " Plug 'Lokaltog/vim-easymotion'
 
-Plug 'edkolev/tmuxline.vim'
 
 
 " use cs to change surrounding, ds to delete surrounding and ys to insert surrounding
@@ -174,16 +173,21 @@ if has("unix")
     if !exists('g:airline_symbols')
       let g:airline_symbols = {}
     endif
-    let g:airline#extensions#tabline#left_sep = '▶'
-    let g:airline#extensions#tabline#left_alt_sep = '|'
+    " let g:airline#extensions#tabline#left_sep = '▶'
+    let g:airline#extensions#tabline#left_sep = ''
+    " let g:airline#extensions#tabline#left_alt_sep = '|'
+    let g:airline#extensions#tabline#left_alt_sep = ''
+    let g:airline#extensions#tabline#right_alt_sep = ''
     "let g:airline_left_sep = '»'
-    let g:airline_left_sep = '▶'
+    " let g:airline_left_sep = '▶'
+    let g:airline_left_sep = ''
     "let g:airline_right_sep = '«'
-    let g:airline_right_sep = '◀'
+    " let g:airline_right_sep = '◀'
+    let g:airline_right_sep = ''
     let g:airline_symbols.linenr = '␤'
     let g:airline_symbols.branch = '⎇'
     let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.whitespace = 'Ξ'
+    let g:airline_symbols.whitespace = '_'
 endif
 
 
@@ -295,16 +299,7 @@ call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 call NERDTreeHighlightFile('py', 'Magenta', 'none', '#ff00ff', '#151515')
 
 
-" TmuxLine
-let g:tmuxline_theme = 'airline'
-let g:tmuxline_preset = 'powerline'
-let g:tmuxline_powerline_separators = 0
-let g:tmuxline_separators = {
-            \'left_alt' : '>', 
-            \'right_alt': '<',
-            \'left' : '▶', 
-            \'right': '◀',
-            \'space': ' '}
+
 
 
 
@@ -425,7 +420,7 @@ if has('gui_running')
     if has("win32")
         set guifont=Terminus:h14
     else
-        set guifont=Terminus\ 11
+        set guifont=Hack\ 11
     endif
     silent! colorscheme molokai
 
