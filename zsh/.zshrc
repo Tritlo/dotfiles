@@ -7,7 +7,7 @@ zsh_signal(){
     local color='%F{yellow}'
     [[ $signal -gt 75 ]] && color='%F{green}'
     [[ $signal -lt 50 ]] && color='%F{red}'
-    echo -n "%{$color%}  $signal%{%f%}"
+    echo -n "%{$color%}\uf230  $signal%{%f%}" # \uf230 is 
 }
 
 if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
@@ -44,7 +44,7 @@ POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symb
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time battery custom_signal dir vcs virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load ram custom_docker)
-POWERLEVEL9K_CUSTOM_DOCKER='echo " $(docker ps -a | grep Up | wc -l)"'
+POWERLEVEL9K_CUSTOM_DOCKER='echo "\uf299 $(docker ps -a | grep Up | wc -l)"' # \uf299 is 
 POWERLEVEL9K_CUSTOM_DOCKER_FOREGROUND="white"
 POWERLEVEL9K_CUSTOM_DOCKER_BACKGROUND="blue"
 POWERLEVEL9K_CUSTOM_SIGNAL='zsh_signal'
