@@ -11,6 +11,7 @@ zsh_signal(){
     echo -n "%{$color%}\uf230%{%f%}" # \uf230 is 
 }
 
+
 if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
     export TERM=$TERM-256color
 fi
@@ -25,7 +26,7 @@ POWERLEVEL9K_BATTERY_BACKGROUND='black'
 POWERLEVEL9K_BATTERY_DISCONNECTED='cyan'
 POWERLEVEL9K_OK_ICON='✓'
 POWERLEVEL9K_FAIL_ICON='✘'
-POWERLEVEL9K_VCS_STASH_ICON=" " # \uf2c5              
+POWERLEVEL9K_VCS_STASH_ICON=" " # \uf2c5
 POWERLEVEL9K_HOME_ICON=" " # \uf28d
 POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=" " #\uf0ed               #  
 POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=" " #\uf0ee               # 
@@ -66,6 +67,7 @@ POWERLEVEL9K_SHOW_CHANGESET=true
 POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
 
 export DEFAULT_USER=tritlo
+
 
 # === END POWERLEVEL9k ===
 
@@ -144,9 +146,10 @@ AUTOSUGGESTION_HIGHLIGHT_CURSOR=0
 # We want to use HEAD^ in git
 unsetopt extendedglob
 
-if [ -f ~/.zprofile ]; then
-    source ~/.zprofile
-fi
+# zsh reads .zshenv automatically
+# if [ -f ~/.zshenv ]; then
+#     source ~/.zshenv
+# fi
 
 if [ -f ~/.zaliases ]; then
     source ~/.zaliases
