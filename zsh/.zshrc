@@ -107,8 +107,7 @@ if ! zgen saved; then
 
     zgen load tarruda/zsh-autosuggestions
     if [[ ! $TERM =~ linux ]]; then 
-        #zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
-        zgen load tritlo/powerlevel9k powerlevel9k.zsh-theme allmyfixes
+        zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
     fi
 
 fi
