@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+echo $USER@$HOST
+echo ""
+echo "#FFFF00"
+
+if [[ $BLOCK_BUTTON -gt 0 ]]; then
+    i3-nagbar -t warning -m "You pressed the user shortcut. Which action do you want to take?" -b 'Logout from i3' 'i3-msg exit' -b 'Restart i3' 'i3-msg restart' -b 'Shutdown' 'sudo shutdown now' -b  'Reboot' 'sudo reboot' -b 'Power off' 'sudo poweroff'
+fi

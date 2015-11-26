@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+echo "⠀"
+echo " "
+echo "#FFFFFF"
+if [[ $BLOCK_BUTTON -gt 0 ]]; then
+    terminator -x htop
+fi

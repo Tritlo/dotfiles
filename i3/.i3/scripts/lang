@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+local cur=$(setxkbmap -query | grep layout | awk '{print $2}' | tr ',' '\n' | head -n 1)
+
+if [[ $BLOCK_BUTTON -gt 0 ]]; then
+    if [[ $cur =~ is ]]; then
+        setxkbmap -layout us
+        echo "us"
+    else
+        setxkbmap -layout is
+        echo "is"
+    fi
+else
+    echo $cur
+fi
+echo " "
+echo "#FFFFFF"
