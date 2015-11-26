@@ -145,11 +145,6 @@ AUTOSUGGESTION_HIGHLIGHT_CURSOR=0
 # We want to use HEAD^ in git
 unsetopt extendedglob
 
-# zsh reads .zshenv automatically
-# if [ -f ~/.zshenv ]; then
-#     source ~/.zshenv
-# fi
-
 if [ -f ~/.zaliases ]; then
     source ~/.zaliases
 fi

@@ -9,14 +9,17 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# Start dropbox
+# Start stuff on startup
 exec --no-startup-id /usr/bin/dropbox start
 exec --no-startup-id /usr/bin/redshift-gtk -c /home/tritlo/.config/redshift.conf;
 exec --no-startup-id /usr/bin/nm-applet
 
 # Turn off screen after 10 minutes
 exec --no-startup-id xset dpms 600
+
+# Make light and audio buttons work.
 exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id dunst
 
 
 # Super key
