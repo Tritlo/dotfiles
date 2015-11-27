@@ -110,8 +110,19 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-bindsym $mod+button1 floating toggle
-bindsym --release button2 kill
+bindsym --release button2 mode "float"
+bindsym --whole-window $mod+button2 mode "float"
+
+mode "float" {
+        bindsym --whole-window button3 mode "default"
+        bindsym --whole-window button1 exec i3-msg -t command floating toggle && i3-msg -t command mode "default"
+        bindsym --whole-window button2 exec i3-msg -t command kill && i3-msg -t command mode "default"
+        bindsym --whole-window button3 mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        
+}
+
 
 # change focus between tiling / floating windows
 

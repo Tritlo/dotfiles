@@ -24,3 +24,5 @@
     dump = cat-file -p
 [init]
 	templatedir = ~/.git_template
+[credential]
+	helper = cache
