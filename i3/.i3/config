@@ -18,7 +18,7 @@ exec --no-startup-id /usr/bin/nm-applet
 # Turn off screen after 10 minutes
 exec --no-startup-id xset dpms 600
 # Lock after 15 minutes of inactivity
-exec xautolock -corners -+-- -cornersize 10 -cornerdelay 10 -detectsleep -time 15 -locker '~/.i3/scripts/lockandblur' &
+exec xautolock -corners ---- -cornersize 10 -cornerdelay 10 -detectsleep -time 15 -locker '~/.i3/scripts/lockandblur' &
 
 # Make light and audio buttons work.
 exec --no-startup-id gnome-settings-daemon
@@ -51,6 +51,11 @@ bindsym $mod+Shift+c kill
 bindsym $mod+Shift+f exec firefox
 # Blurs screen on lock. Requires imagemagick installed.
 bindsym $mod+Control+l exec ~/.i3/scripts/lockandblur
+
+bindsym $mod+c exec ~/.scripts/emc
+
+# Switch to frame in emacs.
+bindsym $mod+u [urgent="latest" class="Emacs"] focus
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -93,6 +98,10 @@ bindsym $mod+Shift+semicolon split h
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
+#move to the scratchpad workspace
+bindsym $mod+minus move scratchpad
+bindsym $mod+Shift+minus scratchpad show
+
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -100,6 +109,9 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+
+bindsym $mod+button1 floating toggle
+bindsym --release button2 kill
 
 # change focus between tiling / floating windows
 
