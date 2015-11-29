@@ -8,7 +8,7 @@ zsh_signal(){
     [[ $signal -gt 75 ]] && color='%F{green}'
     [[ $signal -lt 50 ]] && color='%F{red}'
     #echo -n "%{$color%}\uf230  $signal%{%f%}" # \uf230 is 
-    echo -n "%{$color%}\uf230%{%f%}" # \uf230 is 
+    echo -n "%{$color%}\uf1eb%{%f%}" # \uf1eb is 
 }
 
 
@@ -21,17 +21,21 @@ POWERLEVEL9K_MODE='awesome-fontconfig'
 #POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='>'
 #POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='<'
 #POWERLEVEL9K_BATTERY_FOREGROUND="white"
-POWERLEVEL9K_BATTERY_ICON=' ' # \uf2ca
+POWERLEVEL9K_BATTERY_ICON=' ' # \uf240
 POWERLEVEL9K_BATTERY_BACKGROUND='black'
 POWERLEVEL9K_BATTERY_DISCONNECTED='cyan'
-POWERLEVEL9K_OK_ICON='✓'
-POWERLEVEL9K_FAIL_ICON='✘'
-POWERLEVEL9K_VCS_STASH_ICON=" " # \uf2c5
-POWERLEVEL9K_HOME_ICON=" " # \uf28d
-POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=" " #\uf0ed               #  
-POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=" " #\uf0ee               # 
-POWERLEVEL9K_VCS_UNSTAGED_ICON=" " # \uf228
-POWERLEVEL9K_BACKGROUND_JOBS_ICON=" " # \uf22f
+POWERLEVEL9K_OK_ICON=' '
+POWERLEVEL9K_FAIL_ICON=' '
+POWERLEVEL9K_AWS_ICON=' '
+POWERLEVEL9K_TODO_ICON=' '
+POWERLEVEL9K_TEST_ICON=' '
+POWERLEVEL9K_RUBY_ICON=' '
+POWERLEVEL9K_ROOT_ICON=' '
+POWERLEVEL9K_VCS_TAG_ICON=' '
+POWERLEVEL9K_VCS_BOOKMARK_ICON=' '
+POWERLEVEL9K_HG_ICON=''
+POWERLEVEL9K_VCS_COMMIT_ICON=' '
+POWERLEVEL9K_VCS_REMOTE_BRANCH_ICON=' '
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
@@ -46,7 +50,10 @@ POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symb
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time battery custom_signal dir vcs virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load ram custom_docker)
-POWERLEVEL9K_CUSTOM_DOCKER='echo "\uf299 $(timeout 1s docker ps -a | grep Up | wc -l)"' # \uf299 is 
+POWERLEVEL9K_CUSTOM_DOCKER='echo "\uf21a  $(timeout 1s docker ps -a | grep Up | wc -l)"' # \uf21a is 
+#   f233
+#  f1e6
+#  f0a0
 POWERLEVEL9K_CUSTOM_DOCKER_FOREGROUND="white"
 POWERLEVEL9K_CUSTOM_DOCKER_BACKGROUND="blue"
 POWERLEVEL9K_CUSTOM_SIGNAL='zsh_signal'
@@ -61,7 +68,7 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 #POWERLEVEL9K_STATUS_VERBOSE=false
 
 #POWERLEVEL9K_TIME_FORMAT="%D{%a %F %T}"
-POWERLEVEL9K_TIME_FORMAT="\Uf246 %D{%T}"
+POWERLEVEL9K_TIME_FORMAT=" %D{%T}"
 
 POWERLEVEL9K_SHOW_CHANGESET=true
 POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
@@ -82,14 +89,6 @@ source ~/.zgen/zgen.zsh
 if ! zgen saved; then
     
     # Bootstrap fonts
-    if [ ! -f ~/.fonts/fontawesome-regular.ttf ]; then
-        mkdir -p ~/.fonts/
-        wget -P ~/.fonts/ https://github.com/gabrielelana/awesome-terminal-fonts/raw/master/build/pomicons-regular.ttf\
-                          https://github.com/gabrielelana/awesome-terminal-fonts/raw/master/build/fontawesome-regular.ttf\
-                          https://github.com/gabrielelana/awesome-terminal-fonts/raw/master/build/octicons-regular.ttf
-        fc-cache -fv ~/.fonts
-    fi
-    
 
     # Load skwp theme, in case powerlevel9k doesn't work.
     zgen prezto prompt theme 'skwp'

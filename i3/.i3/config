@@ -54,8 +54,8 @@ bindsym $mod+Control+l exec ~/.i3/scripts/lockandblur
 
 bindsym $mod+c exec ~/.scripts/emc
 
-# Switch to frame in emacs.
-bindsym $mod+u [urgent="latest" class="Emacs"] focus
+# Switch to the latest urgent window.
+bindsym $mod+u [urgent="latest"] focus
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -115,8 +115,8 @@ bindsym --whole-window $mod+button2 mode "float"
 
 mode "float" {
         bindsym --whole-window button3 mode "default"
-        bindsym --whole-window button1 exec i3-msg -t command floating toggle && i3-msg -t command mode "default"
-        bindsym --whole-window button2 exec i3-msg -t command kill && i3-msg -t command mode "default"
+        bindsym --whole-window button1 exec i3-msg -t command floating toggle && sleep 0.5 && i3-msg -t command mode "default"
+        bindsym --whole-window button2 exec i3-msg -t command kill && sleep 0.5 && i3-msg -t command mode "default"
         bindsym --whole-window button3 mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -229,7 +229,9 @@ set $urgent-bg-color     #E53935
 bar {
     #separator_symbol ""
     #separator_symbol ""
-    separator_symbol ""
+    separator_symbol " "
+    #separator_symbol ""
+    
     mode dock
     workspace_buttons yes
     status_command i3blocks -c ~/.i3/i3blocks.conf

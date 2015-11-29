@@ -4,7 +4,7 @@ local img=/tmp/i3lock.png
 local light=$(xbacklight)
 local curdpms=$(xset q | grep DPMS -A1 | grep Standby | awk '{print $2}')
 
-xset dpms 30 &
+xset dpms 180 &
 xbacklight -set 5 -time 1000 &
 scrot $img
 mogrify -blur 0x10 -scale 10% -scale 1000%  $img
