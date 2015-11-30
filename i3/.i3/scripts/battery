@@ -5,7 +5,7 @@ local batstat=$(cat /sys/class/power_supply/BAT1/status)
 local cap=$(cat /sys/class/power_supply/BAT1/capacity)
 case $batstat in
     "Charging")
-        echo "⠀ $cap%"
+        echo "⠀$cap%"
         echo " "
         ;;
     "Discharging")

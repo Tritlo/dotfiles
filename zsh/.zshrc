@@ -7,7 +7,7 @@ zsh_signal(){
     local color='%F{yellow}'
     [[ $signal -gt 75 ]] && color='%F{green}'
     [[ $signal -lt 50 ]] && color='%F{red}'
-    #echo -n "%{$color%}\uf230  $signal%{%f%}" # \uf230 is 
+    #echo -n "%{$color%}\uf1eb  $signal%{%f%}" # \uf1eb is 
     echo -n "%{$color%}\uf1eb%{%f%}" # \uf1eb is 
 }
 
@@ -26,15 +26,17 @@ POWERLEVEL9K_BATTERY_BACKGROUND='black'
 POWERLEVEL9K_BATTERY_DISCONNECTED='cyan'
 POWERLEVEL9K_OK_ICON=' '
 POWERLEVEL9K_FAIL_ICON=' '
+POWERLEVEL9K_CARRIAGE_RETURN_ICON=' '
 POWERLEVEL9K_AWS_ICON=' '
 POWERLEVEL9K_TODO_ICON=' '
 POWERLEVEL9K_TEST_ICON=' '
 POWERLEVEL9K_RUBY_ICON=' '
-POWERLEVEL9K_ROOT_ICON=' '
-POWERLEVEL9K_VCS_TAG_ICON=' '
-POWERLEVEL9K_VCS_BOOKMARK_ICON=' '
+POWERLEVEL9K_ROOT_ICON=' '
+POWERLEVEL9K_VCS_TAG_ICON=' '
+POWERLEVEL9K_VCS_BOOKMARK_ICON=' '
 POWERLEVEL9K_HG_ICON=''
-POWERLEVEL9K_VCS_COMMIT_ICON=' '
+POWERLEVEL9K_VCS_COMMIT_ICON=' '
+POWERLEVEL9K_VCS_BRANCH_ICON=' '
 POWERLEVEL9K_VCS_REMOTE_BRANCH_ICON=' '
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
@@ -51,9 +53,7 @@ POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symb
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time battery custom_signal dir vcs virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load ram custom_docker)
 POWERLEVEL9K_CUSTOM_DOCKER='echo "\uf21a  $(timeout 1s docker ps -a | grep Up | wc -l)"' # \uf21a is 
-#   f233
-#  f1e6
-#  f0a0
+#  f379
 POWERLEVEL9K_CUSTOM_DOCKER_FOREGROUND="white"
 POWERLEVEL9K_CUSTOM_DOCKER_BACKGROUND="blue"
 POWERLEVEL9K_CUSTOM_SIGNAL='zsh_signal'
