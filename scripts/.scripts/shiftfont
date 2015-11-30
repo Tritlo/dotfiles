@@ -1,0 +1,7 @@
+#!/usr/bin/fontforge
+Open($1)
+SelectWorthOutputting()
+Cut()
+Select($2)
+Paste()
+Generate($1:r + ".shifted.ttf")
