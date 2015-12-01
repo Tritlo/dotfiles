@@ -28,12 +28,15 @@ for_window [window_role="pop-up"] floating enable
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id gnome-sound-applet
 
+# Have a compositor, it makes things nicer.
+exec compton
+
 
 # Super key
 set $mod Mod4
 
 
-bindsym XF86PowerOff exec ~/.i3/i3exit
+bindsym XF86PowerOff exec ~/.i3/i3exit poweroff
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -56,8 +59,6 @@ bindsym $mod+Shift+c kill
 
 
 bindsym $mod+Shift+f exec firefox
-# Blurs screen on lock. Requires imagemagick installed.
-bindsym $mod+Control+q exec ~/.i3/scripts/lockandblur
 
 bindsym $mod+c exec ~/.scripts/emc
 
@@ -76,40 +77,24 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsyn $mod+Control+h focus output left
-bindsyn $mod+Control+j focus output down
-bindsyn $mod+Control+k focus output up
-bindsyn $mod+Control+l focus output right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-bindsyn $mod+Control+Left focus output left
-bindsyn $mod+Control+Down focus output down
-bindsyn $mod+Control+Up focus output up
-bindsyn $mod+Control+Right focus output right
 
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-bindsyn $mod+Control+Shift+h move container to output left
-bindsyn $mod+Control+Shift+j move container to output down
-bindsyn $mod+Control+Shift+k move container to output up
-bindsyn $mod+Control+Shift+l move container to output right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-bindsyn $mod+Control+Shift+Left move container to output left
-bindsyn $mod+Control+Shift+Down move container to output down
-bindsyn $mod+Control+Shift+Up move container to output up
-bindsyn $mod+Control+Shift+Right move container to output right
 
 bindsym $mod+ae split v
 bindsym $mod+semicolon split v
@@ -225,16 +210,19 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $mod+b workspace back_and_forth
-bindsym $mod+Shift+b move container to workspace back_and_forth
+bindsym $mod+Shift+b exec i3-msg -t command  move container to workspace back_and_forth && i3-msg -t command workspace back_and_forth
+bindsym $mod+Control+Shift+b move container to workspace back_and_forth
 
 
-bindsym $mod+z move container to output left
-bindsym $mod+Shift+z move workspace to output left
-bindsym $mod+Control+z focus output left
+bindsym $mod+Control+z move workspace to output left
+bindsym $mod+Shift+z exec i3-msg -t command move container to output left && i3-msg -t command focus output left
+bindsym $mod+Control+Shift+z move container to output left
+bindsym $mod+z focus output left
 
-bindsym $mod+x move container to output right
-bindsym $mod+Shift+x move workspace to output right
-bindsym $mod+Control+x focus output right
+bindsym $mod+x focus output right
+bindsym $mod+Shift+x exec i3-msg -t command move container to output right && i3-msg -t command focus output right
+bindsym $mod+Control+Shift+x move container to output right
+bindsym $mod+Control+x move workspace to output right
 
 # reload the configuration file
 bindsym $mod+Shift+r reload
@@ -242,6 +230,9 @@ bindsym $mod+Shift+r reload
 bindsym $mod+q restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Blurs screen on lock. Requires imagemagick installed.
+bindsym $mod+Control+q exec ~/.i3/scripts/lockandblur
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
