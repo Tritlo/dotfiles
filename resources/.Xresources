@@ -184,6 +184,9 @@ URxvt*color19:      base02
 URxvt*color20:      base04
 URxvt*color21:      base06
 
+XTerm*faceName: Hack Regular:size=10:antialias=false
+XTerm*termName: xterm-256color
+XTerm*locale: true
 XTerm*scrollBar:     false
 XTerm*foreground:   base05
 XTerm*background:   base00
@@ -213,6 +216,7 @@ XTerm*color19:      base02
 XTerm*color20:      base04
 XTerm*color21:      base06
 
+Terminator*termName: xterm-256color
 I3FloatingEnable*faceName: Hack Regular:size=10:antialias=false
 I3FloatingEnable*scrollBar:     false
 I3FloatingEnable*foreground:   base05

@@ -19,7 +19,9 @@ i3_next_workspace() {
     #     i3-msg -t command output $curout
     #     i3-msg -t command move workspace to output $nextout
     # fi
-    i3-msg -t command workspace $next
+    if [[ ! $2 =~ nogo ]]; then
+        i3-msg -t command workspace $next
+    fi
 
 }
 
@@ -43,7 +45,9 @@ i3_prev_workspace() {
     #     i3-msg -t command workspace $curnum
     #     i3-msg -t command move workspace to output $prevout
     # fi
-
-    i3-msg -t command workspace $prev
+    #
+    if [[ ! $2 =~ nogo ]]; then
+        i3-msg -t command workspace $prev
+    fi
 }
-i3_$1_workspace $2
+i3_$1_workspace $2 $3
