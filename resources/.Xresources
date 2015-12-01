@@ -183,3 +183,90 @@ URxvt*color18:      base01
 URxvt*color19:      base02
 URxvt*color20:      base04
 URxvt*color21:      base06
+
+XTerm*scrollBar:     false
+XTerm*foreground:   base05
+XTerm*background:   base00
+XTerm*cursorColor:  base05
+XTerm*color0:       base00
+XTerm*color1:       base08
+XTerm*color2:       base0B
+XTerm*color3:       base0A
+XTerm*color4:       base0D
+XTerm*color5:       base0E
+XTerm*color6:       base0C
+XTerm*color7:       base05
+XTerm*color8:       base03
+XTerm*color9:       base08
+XTerm*color10:      base0B
+XTerm*color11:      base0A
+XTerm*color12:      base0D
+XTerm*color13:      base0E
+XTerm*color14:      base0C
+XTerm*color15:      base07
+!XTerm: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+!XTermt use 'shell' template to set these if necessary
+XTerm*color16:      base09
+XTerm*color17:      base0F
+XTerm*color18:      base01
+XTerm*color19:      base02
+XTerm*color20:      base04
+XTerm*color21:      base06
+
+I3FloatingEnable*faceName: Hack Regular:size=10:antialias=false
+I3FloatingEnable*scrollBar:     false
+I3FloatingEnable*foreground:   base05
+I3FloatingEnable*background:   base00
+I3FloatingEnable*cursorColor:  base05
+I3FloatingEnable*color0:       base00
+I3FloatingEnable*color1:       base08
+I3FloatingEnable*color2:       base0B
+I3FloatingEnable*color3:       base0A
+I3FloatingEnable*color4:       base0D
+I3FloatingEnable*color5:       base0E
+I3FloatingEnable*color6:       base0C
+I3FloatingEnable*color7:       base05
+I3FloatingEnable*color8:       base03
+I3FloatingEnable*color9:       base08
+I3FloatingEnable*color10:      base0B
+I3FloatingEnable*color11:      base0A
+I3FloatingEnable*color12:      base0D
+I3FloatingEnable*color13:      base0E
+I3FloatingEnable*color14:      base0C
+I3FloatingEnable*color15:      base07
+!I3FloatingEnable: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+!I3FloatingEnablet use 'shell' template to set these if necessary
+I3FloatingEnable*color16:      base09
+I3FloatingEnable*color17:      base0F
+I3FloatingEnable*color18:      base01
+I3FloatingEnable*color19:      base02
+I3FloatingEnable*color20:      base04
+I3FloatingEnable*color21:      base06
+
+I3FloatingEnableToMouse*faceName: Hack Regular:size=10:antialias=false
+I3FloatingEnableToMouse*scrollBar:     false
+I3FloatingEnableToMouse*foreground:   base05
+I3FloatingEnableToMouse*background:   base00
+I3FloatingEnableToMouse*cursorColor:  base05
+I3FloatingEnableToMouse*color0:       base00
+I3FloatingEnableToMouse*color1:       base08
+I3FloatingEnableToMouse*color2:       base0B
+I3FloatingEnableToMouse*color3:       base0A
+I3FloatingEnableToMouse*color4:       base0D
+I3FloatingEnableToMouse*color5:       base0E
+I3FloatingEnableToMouse*color6:       base0C
+I3FloatingEnableToMouse*color7:       base05
+I3FloatingEnableToMouse*color8:       base03
+I3FloatingEnableToMouse*color9:       base08
+I3FloatingEnableToMouse*color10:      base0B
+I3FloatingEnableToMouse*color11:      base0A
+I3FloatingEnableToMouse*color12:      base0D
+I3FloatingEnableToMouse*color13:      base0E
+I3FloatingEnableToMouse*color14:      base0C
+I3FloatingEnableToMouse*color15:      base07
+I3FloatingEnableToMouse*color16:      base09
+I3FloatingEnableToMouse*color17:      base0F
+I3FloatingEnableToMouse*color18:      base01
+I3FloatingEnableToMouse*color19:      base02
+I3FloatingEnableToMouse*color20:      base04
+I3FloatingEnableToMouse*color21:      base06
