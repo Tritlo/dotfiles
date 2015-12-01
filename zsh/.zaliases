@@ -1,7 +1,8 @@
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias lsc='ls --color=auto'
+    alias ls='ls --color=auto'
+    alias lsn='/bin/ls'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 

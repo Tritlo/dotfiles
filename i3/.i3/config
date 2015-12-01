@@ -9,28 +9,11 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# Start stuff on startup
-exec --no-startup-id /usr/bin/dropbox start
-exec --no-startup-id /usr/bin/redshift-gtk -c /home/tritlo/.config/redshift.conf;
-exec --no-startup-id /usr/bin/nm-applet
-
-
-# Turn off screen after 10 minutes
-exec --no-startup-id xset dpms 600
-# Lock after 15 minutes of inactivity
-exec xautolock -corners ---- -cornersize 10 -cornerdelay 10 -detectsleep -time 15 -locker '~/.i3/scripts/lockandblur' &
 
 for_window [class="I3MoveScratchpad"] move scratchpad
 for_window [class="I3FloatingEnable*"] floating enable
 for_window [class="I3FloatingEnableToMouse"] move position mouse
 for_window [window_role="pop-up"] floating enable
-# Make light and audio buttons work.
-exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id gnome-sound-applet
-
-# Have a compositor, it makes things nicer.
-exec compton
-
 
 # Super key
 set $mod Mod4
@@ -61,7 +44,6 @@ bindsym $mod+Shift+c kill
 bindsym $mod+Shift+f exec firefox
 
 bindsym $mod+c exec ~/.scripts/emc
-
 # Switch to the latest urgent window.
 bindsym $mod+u [urgent="latest"] focus
 
@@ -305,3 +287,27 @@ bar {
         urgent_workspace   $inactive-text-color	 $inactive-text-color	$inactive-bg-color
     }
 }
+
+
+# Start stuff on startup
+exec --no-startup-id /usr/bin/dropbox start
+exec --no-startup-id /usr/bin/redshift-gtk -c /home/tritlo/.config/redshift.conf;
+exec --no-startup-id /usr/bin/nm-applet
+
+
+# Turn off screen after 20 minutes
+exec --no-startup-id xset dpms 1800
+
+# Lock after 15 minutes of inactivity
+exec xautolock -corners ---- -cornersize 10 -cornerdelay 10 -detectsleep -time 15 -locker '~/.i3/scripts/lockandblur' &
+
+# Make light and audio buttons work.
+exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id gnome-sound-applet
+
+# Start a compositor and set wallpaper. Propably
+# squashes some bugs with programs that expect compositing,
+# and we can also have transparent stuff.
+# Turn off glx if it is causing trouble
+exec compton -cCb --use-ewmh-active-win -r 2 -l -2 -t -2 --backend glx
+exec nitrogen --restore
