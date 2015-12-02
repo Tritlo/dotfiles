@@ -99,6 +99,7 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+Control+space focus mode_toggle
 
 bindsym --release button2 mode "float"
 bindsym --whole-window $mod+button2 mode "float"
@@ -118,8 +119,6 @@ mode "float" {
 
 # focus the parent container
 bindsym $mod+a focus parent
-bindsym $mod+Shift+a focus mode_toggle
-
 bindsym $mod+space exec --no-startup-id ( (setxkbmap -query | grep "layout:\s\+us")  && setxkbmap -layout is || setxkbmap -layout us) && pkill -RTMIN+1 i3blocks
 
 
@@ -216,18 +215,25 @@ bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # Blurs screen on lock. Requires imagemagick installed.
 bindsym $mod+Control+q exec ~/.i3/scripts/lockandblur
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
+# resize or move window (you can also use the mouse for that)
+#
+mode "resizeandmove" {
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize shrink height 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize grow left  10 px or 10 ppt
+        bindsym j resize grow down 10 px or 10 ppt
+        bindsym k resize grow up    10 px or 10 ppt
+        bindsym l resize grow right  10 px or 10 ppt
+
+        bindsym Shift+h resize shrink right  10 px or 10 ppt
+        bindsym Shift+j resize shrink up     10 px or 10 ppt
+        bindsym Shift+k resize shrink down   10 px or 10 ppt
+        bindsym Shift+l resize shrink left   10 px or 10 ppt
+
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -235,12 +241,22 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
+        bindsym $mod+h move left 10 px
+        bindsym $mod+j move down 10 px
+        bindsym $mod+k move up 10 px
+        bindsym $mod+l move right 10 px 
+
+        bindsym $mod+Left move left 10 px
+        bindsym $mod+Down move down 10 px
+        bindsym $mod+Up move up 10 px
+        bindsym $mod+Right move right 10 px 
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode "resizeandmove"
 
 # Colors
 set $black  	#002B36
@@ -308,7 +324,7 @@ exec --no-startup-id gnome-sound-applet
 # Start a compositor and set wallpaper. Propably
 # squashes some bugs with programs that expect compositing,
 # and we can also have transparent stuff.
-exec compton -cCb --use-ewmh-active-win -r 2 -l -2 -t -2
+exec compton -cCb --use-ewmh-active-win -r 2 -l -2 -t -2 --sw-opti
 # nitrogen must restore again, since it might fail because the monitor
 # wasnt on.
 exec nitrogen --restore;  sleep 10 && nitrogen --restore
