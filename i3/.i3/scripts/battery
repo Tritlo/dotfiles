@@ -3,9 +3,11 @@
 #empty='⠀'
 local batstat=$(cat /sys/class/power_supply/BAT1/status)
 local cap=$(cat /sys/class/power_supply/BAT1/capacity)
+local plug=""
+#local plug="⠀"
 case $batstat in
     "Charging")
-        echo "⠀$cap%"
+        echo "$plug $cap%"
         echo "$cap%"
         ;;
     "Discharging")
