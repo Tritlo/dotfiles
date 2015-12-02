@@ -6,23 +6,24 @@ local cap=$(cat /sys/class/power_supply/BAT1/capacity)
 case $batstat in
     "Charging")
         echo "⠀$cap%"
-        echo " "
+        echo "$cap%"
         ;;
     "Discharging")
-        local batticon="  "
-        test $cap -gt 25 && batticon="  "
-        test $cap -gt 50 && batticon="  "
-        test $cap -gt 75 && batticon="  "
-        test $cap -gt 95 && batticon="  "
+        local batticon=""
+        test $cap -gt 25 && batticon=""
+        test $cap -gt 50 && batticon=""
+        test $cap -gt 75 && batticon=""
+        test $cap -gt 95 && batticon=""
         echo "$batticon $cap%"
+        echo "$cap%"
         test $cap -gt 24 && echo "#FFFF00" && exit 0
         test $cap -lt 5 && exit 33
         echo "#FF0000"
         exit 0
         ;;
     "Full")
-        echo " "
-        echo " "
+        echo ""
+        echo "100%"
         ;;
     *)
         echo ""
