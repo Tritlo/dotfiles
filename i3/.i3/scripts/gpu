@@ -7,7 +7,7 @@ local switchto=""
 local tempPost="°C"
 
 if [[ $currentGPU =~ nvidia ]]; then
-    color="#99FF99"
+    color="#33FF33"
     temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
     switchto="intel"
 else

@@ -1,6 +1,8 @@
 #!/bin/zsh
 
-echo " $USER@$HOST"
+#local logo=""
+local logo=""
+echo "$logo $USER@$HOST"
 echo ""
 echo "#ED1B24"
 
