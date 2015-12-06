@@ -52,7 +52,9 @@ POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symb
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time battery custom_signal dir vcs virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load ram custom_docker)
-POWERLEVEL9K_CUSTOM_DOCKER='echo "\uf21a  $(timeout 1s docker ps -a | grep Up | wc -l)"' # \uf21a is 
+POWERLEVEL9K_CUSTOM_DOCKER='echo "\uf2ff  $(timeout 1s docker ps -a | grep Up | wc -l)"'
+#  f2ff
+# \uf21a is 
 #  f379
 POWERLEVEL9K_CUSTOM_DOCKER_FOREGROUND="white"
 POWERLEVEL9K_CUSTOM_DOCKER_BACKGROUND="blue"

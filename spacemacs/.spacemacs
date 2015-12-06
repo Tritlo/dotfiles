@@ -58,7 +58,7 @@
                  haskell-enable-ghc-mod-support t
                  ; haskell-enable-shm-support t
                  )
-        agda
+        ;; agda
         java
         html
         javascript
@@ -153,8 +153,7 @@ before layers configuration."
                                :size 12
                                :weight normal
                                :width normal
-                               ;:powerline-scale 1.1)
-                               :powerline-scale 1.0)
+                               :powerline-scale 1.2)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -249,7 +248,7 @@ layers configuration."
 
   ;;================ Haskell ==========================
   ;; Use the stack ghc-mod file.
-  (add-to-list 'load-path "~/.stack/global-project/.stack-work/install/x86_64-linux/lts-3.12/7.10.2/share/x86_64-linux-ghc-7.10.2/ghc-mod-5.4.0.0/elisp/")
+  ;; (add-to-list 'load-path "~/.stack/global-project/.stack-work/install/x86_64-linux/lts-3.12/7.10.2/share/x86_64-linux-ghc-7.10.2/ghc-mod-5.4.0.0/elisp/")
   ;; ghc-mod keybinds
 
   (spacemacs/declare-prefix-for-mode 'haskell-mode "mm" "haskell/ghc-mod")
@@ -270,13 +269,15 @@ layers configuration."
   (setq neo-show-updir-line t)
   (evil-leader/set-key "tb" 'speedbar)
   (global-linum-mode 1)
+  (setq linum-format 'dynamic)
   (global-subword-mode 1) ;; camelCaseWords
+  (global-evil-search-highlight-persist nil)
   ; (setq ispell-dictionary "is")
   ;; (setq-default
   ;;  LaTeX-command "latex -shell-escape"
   ;;  Tex-PDF-mode t)
   ; Better for terminus
-  (setq powerline-default-separator 'arrow-fade)
+  ;; (setq powerline-default-separator 'arrow-fade)
   (fancy-battery-mode)
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
@@ -290,7 +291,7 @@ layers configuration."
   ;; (add-hook 'clojure-mode-hook #'subword-mode)
 
   ;; agda
-  (setq agda2-include-dirs '("." "./stdlib/src"))
+  ;; (setq agda2-include-dirs '("." "./stdlib/src"))
 )
 
 ;; Do not write anything past this comme

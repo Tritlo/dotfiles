@@ -325,6 +325,7 @@ exec --no-startup-id gnome-sound-applet
 # squashes some bugs with programs that expect compositing,
 # and we can also have transparent stuff.
 exec compton -cCb --use-ewmh-active-win -r 2 -l -2 -t -2 --sw-opti --backend glx
+#exec compton -cCGb --use-ewmh-active-win -r 2 -l -2 -t -2 --sw-opti --backend glx
 # nitrogen must restore again, since it might fail because the monitor
 # wasnt on.
 exec nitrogen --restore;  sleep 10 && nitrogen --restore

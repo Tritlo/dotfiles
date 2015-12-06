@@ -44,8 +44,8 @@ local color="#FFFFFF"
 [[ loadavg1min -gt 0.5 ]] && color="#00FF00"
 [[ loadavg1min -gt 1 ]] && color="#FFFF00"
 [[ loadavg1min -gt 2 ]] && color="#FF0000"
-
-echo "$loadavg1min $hramfree$hswap_free"
+local temp="$(sensors | grep Physical | awk '{print $4}' | tr '.' "\n" | head -n 1 | tr "+" "\n" | tail -n 1)°C"
+echo "$loadavg1min $hramfree$hswap_free $temp"
 echo "$loadavg1min"
 echo "$color"
 if [[ $BLOCK_BUTTON -gt 1 ]]; then

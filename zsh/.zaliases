@@ -13,6 +13,7 @@ fi
 alias minecraft='java -jar /opt/minecraft/Minecraft.jar'
 alias -s pdf=evince
 alias open=xdg-open
+alias pcf="pcmanfm . > /dev/null 2>&1 & disown"
 alias tmux="tmux -2"
 alias vimr="gvim --remote-tab"
 alias svim="vim -u ~/.vimrc.config"
