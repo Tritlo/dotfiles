@@ -4,6 +4,7 @@
 local batstat=$(cat /sys/class/power_supply/BAT1/status)
 local cap=$(cat /sys/class/power_supply/BAT1/capacity)
 local plug=""
+local fullbatt=""
 #local plug="⠀"
 case $batstat in
     "Charging")
@@ -24,7 +25,7 @@ case $batstat in
         exit 0
         ;;
     "Full")
-        echo ""
+        echo "$plug"
         echo "100%"
         ;;
     *)

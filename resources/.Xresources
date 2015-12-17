@@ -70,7 +70,9 @@ URxvt*scrollBar:                      false
 ! URxvt*backgroundPixmap:               file[;geom]
 ! URxvt*iconFile:                       file
 ! URxvt.font: -*-terminus-medium-*-*-*-*-140-*-*-*-*-iso8859-1
-URxvt.font: xft:Terminus:antialias=false:size=15 */
+URxvt.font: xft:Hack:size=14
+URxvt.letterSpace: true
+! URxvt*boldFont: xft:Hack:size=14, xft:FontAwesome
 ! URxvt*boldFont:                       fontname
 ! URxvt*italicFont:                     fontname
 ! URxvt*boldItalicFont:                 fontname

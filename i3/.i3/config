@@ -234,8 +234,18 @@ mode "resizeandmove" {
         bindsym Shift+k resize shrink down   10 px or 10 ppt
         bindsym Shift+l resize shrink left   10 px or 10 ppt
 
+        bindsym Control+h resize grow left  1 px or 1 ppt
+        bindsym Control+j resize grow down 1 px or 1 ppt
+        bindsym Control+k resize grow up    1 px or 1 ppt
+        bindsym Control+l resize grow right  1 px or 1 ppt
 
-        # same bindings, but for the arrow keys
+        bindsym Control+Shift+h resize shrink right  1 px or 1 ppt
+        bindsym Control+Shift+j resize shrink up     1 px or 1 ppt
+        bindsym Control+Shift+k resize shrink down   1 px or 1 ppt
+        bindsym Control+Shift+l resize shrink left   1 px or 1 ppt
+
+
+        # bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt

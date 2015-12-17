@@ -11,3 +11,5 @@ export SSH_ASKPASS=ssh-askpass
 export PATH=${PATH}:$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/build-tools
 export ANDROID_HOME=$HOME/Android/Sdk/
 export PATH=$HOME/.local/bin:$PATH
+export EDITOR=$HOME/.scripts/em
+export PAGER=less

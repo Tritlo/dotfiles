@@ -36,7 +36,7 @@
         ;; ----------------------------------------------------------------
         ;; Tools
         ;; ----------------------------------------------------------------
-        ;; wakatime
+        wakatime
         (ranger :variables ranger-show-preview t)
         ;; (shell :variables shell-default-shell 'multi-term)
 
@@ -68,7 +68,7 @@
         (latex :variables latex-build-command "latex -shell-escape")
 
         ;; ----------------------------------------------------------------
-        ;; Frameworks
+            ;; Frameworks
         ;; ----------------------------------------------------------------
         ;; django
         react
@@ -138,12 +138,12 @@ before layers configuration."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         spacemacs-dark
+                         spacemacs-light
                          monokai
                          leuven
                          zenburn
                          gotham
-                         spacemacs-dark
-                         spacemacs-light
                          )
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -235,6 +235,10 @@ before layers configuration."
    vc-follow-symlinks t
    fci-rule-column 80
    global-evil-search-highlight-persist nil
+   ;; evil-toggle-key "C-M-z"
+   wakatime-api-key "***REMOVED***"
+   wakatime-cli-path "/usr/local/bin/wakatime"
+   waktime-python-bin "/usr/bin/python"
    )
  )
 
@@ -268,10 +272,13 @@ layers configuration."
   (setq neo-theme 'ascii)
   (setq neo-show-updir-line t)
   (evil-leader/set-key "tb" 'speedbar)
+
   (global-linum-mode 1)
   (setq linum-format 'dynamic)
   (global-subword-mode 1) ;; camelCaseWords
-  (global-evil-search-highlight-persist nil)
+  (setq
+   global-evil-search-highlight-persist nil
+  )
   ; (setq ispell-dictionary "is")
   ;; (setq-default
   ;;  LaTeX-command "latex -shell-escape"
@@ -292,6 +299,8 @@ layers configuration."
 
   ;; agda
   ;; (setq agda2-include-dirs '("." "./stdlib/src"))
+
+
 )
 
 ;; Do not write anything past this comme
@@ -301,56 +310,6 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(compilation-message-face (quote default))
- '(cua-global-mark-cursor-color "#2aa198")
- '(cua-normal-cursor-color "#657b83")
- '(cua-overwrite-cursor-color "#b58900")
- '(cua-read-only-cursor-color "#859900")
- '(evil-toggle-key "C-M-z")
- '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
- '(highlight-symbol-colors
-   (--map
-    (solarized-color-blend it "#fdf6e3" 0.25)
-    (quote
-     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
- '(highlight-symbol-foreground-color "#586e75")
- '(highlight-tail-colors
-   (quote
-    (("#eee8d5" . 0)
-     ("#B4C342" . 20)
-     ("#69CABF" . 30)
-     ("#69B7F0" . 50)
-     ("#DEB542" . 60)
-     ("#F2804F" . 70)
-     ("#F771AC" . 85)
-     ("#eee8d5" . 100))))
- '(hl-bg-colors
-   (quote
-    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
- '(hl-fg-colors
-   (quote
-    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
  '(magit-diff-use-overlays nil)
- '(pos-tip-background-color "#eee8d5")
- '(pos-tip-foreground-color "#586e75")
- '(powerline-default-separator (quote arrow-fade))
  '(ring-bell-function (quote ignore) t)
- '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
- '(term-default-bg-color "#fdf6e3")
- '(term-default-fg-color "#657b83")
- '(wakatime-api-key "***REMOVED***")
- '(wakatime-cli-path "/usr/local/bin/wakatime")
- '(waktime-python-bin "/usr/bin/python")
- '(weechat-color-list
-   (quote
-    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 257)) (:foreground "#F8F8F2" :background "#272822")) (((class color) (min-colors 89)) (:foreground "#F5F5F5" :background "#1B1E1C"))))
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ )
