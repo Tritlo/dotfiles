@@ -13,3 +13,4 @@ export ANDROID_HOME=$HOME/Android/Sdk/
 export PATH=$HOME/.local/bin:$PATH
 export EDITOR=$HOME/.scripts/em
 export PAGER=less
+export PATH="/usr/local/heroku/bin:$PATH"

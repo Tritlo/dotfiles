@@ -29,12 +29,16 @@ values."
         (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
-                      auto-completion-enable-snippets-in-popup t
-                      )
+                      auto-completion-enable-snippets-in-popup t)
         ;; themes-megapack
+
         syntax-checking
         spell-checking
         (colors :variables colors-enable-rainbow-identifiers t)
+
+        ;; i3 like Workspaces with SPC W
+        eyebrowse
+        perspectives
 
         ;; Fun
         games
@@ -42,9 +46,16 @@ values."
         ;; ----------------------------------------------------------------
         ;; Tools
         ;; ----------------------------------------------------------------
+
         wakatime
         (ranger :variables ranger-show-preview t)
-        ;; (shell :variables shell-default-shell 'multi-term)
+
+        (shell :variables
+               shell-enable-smart-eshell t
+               shell-default-shell 'eshell)
+
+        ;; Manage services from emacs
+        ;; prodigy
 
         ;; ----------------------------------------------------------------
         ;; Languages
@@ -52,6 +63,7 @@ values."
         markdown
         yaml
         emacs-lisp
+        ;; semantic
         (python :variables
                 python-test-runner 'pytest
                 ; python-enable-yapf-format-on-save t
@@ -74,7 +86,7 @@ values."
         (latex :variables latex-build-command "latex -shell-escape")
 
         ;; ----------------------------------------------------------------
-            ;; Frameworks
+        ;; Frameworks
         ;; ----------------------------------------------------------------
         ;; django
         react
@@ -98,7 +110,10 @@ values."
         ;; Misc
         ;; ----------------------------------------------------------------
         ; ibuffer
-        ; spotify
+        spotify
+
+        ;; Collaborative editig, see floobits.org
+        floobits
         )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -275,6 +290,7 @@ user code."
    wakatime-api-key "***REMOVED***"
    wakatime-cli-path "/usr/local/bin/wakatime"
    waktime-python-bin "/usr/bin/python"
+   speedbar-use-images nil
    )
   )
 
@@ -307,7 +323,7 @@ user code."
   ;; ============================================================
   (setq neo-theme 'ascii)
   (setq neo-show-updir-line t)
-  (evil-leader/set-key "tb" 'speedbar)
+  ;; (evil-leader/set-key "tb" 'speedbar)
 
   (global-linum-mode 1)
   (setq linum-format 'dynamic)
@@ -336,7 +352,6 @@ user code."
   ;; agda
   ;; (setq agda2-include-dirs '("." "./stdlib/src"))
 
-
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -349,3 +364,10 @@ user code."
  '(magit-diff-use-overlays nil)
  '(ring-bell-function (quote ignore) t)
  )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
