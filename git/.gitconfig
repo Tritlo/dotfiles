@@ -6,8 +6,7 @@
 [mergetool]
 	prompt = false
 [merge]
-	conflictstyle = diff3
-	tool = gvimdiff
+	tool = vimdiff
 	summary = true
 [core]
 	excludesfile = /home/tritlo/.gitignore_global
