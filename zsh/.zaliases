@@ -1,22 +1,9 @@
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias lsn='/bin/ls'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+alias ls='ls -G'
 alias minecraft='java -jar /opt/minecraft/Minecraft.jar'
 alias -s pdf=evince
-alias open=xdg-open
-alias pcf="pcmanfm . > /dev/null 2>&1 & disown"
 alias tmux="tmux -2"
 alias vimr="gvim --remote-tab"
 alias svim="vim -u ~/.vimrc.config"
 alias jotunn="ssh mpg3@katla.rhi.hi.is -t 'ssh mpg3@jotunn.rhi.hi.is'"
 alias naut="nautilus . > /dev/null 2>&1 & disown"
-alias ranger="source /usr/bin/ranger"
+alias ranger="source /usr/local/Cellar/ranger/1.7.2/bin/ranger"

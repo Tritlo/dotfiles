@@ -1,84 +1,7 @@
-# ===  BEGIN POWERLEVEL9K ===
-#
-#
-
-zsh_signal(){
-    local signal=$(timeout 1s nmcli device wifi | grep yes | awk '{print $8}')
-    local color='%F{yellow}'
-    [[ $signal -gt 75 ]] && color='%F{green}'
-    [[ $signal -lt 50 ]] && color='%F{red}'
-    #echo -n "%{$color%}\uf1eb  $signal%{%f%}" # \uf1eb is 
-    echo -n "%{$color%}\uf1eb%{%f%}" # \uf1eb is 
-}
-
 
 if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
     export TERM=$TERM-256color
 fi
-POWERLEVEL9K_MODE='awesome-fontconfig'
-#POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='▶'
-#POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='◀'
-#POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='>'
-#POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='<'
-#POWERLEVEL9K_BATTERY_FOREGROUND="white"
-POWERLEVEL9K_BATTERY_ICON=' ' # \uf240
-POWERLEVEL9K_BATTERY_BACKGROUND='black'
-POWERLEVEL9K_BATTERY_DISCONNECTED='cyan'
-POWERLEVEL9K_OK_ICON=' '
-POWERLEVEL9K_FAIL_ICON=' '
-POWERLEVEL9K_CARRIAGE_RETURN_ICON=' '
-POWERLEVEL9K_AWS_ICON=' '
-POWERLEVEL9K_TODO_ICON=' '
-POWERLEVEL9K_TEST_ICON=' '
-POWERLEVEL9K_RUBY_ICON=' '
-POWERLEVEL9K_ROOT_ICON=' '
-POWERLEVEL9K_VCS_TAG_ICON=' '
-POWERLEVEL9K_VCS_BOOKMARK_ICON=' '
-POWERLEVEL9K_HG_ICON=''
-POWERLEVEL9K_VCS_COMMIT_ICON=' '
-POWERLEVEL9K_VCS_BRANCH_ICON=' '
-POWERLEVEL9K_VCS_REMOTE_BRANCH_ICON=' '
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-
-local user_symbol="$"
-if [[ $(print -P "%#") =~ "#" ]]; then
-    user_symbol = "#"
-fi
-
-#POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symbol%{%b%f%k%F{blue}%}▶ %{%f%}"
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symbol%{%f%b%k%F{blue}%} %{%f%}"
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context time battery custom_signal dir vcs virtualenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(aws status load ram custom_docker)
-POWERLEVEL9K_CUSTOM_DOCKER='echo "\uf2ff  $(timeout 1s docker ps -a | grep Up | wc -l)"'
-#  f2ff
-# \uf21a is 
-#  f379
-POWERLEVEL9K_CUSTOM_DOCKER_FOREGROUND="white"
-POWERLEVEL9K_CUSTOM_DOCKER_BACKGROUND="blue"
-POWERLEVEL9K_CUSTOM_SIGNAL='zsh_signal'
-POWERLEVEL9K_CUSTOM_SIGNAL_FOREGROUND="white"
-POWERLEVEL9K_CUSTOM_SIGNAL_BACKGROUND="black"
-#POWERLEVEL9K_DISABLE_RPROMPT=true
-
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-
-#POWERLEVEL9K_STATUS_VERBOSE=false
-
-#POWERLEVEL9K_TIME_FORMAT="%D{%a %F %T}"
-POWERLEVEL9K_TIME_FORMAT=" %D{%T}"
-
-POWERLEVEL9K_SHOW_CHANGESET=true
-POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
-
-export DEFAULT_USER=tritlo
-
-
-# === END POWERLEVEL9k ===
 
 # === ZGEN stuff ===
 if [ !  -f ~/.zgen/zgen.zsh ]; then
@@ -107,10 +30,11 @@ if ! zgen saved; then
     zgen prezto fasd
 
     zgen load tarruda/zsh-autosuggestions
-    if [[ ! $TERM =~ linux ]]; then 
-        zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
-    fi
+    # if [[ ! $TERM =~ linux ]]; then 
+    #     zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
+    # fi
 
+    prompt skwp
 fi
 
 
@@ -149,5 +73,3 @@ unsetopt extendedglob
 if [ -f ~/.zaliases ]; then
     source ~/.zaliases
 fi
-# Set theme to skwp, this only matters if powerlevel9k.zsh-theme is not loaded.
-prompt skwp
