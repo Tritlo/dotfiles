@@ -24,4 +24,5 @@
 [init]
 	templatedir = ~/.git_template
 [credential]
-	helper = cache
+	helper = "!aws codecommit credential-helper $@"
+	UseHttpPath = true

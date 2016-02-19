@@ -47,7 +47,7 @@ values."
         ;; Tools
         ;; ----------------------------------------------------------------
 
-        wakatime
+        ; wakatime
         (ranger :variables ranger-show-preview t)
 
         (shell :variables
@@ -56,6 +56,7 @@ values."
 
         ;; Manage services from emacs
         ;; prodigy
+        org
 
         ;; ----------------------------------------------------------------
         ;; Languages
@@ -118,20 +119,16 @@ values."
         ;; selectric
         ;; games
 
-        ;; Collaborative editig, see floobits.org
-        ;; floobits
         )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-    dotspacemacs-additional-packages '(
-                                       flycheck-clojure
-                                       flycheck-pos-tip
-                                       )
+   ;; dotspacemacs-additional-packages '(flycheck-clojure flycheck-pos-tip)
+   dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(
-                                    evil-terminal-cursor-changer ; Fixes error when in terminal
+                                    ;; evil-terminal-cursor-changer ; Fixes error when in terminal
                                     )
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
@@ -194,8 +191,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Hack"
-                               :size 12
+   dotspacemacs-default-font '("Pragmata Pro"
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.2)
@@ -232,7 +229,7 @@ values."
    dotspacemacs-display-default-layout t
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts t
+   dotspacemacs-auto-resume-layouts nil
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
@@ -329,12 +326,14 @@ in `dotspacemacs/user-config'."
   ; (setq waktime-python-bin "/usr/bin/python")
 
   ; Make sure emacs finds agda and ghc-mode etc.
-  (add-to-list 'exec-path "~/.cabal/bin/")
+  (add-to-list 'exec-path "~/.local/bin/")
 
   (setq-default
    vc-follow-symlinks t
    fci-rule-column 80
    global-evil-search-highlight-persist nil
+   js2-basic-offset 2
+   js-indent-level 2
    ;; evil-toggle-key "C-M-z"
    wakatime-api-key "***REMOVED***"
    wakatime-cli-path "/usr/local/bin/wakatime"
@@ -365,7 +364,9 @@ in `dotspacemacs/user-config'."
   (global-subword-mode 1) ;; camelCaseWords
   (setq
    global-evil-search-highlight-persist nil
-  )
+   )
+
+  (setq global-prettify-symbols-mode +1)
   ; (setq ispell-dictionary "is")
   ;; (setq-default
   ;;  LaTeX-command "latex -shell-escape"
@@ -378,16 +379,26 @@ in `dotspacemacs/user-config'."
                   '("Arara" "arara %s" TeX-run-TeX nil t :help "Run Arara.")))
 
   ;; clojure
-  (eval-after-load 'flycheck
-    '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
-  (eval-after-load 'flycheck '(flycheck-clojure-setup))
-  (add-hook 'clojure-mode-hook #'flycheck-mode)
+  ;; (eval-after-load 'flycheck
+  ;;   '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+  ;; (eval-after-load 'flycheck '(flycheck-clojure-setup))
+  ;; (add-hook 'clojure-mode-hook #'flycheck-mode)
   ;; (add-hook 'clojure-mode-hook #'subword-mode)
 
   ;; agda
   ;; (setq agda2-include-dirs '("." "./stdlib/src"))
+  (add-hook 'haskell-mode-hook (lambda ()
+                                 (spacemacs/set-leader-keys-for-major-mode 'haskell-mode
+                                   "hi" 'ghc-show-info
+                                   "ht" 'ghc-show-type
+                                   ;; "hi"  (lookup-key haskell-mode-map (kbd "C-c TAB"))
+                                   ;; "ht"  (lookup-key haskell-mode-map (kbd "C-c C-t"))
+                                   )))
 
-)
+  (mac-auto-operator-composition-mode)
+  ;; (add-hook 'haskell-mode-hook (lambda () (mac-auto-operator-composition-mode)))
+
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -398,11 +409,12 @@ in `dotspacemacs/user-config'."
  ;; If there is more than one, they won't work right.
  '(magit-diff-use-overlays nil)
  '(ring-bell-function (quote ignore) t)
- )
+ '(wakatime-cli-path "/Users/tritlo/Code/HackerCup/boomerang_constellations.py"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Hack" :foundry "nil" :slant normal :weight normal :height 120 :width normal))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

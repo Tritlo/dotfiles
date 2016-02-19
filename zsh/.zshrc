@@ -58,13 +58,8 @@ bindkey '^v' vi-forward-blank-word
 
 bindkey "^I" expand-or-complete
 
-zle-line-init() {
-    zle autosuggest-start
-}
-zle -N zle-line-init
-AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=6'
-AUTOSUGGESTION_HIGHLIGHT_CURSOR=0
 
+# ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down)
 # === end autosuggestion ===
 
 # We want to use HEAD^ in git
@@ -73,3 +68,5 @@ unsetopt extendedglob
 if [ -f ~/.zaliases ]; then
     source ~/.zaliases
 fi
+
+eval "$(direnv hook zsh)"
