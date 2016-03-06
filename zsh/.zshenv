@@ -7,7 +7,6 @@ export PATH=$PATH:$HOME/Library/Haskell/bin
 #export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH=${PATH}:$HOME/Android/Sdk/platform-tools:$HOME/Android/Sdk/build-tools
 export ANDROID_HOME=$HOME/Android/Sdk/
-export PATH=$HOME/.local/bin:$PATH
 export PAGER=less
 export LANG=is_IS.UTF-8
 export LC_ALL=is_IS.UTF-8
@@ -35,3 +34,4 @@ export DYLD_FALLBACK_LIBRARY_PATH=/opt/X11/lib:$DYLD_FALLBACK_LIBRARY_PATH
 export MPLBACKEND="module://matplotlib.backends.backend_tkagg"
 eval "$(/usr/local/bin/pyenv init -)"
 export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
+export PATH=$HOME/.local/bin:$PATH

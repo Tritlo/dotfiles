@@ -12,7 +12,6 @@ fi
 
 source ~/.zgen/zgen.zsh
 if ! zgen saved; then
-    
     # Bootstrap fonts
 
     # Load skwp theme, in case powerlevel9k doesn't work.
@@ -30,8 +29,9 @@ if ! zgen saved; then
     zgen prezto fasd
 
     zgen load tarruda/zsh-autosuggestions
-    # if [[ ! $TERM =~ linux ]]; then 
-    #     zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
+    # if [[ ! $TERM =~ linux ]];
+    # then
+    #     zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme master
     # fi
 
     prompt skwp
@@ -51,7 +51,6 @@ bindkey -a 'k' history-beginning-search-backward
 bindkey -a 'j' history-beginning-search-forward
 bindkey '^?' backward-delete-char
 
-# === end history-substring-search===
 
 # === autosuggestion ===
 bindkey '^v' vi-forward-blank-word
@@ -59,7 +58,6 @@ bindkey '^v' vi-forward-blank-word
 bindkey "^I" expand-or-complete
 
 
-# ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down)
 # === end autosuggestion ===
 
 # We want to use HEAD^ in git
@@ -70,3 +68,5 @@ if [ -f ~/.zaliases ]; then
 fi
 
 eval "$(direnv hook zsh)"
+
+test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh

@@ -2,7 +2,7 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
-;; Last synced on Spacemacs 105.5
+;; Last synced on Spacemacs 105.11
 ;; Easy syncing can be done with SPC f e D
 
 (defun dotspacemacs/layers ()
@@ -114,6 +114,7 @@ values."
         ;; ibuffer
         spotify
         speed-reading
+        command-log
 
         ;; Fun
         ;; selectric
@@ -177,6 +178,8 @@ values."
    ;; Number of recent files to show in the startup buffer. Ignored if
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
    dotspacemacs-startup-recent-list-size 5
+   ;; Default major mode of the scratch buffer (default `text-mode')
+   dotspacemacs-scratch-mode 'text-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -273,7 +276,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -327,7 +330,7 @@ in `dotspacemacs/user-config'."
 
   ; Make sure emacs finds agda and ghc-mode etc.
   (add-to-list 'exec-path "~/.local/bin/")
-
+  (setq frame-title-format '("%b @ " "Spacemacs " spacemacs-version " - Emacs " emacs-version ))
   (setq-default
    vc-follow-symlinks t
    fci-rule-column 80
@@ -335,9 +338,9 @@ in `dotspacemacs/user-config'."
    js2-basic-offset 2
    js-indent-level 2
    ;; evil-toggle-key "C-M-z"
-   wakatime-api-key "***REMOVED***"
-   wakatime-cli-path "/usr/local/bin/wakatime"
-   waktime-python-bin "/usr/bin/python"
+   ;; wakatime-api-key "***REMOVED***"
+   ;; wakatime-cli-path "/usr/local/bin/wakatime"
+   ;; waktime-python-bin "/usr/bin/python"
    speedbar-use-images nil
    )
   )
@@ -378,6 +381,7 @@ in `dotspacemacs/user-config'."
     '(add-to-list 'TeX-command-list
                   '("Arara" "arara %s" TeX-run-TeX nil t :help "Run Arara.")))
 
+  (spacemacs/toggle-smooth-scrolling-on)
   ;; clojure
   ;; (eval-after-load 'flycheck
   ;;   '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
@@ -396,7 +400,6 @@ in `dotspacemacs/user-config'."
                                    )))
 
   (mac-auto-operator-composition-mode)
-  ;; (add-hook 'haskell-mode-hook (lambda () (mac-auto-operator-composition-mode)))
 
   )
 
@@ -408,8 +411,9 @@ in `dotspacemacs/user-config'."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(magit-diff-use-overlays nil)
+ '(paradox-github-token t)
  '(ring-bell-function (quote ignore) t)
- '(wakatime-cli-path "/Users/tritlo/Code/HackerCup/boomerang_constellations.py"))
+ '(wakatime-cli-path "/Users/tritlo/Code/HackerCup/boomerang_constellations.py" t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
