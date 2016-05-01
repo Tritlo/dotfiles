@@ -58,6 +58,8 @@ values."
         ;; prodigy
         org
 
+        pandoc
+
         ;; ----------------------------------------------------------------
         ;; Languages
         ;; ----------------------------------------------------------------
@@ -67,7 +69,7 @@ values."
         ;; semantic
         (python :variables
                 python-test-runner 'pytest
-                ; python-enable-yapf-format-on-save t
+                python-enable-yapf-format-on-save t
                 )
         clojure
         (c-c++ :variables
@@ -77,6 +79,8 @@ values."
                  haskell-enable-ghc-mod-support t
                  ; haskell-enable-shm-support t
                  )
+        erlang
+        elixir
         ;; agda
         lua
         java
@@ -112,9 +116,11 @@ values."
         ;; Misc
         ;; ----------------------------------------------------------------
         ;; ibuffer
+        floobits
         spotify
         speed-reading
         command-log
+        dash
 
         ;; Fun
         ;; selectric
@@ -126,7 +132,7 @@ values."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    ;; dotspacemacs-additional-packages '(flycheck-clojure flycheck-pos-tip)
-   dotspacemacs-additional-packages '()
+    dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(
                                     ;; evil-terminal-cursor-changer ; Fixes error when in terminal
@@ -195,10 +201,10 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Pragmata Pro"
-                               :size 14
+                               :size 12
                                :weight normal
                                :width normal
-                               :powerline-scale 1.2)
+                               :powerline-scale 2.0)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -304,7 +310,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil advises quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+    dotspacemacs-persistent-server nil
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
@@ -391,6 +397,7 @@ in `dotspacemacs/user-config'."
 
   ;; agda
   ;; (setq agda2-include-dirs '("." "./stdlib/src"))
+
   (add-hook 'haskell-mode-hook (lambda ()
                                  (spacemacs/set-leader-keys-for-major-mode 'haskell-mode
                                    "hi" 'ghc-show-info
@@ -400,6 +407,15 @@ in `dotspacemacs/user-config'."
                                    )))
 
   (mac-auto-operator-composition-mode)
+
+  ;;; helm-dash
+  (setq helm-dash-browser-func 'eww)
+  (setq helm-dash-enable-debugging nil)
+
+  ;; eclim
+  (setq eclim-executable "/opt/homebrew-cask/Caskroom/eclipse-java/4.5.2/Eclipse.app/Contents/Eclipse/eclim")
+  (setq eclimd-executable "/opt/homebrew-cask/Caskroom/eclipse-java/4.5.2/Eclipse.app/Contents/Eclipse/eclimd")
+  (setq eclim-eclipse-dirs '("/opt/homebrew-cask/Caskroom/eclipse-java/4.5.2/Eclipse.app/Contents/Eclipse/"))
 
   )
 
@@ -413,7 +429,7 @@ in `dotspacemacs/user-config'."
  '(magit-diff-use-overlays nil)
  '(paradox-github-token t)
  '(ring-bell-function (quote ignore) t)
- '(wakatime-cli-path "/Users/tritlo/Code/HackerCup/boomerang_constellations.py" t))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -9,8 +9,4 @@
 #         while [ ! -e "/tmp/emacs$USERID/server" ] ; do sleep 1 ; done
 # fi
 
-if [ "$#" -eq 0 ]; then
-  XMODIFIERS= emacsclient -c  -n || emacs & disown
-else
-  XMODIFIERS= emacsclient -c -a ""  -n $* || emacs & disown
-fi
+emacsclient -c  $* -n --alternate-editor /Applications/Emacs.app/Contents/MacOS/Emacs  & disown

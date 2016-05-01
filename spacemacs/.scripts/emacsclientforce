@@ -1,6 +1,0 @@
-#!/bin/bash
-if [ "$#" -eq 0 ]; then
-  XMODIFIERS= emacsclient -c  -n || emacs & disown
-else
-  XMODIFIERS= emacsclient -c -a ""  -n $* || emacs & disown
-fi
