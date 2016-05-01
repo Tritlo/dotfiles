@@ -1,6 +1,7 @@
 [user]
 	Name = Matthías Páll Gissurarson
 	email = mpg@mpg.is
+	signingkey = 8DAF2222
 [push]
 	default = simple
 [mergetool]
@@ -9,7 +10,8 @@
 	tool = vimdiff
 	summary = true
 [core]
-	excludesfile = /home/tritlo/.gitignore_global
+    excludesfile = /Users/tritlo/.gitignore_global
+    logAllRefUpdates = true
 [gui]
 	fontui = -family \"Droid Sans Mono\" -size -12 -weight normal -slant roman -underline 0 -overstrike 0
     fontdiff = -family \"Droid Sans Mono\" -size -12 -weight normal -slant roman -underline 0 -overstrike 0
@@ -24,5 +26,5 @@
 [init]
 	templatedir = ~/.git_template
 [credential]
-	helper = "!aws codecommit credential-helper $@"
+    helper = "!aws codecommit credential-helper $@"
 	UseHttpPath = true
