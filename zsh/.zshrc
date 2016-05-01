@@ -1,4 +1,7 @@
 
+source ~/.powerlevel9k
+
+
 if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
     export TERM=$TERM-256color
 fi
@@ -29,10 +32,10 @@ if ! zgen saved; then
     zgen prezto fasd
 
     zgen load tarruda/zsh-autosuggestions
-    # if [[ ! $TERM =~ linux ]];
-    # then
-    #     zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme master
-    # fi
+    if [[ ! $TERM =~ linux ]];
+    then
+        zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
+    fi
 
     prompt skwp
 fi
