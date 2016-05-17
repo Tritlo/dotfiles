@@ -28,3 +28,7 @@
 [credential]
     helper = "!aws codecommit credential-helper $@"
 	UseHttpPath = true
+[commit]
+	template = /Users/tritlo/.git_commit_template
+[rebase]
+	autosquash = true

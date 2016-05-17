@@ -417,6 +417,10 @@ in `dotspacemacs/user-config'."
         eclim-eclipse-dirs '("/opt/homebrew-cask/Caskroom/eclipse-java/4.5.2/Eclipse.app/Contents/Eclipse/"))
   (require 'eclimd)
 
+  ;; Add initialize magit, so that
+  ;; it's bindings work in commit messages.
+  (require  'magit)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

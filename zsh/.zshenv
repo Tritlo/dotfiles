@@ -20,7 +20,7 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
 fi
 
 
-export EDITOR=vim
+export EDITOR='emacsclient -a="vim"'
 
 # Add GHC 7.10.2 to the PATH, via https://ghcformacosx.github.io/
 export GHC_DOT_APP="/opt/homebrew-cask/Caskroom/ghc/7.10.2-r0/ghc-7.10.2.app"
