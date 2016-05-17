@@ -204,7 +204,7 @@ values."
                                :size 12
                                :weight normal
                                :width normal
-                               :powerline-scale 2.0)
+                               :powerline-scale 1.4)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -413,9 +413,9 @@ in `dotspacemacs/user-config'."
   (setq helm-dash-enable-debugging nil)
 
   ;; eclim
-  (setq eclim-executable "/opt/homebrew-cask/Caskroom/eclipse-java/4.5.2/Eclipse.app/Contents/Eclipse/eclim")
-  (setq eclimd-executable "/opt/homebrew-cask/Caskroom/eclipse-java/4.5.2/Eclipse.app/Contents/Eclipse/eclimd")
-  (setq eclim-eclipse-dirs '("/opt/homebrew-cask/Caskroom/eclipse-java/4.5.2/Eclipse.app/Contents/Eclipse/"))
+  (setq eclim-executable "/opt/homebrew-cask/Caskroom/eclipse-java/4.5.2/Eclipse.app/Contents/Eclipse/eclim"
+        eclim-eclipse-dirs '("/opt/homebrew-cask/Caskroom/eclipse-java/4.5.2/Eclipse.app/Contents/Eclipse/"))
+  (require 'eclimd)
 
   )
 
@@ -428,8 +428,7 @@ in `dotspacemacs/user-config'."
  ;; If there is more than one, they won't work right.
  '(magit-diff-use-overlays nil)
  '(paradox-github-token t)
- '(ring-bell-function (quote ignore) t)
- )
+ '(ring-bell-function (quote ignore) t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

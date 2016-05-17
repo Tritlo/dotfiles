@@ -1,18 +1,19 @@
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context time battery dir vcs virtualenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status load ram swap docker_machine ip)
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-POWERLEVEL9K_BATTERY_ICON="B"
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+    POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context time dir)
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs ip battery docker_machine)
+    POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+    POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
+    # POWERLEVEL9K_RPROMPT_RENDER_ASAP=true
+    POWERLEVEL9K_BATTERY_ICON="B"
+    POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 
-local user_symbol="$"
-if [[ $(print -P "%#") =~ "#" ]]; then
-	user_symbol = "#"
-fi
+    local user_symbol="$"
+    if [[ $(print -P "%#") =~ "#" ]]; then
+        user_symbol = "#"
+    fi
 
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symbol%{%b%f%k%F{blue}%} %{%f%}"
+    POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symbol%{%b%f%k%F{blue}%} %{%f%}"
 
-POWERLEVEL9K_SHOW_CHANGESET=true
-POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
-POWERLEVEL9K_TIME_FORMAT="%D{%F %T}"
+    POWERLEVEL9K_SHOW_CHANGESET=true
+    POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
+    POWERLEVEL9K_TIME_FORMAT="%D{%F %T}"
