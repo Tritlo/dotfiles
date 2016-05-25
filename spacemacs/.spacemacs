@@ -2,8 +2,12 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
-;; Last synced on Spacemacs 105.11
+;; Last synced on Spacemacs 105.20
 ;; Easy syncing can be done with SPC f e D
+
+;; emacs installed with.
+;; brew install emacs-plus --with-cocoa --with-gnutls --with-librsvg --with-imagemagick --with-spacemacs-icon --with-dbus
+
 
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
@@ -109,7 +113,7 @@ values."
         ;; ----------------------------------------------------------------
         evil-commentary
         unimpaired
-        ; vim-empty-lines
+        vim-empty-lines
         ; vinegar
 
         ;; ----------------------------------------------------------------
@@ -132,7 +136,12 @@ values."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    ;; dotspacemacs-additional-packages '(flycheck-clojure flycheck-pos-tip)
-    dotspacemacs-additional-packages '()
+    dotspacemacs-additional-packages '(
+                                       cuda-mode
+                                       (docker-tramp
+                                        :location
+                                        (recipe :fetcher github
+                                                :repo "Tritlo/docker-tramp.el")))
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(
                                     ;; evil-terminal-cursor-changer ; Fixes error when in terminal
@@ -189,22 +198,22 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(monokai
+                         spacemacs-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
                          leuven
-                         monokai
                          zenburn)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Pragmata Pro"
+   dotspacemacs-default-font '("PragmataPro"
                                :size 12
                                :weight normal
                                :width normal
-                               :powerline-scale 1.4)
+                               :powerline-scale 1.0)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -235,7 +244,7 @@ values."
    dotspacemacs-default-layout-name "Default"
    ;; If non nil the default layout name is displayed in the mode-line.
    ;; (default nil)
-   dotspacemacs-display-default-layout t
+   dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
    dotspacemacs-auto-resume-layouts nil
@@ -251,7 +260,7 @@ values."
    ;; `find-contrib-file' (SPC f e c) are replaced. (default nil)
    dotspacemacs-use-ido nil
    ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
-   dotspacemacs-helm-resize nil
+   dotspacemacs-helm-resize t
    ;; if non nil, the helm header is hidden when there is only one source.
    ;; (default nil)
    dotspacemacs-helm-no-header t
@@ -260,7 +269,7 @@ values."
    dotspacemacs-helm-position 'bottom
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
-   dotspacemacs-enable-paste-micro-state nil
+   dotspacemacs-enable-paste-micro-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
    dotspacemacs-which-key-delay 0.4
@@ -292,7 +301,7 @@ values."
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
    ;; If non nil unicode symbols are displayed in the mode line. (default t)
-   dotspacemacs-mode-line-unicode-symbols t
+   dotspacemacs-mode-line-unicode-symbols nil
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters the
    ;; point when it reaches the top or bottom of the screen. (default t)
@@ -310,7 +319,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil advises quit functions to keep server open when quitting.
    ;; (default nil)
-    dotspacemacs-persistent-server nil
+    dotspacemacs-persistent-server t
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
@@ -349,7 +358,7 @@ in `dotspacemacs/user-config'."
    ;; waktime-python-bin "/usr/bin/python"
    speedbar-use-images nil
    )
-  )
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -376,18 +385,17 @@ in `dotspacemacs/user-config'."
    )
 
   (setq global-prettify-symbols-mode +1)
+
   ; (setq ispell-dictionary "is")
   ;; (setq-default
   ;;  LaTeX-command "latex -shell-escape"
   ;;  Tex-PDF-mode t)
   ; Better for terminus
-  ;; (setq powerline-default-separator 'arrow-fade)
   (fancy-battery-mode)
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("Arara" "arara %s" TeX-run-TeX nil t :help "Run Arara.")))
 
-  (spacemacs/toggle-smooth-scrolling-on)
   ;; clojure
   ;; (eval-after-load 'flycheck
   ;;   '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
@@ -406,7 +414,7 @@ in `dotspacemacs/user-config'."
                                    ;; "ht"  (lookup-key haskell-mode-map (kbd "C-c C-t"))
                                    )))
 
-  (mac-auto-operator-composition-mode)
+  ;; (mac-auto-operator-composition-mode)
 
   ;;; helm-dash
   (setq helm-dash-browser-func 'eww)
@@ -421,7 +429,50 @@ in `dotspacemacs/user-config'."
   ;; it's bindings work in commit messages.
   (require  'magit)
 
-  )
+  ;; Make possible to ssh into ash
+  (setq docker-tramp-use-names t)
+
+  ;; make ligatures work
+  (let ((alist '(
+                 (33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+                 (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+                 (36 . ".\\(?:>\\)")
+                 (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+                 (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+                 (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+                 (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+                 ;; These make SPC : freeze for some reason
+                 ;; (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+                 ;; (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+                 (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+                 (48 . ".\\(?:x[a-zA-Z]\\)")
+                 (58 . ".\\(?:::\\|[:=]\\)")
+                 (59 . ".\\(?:;;\\|;\\)")
+                 (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+                 (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+                 (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+                 (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+                 (91 . ".\\(?:]\\)")
+                 (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+                 (94 . ".\\(?:=\\)")
+                 (119 . ".\\(?:ww\\)")
+                 (123 . ".\\(?:-\\)")
+                 (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+                 (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+                 )))
+    (dolist (char-regexp alist)
+      (set-char-table-range composition-function-table (car char-regexp)
+                            `([,(cdr char-regexp) 0 font-shape-gstring]))))
+
+  (setq
+   powerline-default-separator 'utf-8
+   powerline-utf-8-separator-left #xe0b0
+   powerline-utf-8-separator-right #xe0b2
+   spaceline-window-numbers-unicode t
+   spaceline-workspace-numbers-unicode t
+   )
+  (spaceline-compile)
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -438,6 +489,5 @@ in `dotspacemacs/user-config'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Hack" :foundry "nil" :slant normal :weight normal :height 120 :width normal))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
