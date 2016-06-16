@@ -34,8 +34,8 @@
 	local = yellow
 	remote = green
 [color "status"]
-	added = yellow
-	changed = green
+	added = green
+	changed = yellow
 	untracked = cyan
 [alias]
 	dsf = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX --pattern='^(added|deleted|modified): '; }; f"
@@ -58,9 +58,9 @@
 [github]
 	user = Tritlo
 [pager]
-	log = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less --tabs=2 -RFX
-	show = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less --tabs=2 -RFX
-	diff = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less --tabs=2 -RFX
+	log = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less --tabs=2 -RFX --pattern '^ diff '
+	show = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less --tabs=2 -RFX --pattern '^diff '
+	diff = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less --tabs=2 -RFX --pattern '^diff '
 [interactive]
 	diffFilter = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight
 [diff]
