@@ -35,9 +35,9 @@
 [github]
 	user = Tritlo
 [pager]
-	log = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
-	show = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
-	diff = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
+	log = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less --tabs=2 -RFX
+	show = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less --tabs=2 -RFX
+	diff = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less --tabs=2 -RFX
 [interactive]
 	diffFilter = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight
 [diff]
