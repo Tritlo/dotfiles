@@ -10,25 +10,35 @@
 	tool = vimdiff
 	summary = true
 [core]
-    excludesfile = /Users/tritlo/.gitignore_global
-    logAllRefUpdates = true
+	excludesfile = /Users/tritlo/.gitignore_global
+	logAllRefUpdates = true
 [gui]
 	fontui = -family \"Droid Sans Mono\" -size -12 -weight normal -slant roman -underline 0 -overstrike 0
-    fontdiff = -family \"Droid Sans Mono\" -size -12 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Droid Sans Mono\" -size -12 -weight normal -slant roman -underline 0 -overstrike 0
 [alias]
-    co = checkout
-    ci = commit
-    st = status
-    br = branch
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-    type = cat-file -t
-    dump = cat-file -p
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
 [init]
 	templatedir = ~/.git_template
 [credential]
-    helper = "!aws codecommit credential-helper $@"
+	helper = "!aws codecommit credential-helper $@"
 	UseHttpPath = true
 [commit]
 	template = /Users/tritlo/.git_commit_template
 [rebase]
 	autosquash = true
+[github]
+	user = Tritlo
+[pager]
+	log = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
+	show = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
+	diff = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | less
+[interactive]
+	diffFilter = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight
+[diff]
+	compactionHeuristic = True
