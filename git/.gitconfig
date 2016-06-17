@@ -43,6 +43,8 @@
 	ci = commit
 	st = status
 	br = branch
+	dh = diff HEAD
+	au = add --update
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
@@ -65,3 +67,4 @@
 	diffFilter = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight
 [diff]
 	compactionHeuristic = True
+	algorithm = histogram
