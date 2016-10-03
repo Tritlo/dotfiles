@@ -47,7 +47,9 @@ values."
      helm
 
      ;; +themes
-     (colors :variables colors-enable-rainbow-identifiers t)
+     (colors :variables
+             ;; Can be one of `variables', `all' and `nil'
+             colors-colorize-identifiers 'all)
      ;; +checkers
      syntax-checking
      spell-checking
@@ -63,10 +65,15 @@ values."
      (shell :variables
             shell-enable-smart-eshell t
             shell-default-shell 'eshell)
+     docker
+     rebox
+     systemd
 
      ;; +lang
      org
-     markdown
+     (markdown :variables
+               markdown-live-preview-engine 'vmd)
+
      yaml
      emacs-lisp
      csv
@@ -75,26 +82,26 @@ values."
      (python :variables
              python-test-runner 'pytest
              python-enable-yapf-format-on-save t
-             )
+             python-sort-imports-on-save t)
      clojure
      (c-c++ :variables
-            c-c++-enable-clang-support t
-            )
-     ; (haskell :variables
-     ;;          haskell-enable-ghc-mod-support t
-     ;;          )
-     intero ; better haskell mode?
+            c-c++-enable-clang-support t)
+     (haskell :variables
+              ;; haskell-enable-ghc-mod-support t
+              haskell-completion-backend 'intero)
      erlang
      elixir
-     ;; agda
+     agda
      lua
      java
      html
      javascript
      extra-langs
      dockerfile
-     ;; sql
+     sql
      (latex :variables latex-build-command "latex -shell-escape")
+     shaders
+     rust
 
      ;; +chat
      slack
@@ -112,11 +119,9 @@ values."
      evil-commentary
      vim-empty-lines
      vinegar
-     unimpaired
 
      ;; +misc
      nlinum
-     rebox
 
      ;; +pair-programming
      floobits
@@ -232,7 +237,6 @@ values."
    dotspacemacs-themes
    '(monokai
      zenburn
-     leuven
      solarized-dark
      solarized-light
      spacemacs-dark
@@ -266,7 +270,7 @@ values."
    ;; and TAB or <C-m> and RET.
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
-   dotspacemacs-distinguish-gui-tab nil
+   dotspacemacs-distinguish-gui-tab t
    ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
    dotspacemacs-remap-Y-to-y$ nil
    ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
@@ -312,7 +316,7 @@ values."
    ;; source settings. Else, disable fuzzy matching in all sources.
    ;; (default 'always)
    dotspacemacs-helm-use-fuzzy 'always
-   ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
+   ;; If non nil the paste transient-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
    dotspacemacs-enable-paste-transient-state nil
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
@@ -361,7 +365,7 @@ values."
    dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'evil
+   dotspacemacs-folding-method 'origami
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -399,7 +403,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  ; (setq waktime-python-bin "/usr/bin/python")
 
   ; Make sure emacs finds agda and ghc-mode etc.
   (add-to-list 'exec-path "~/.local/bin/")
