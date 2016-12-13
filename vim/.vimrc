@@ -322,7 +322,7 @@ endfunction
 if has('gui_running')
     silent! colorscheme molokai
 else
-    let g:airline_theme="luna"
+    let g:airline_theme="molokai"
     colorscheme pablo
 endif
 
