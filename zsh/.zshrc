@@ -1,4 +1,3 @@
-
 source ~/.powerlevel9k
 
 
@@ -24,6 +23,7 @@ if ! zgen saved; then
     # prezto and modules
     zgen prezto
 
+    # zgen prezto gpg
     zgen prezto git
     zgen prezto command-not-found
     zgen prezto syntax-highlighting
@@ -34,8 +34,12 @@ if ! zgen saved; then
     zgen load tarruda/zsh-autosuggestions
     if [[ ! $TERM =~ linux ]];
     then
-        zgen load Tritlo/powerlevel9k powerlevel9k.zsh-theme next
+        #zgen load Tritlo/powerlevel9k powerlevel9k.zsh-theme async_all_the_segments
+        #zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
+        zgen load dritter/powerlevel9k powerlevel9k.zsh-theme async_all_the_segments
     fi
+
+    zgen load wbinglee/zsh-wakatime
 
     prompt skwp
 fi

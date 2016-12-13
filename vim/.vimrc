@@ -25,7 +25,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeFind'}
 "Plug 'scrooloose/nerdcommenter' " Commenter
 Plug 'tpope/vim-commentary'
 
-Plug 'bling/vim-airline' "status bar
+Plug 'vim-airline/vim-airline' "status bar
+Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/syntastic' " Dat syntax highlighter
 Plug 'tpope/vim-fugitive' " git integration
 

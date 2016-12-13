@@ -60,7 +60,7 @@
 [github]
 	user = Tritlo
 [pager]
-	log = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | ifne less --tabs=2 -RFX --pattern '^diff '
+	log = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | ifne less --tabs=2 -RFX
 	show = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | ifne less --tabs=2 -RFX --pattern '^diff '
 	diff = /usr/local/opt/git/share/git-core/contrib/diff-highlight/diff-highlight | ifne less --tabs=2 -RFX --pattern '^diff '
 [interactive]
