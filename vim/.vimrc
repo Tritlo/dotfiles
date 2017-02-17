@@ -16,7 +16,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'gmarik/Vundle.vim' " Required
 
 " The colorschemes
-Plug 'tomasr/molokai'
+" Plug 'tomasr/molokai'
 " Plug 'flazz/vim-colorschemes'
 
 
@@ -26,7 +26,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeFind'}
 Plug 'tpope/vim-commentary'
 
 Plug 'vim-airline/vim-airline' "status bar
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/syntastic' " Dat syntax highlighter
 Plug 'tpope/vim-fugitive' " git integration
 
@@ -238,7 +238,7 @@ let g:indent_guides_enable_on_vim_startup=1
 
 let g:shell_mappings_enabled = 0
 
-colorscheme molokai
+" colorscheme molokai
 
 if has('gui_running')
     let g:ctrlp_extensions = ['gazetteer']
@@ -318,13 +318,15 @@ function! g:ToggleColorColumn()
     endif
 endfunction
 
+let g:airline_theme="dark"
+colorscheme default
 
-if has('gui_running')
-    silent! colorscheme molokai
-else
-    let g:airline_theme="molokai"
-    colorscheme pablo
-endif
+" if has('gui_running')
+"     silent! colorscheme molokai
+" else
+"     let g:airline_theme="dark"
+"     colorscheme pablo
+" endif
 
 
 
