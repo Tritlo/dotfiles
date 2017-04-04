@@ -1,7 +1,11 @@
 [user]
 	Name = Matthías Páll Gissurarson
 	email = mpg@mpg.is
-	signingkey = 8DAF2222
+	signingkey = 75E73F2ED8DF662B
+[commit]
+	gpgsign = true
+[format]
+	signoff = true
 [push]
 	default = simple
 [mergetool]

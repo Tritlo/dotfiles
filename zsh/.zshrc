@@ -1,5 +1,5 @@
-source ~/.powerlevel9k
-
+#source ~/.powerlevel9k
+PURE_PROMPT_SYMBOL=">>="
 
 if [ "$TERM" = "screen" ] || [ "$TERM" = "xterm" ]; then
     export TERM=$TERM-256color
@@ -17,31 +17,35 @@ if ! zgen saved; then
     # Bootstrap fonts
 
     # Load skwp theme, in case powerlevel9k doesn't work.
-    zgen prezto prompt theme 'skwp'
+    # zgen prezto prompt theme 'skwp'
     zgen prezto syntax-highlighting color 'yes'
 
     # prezto and modules
     zgen prezto
 
     # zgen prezto gpg
+    zgen prezto ssh
     zgen prezto git
     zgen prezto command-not-found
     zgen prezto syntax-highlighting
     zgen prezto history-substring-search
     zgen prezto completion
     zgen prezto fasd
+    zgen prezto prompt theme "pure"
 
     zgen load tarruda/zsh-autosuggestions
-    if [[ ! $TERM =~ linux ]];
-    then
-        #zgen load Tritlo/powerlevel9k powerlevel9k.zsh-theme async_all_the_segments
-        #zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
-        zgen load dritter/powerlevel9k powerlevel9k.zsh-theme async_all_the_segments
-    fi
+    # if [[ ! $TERM =~ linux ]];
+    # then
+    #     #zgen load Tritlo/powerlevel9k powerlevel9k.zsh-theme async_all_the_segments
+    #     #zgen load bhilburn/powerlevel9k powerlevel9k.zsh-theme next
+    #     zgen load dritter/powerlevel9k powerlevel9k.zsh-theme async_all_the_segments
+    # fi
 
-    zgen load wbinglee/zsh-wakatime
+    # zgen load wbinglee/zsh-wakatime
 
-    prompt skwp
+    prompt pure
+
+    zgen save
 fi
 
 
@@ -77,3 +81,4 @@ fi
 eval "$(direnv hook zsh)"
 
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+

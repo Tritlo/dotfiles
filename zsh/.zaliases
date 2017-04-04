@@ -4,3 +4,8 @@ alias vimr="gvim --remote-tab"
 alias svim="vim -u ~/.vimrc.config"
 #alias ranger="source /usr/local/Cellar/ranger/1.7.2/bin/ranger"
 alias markdown="pandock -f markdown -t html"
+alias tp="teleport-exe"
+tpg(){
+  cd $(teleport-exe goto $1)
+}
+alias clash="stack exec --resolver=nightly-2017-01-17 -- /Users/tritlo/.local/bin/clash"

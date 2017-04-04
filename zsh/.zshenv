@@ -43,7 +43,13 @@ export PATH="/usr/local/sbin:$PATH"
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
+export PATH="$HOME/Code/arcanist/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
+
 #export DOCKER_TLS_VERIFY="1"
 #export DOCKER_HOST="tcp://192.168.99.100:2376"
 #export DOCKER_CERT_PATH="/Users/tritlo/.docker/machine/machines/default"
 #export DOCKER_MACHINE_NAME="default"
+
