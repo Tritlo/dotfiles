@@ -53,7 +53,7 @@ Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as �
 " Plug 'wakatime/vim-wakatime'
 
 "" misc
-Plug 'tinymode.vim' " continuous key presses
+" Plug 'tinymode.vim' " continuous key presses
 Plug 'rking/ag.vim', {'on':'Ag'} " better grep, search for term in project.
 
 
@@ -62,7 +62,7 @@ Plug 'wting/rust.vim', {'for': 'rust'}
 Plug 'jnwhiteh/vim-golang', {'for' : 'go'}
 Plug 'pangloss/vim-javascript', {'for' : 'javascript'}
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'nginx.vim', {'for': 'nginx'}
+" Plug 'nginx.vim', {'for': 'nginx'}
 Plug 'elzr/vim-json'
 " Plug 'godlygeek/tabular' " for markdown
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
@@ -174,17 +174,17 @@ if has("unix")
     if !exists('g:airline_symbols')
       let g:airline_symbols = {}
     endif
-    " let g:airline#extensions#tabline#left_sep = '▶'
-    let g:airline#extensions#tabline#left_sep = ''
+    let g:airline#extensions#tabline#left_sep = '▶'
+    "let g:airline#extensions#tabline#left_sep = ''
     " let g:airline#extensions#tabline#left_alt_sep = '|'
     let g:airline#extensions#tabline#left_alt_sep = ''
     let g:airline#extensions#tabline#right_alt_sep = ''
     "let g:airline_left_sep = '»'
-    " let g:airline_left_sep = '▶'
-    let g:airline_left_sep = ''
+    let g:airline_left_sep = '▶'
+    "let g:airline_left_sep = ''
     "let g:airline_right_sep = '«'
-    " let g:airline_right_sep = '◀'
-    let g:airline_right_sep = ''
+    let g:airline_right_sep = '◀'
+    "let g:airline_right_sep = ''
     let g:airline_symbols.linenr = '␤'
     let g:airline_symbols.branch = '⎇'
     let g:airline_symbols.paste = 'ρ'
@@ -254,25 +254,25 @@ if has('gui_running')
 endif
 
 
-call tinymode#EnterMap("winsize","<C-W>+","+")
-call tinymode#EnterMap("winsize","<C-W>-","-")
-call tinymode#EnterMap("winsize","<Leader>w+","+")
-call tinymode#EnterMap("winsize","<Leader>w-","-")
-call tinymode#Map("winsize","+","wincmd +")
-call tinymode#Map("winsize","-","wincmd -")
-call tinymode#EnterMap("winsize","<C-W><","<")
-call tinymode#EnterMap("winsize","<C-W>>",">")
-call tinymode#EnterMap("winsize","<Leader>w<","<")
-call tinymode#EnterMap("winsize","<Leader>w>",">")
-call tinymode#Map("winsize","<","wincmd <")
-call tinymode#Map("winsize",">","wincmd >")
-call tinymode#ModeMsg("winsize","Change window size +/-, </>")
+" call tinymode#EnterMap("winsize","<C-W>+","+")
+" call tinymode#EnterMap("winsize","<C-W>-","-")
+" call tinymode#EnterMap("winsize","<Leader>w+","+")
+" call tinymode#EnterMap("winsize","<Leader>w-","-")
+" call tinymode#Map("winsize","+","wincmd +")
+" call tinymode#Map("winsize","-","wincmd -")
+" call tinymode#EnterMap("winsize","<C-W><","<")
+" call tinymode#EnterMap("winsize","<C-W>>",">")
+" call tinymode#EnterMap("winsize","<Leader>w<","<")
+" call tinymode#EnterMap("winsize","<Leader>w>",">")
+" call tinymode#Map("winsize","<","wincmd <")
+" call tinymode#Map("winsize",">","wincmd >")
+" call tinymode#ModeMsg("winsize","Change window size +/-, </>")
 
-call tinymode#EnterMap("yankstack","<Leader>pj","j")
-call tinymode#EnterMap("yankstack","<Leader>pk","k")
-call tinymode#Map("yankstack","j","normal \<Plug>yankstack_substitute_newer_paste")
-call tinymode#Map("yankstack","k","normal \<Plug>yankstack_substitute_older_paste")
-call tinymode#ModeMsg("yankstack","Scroll through yankstack with j/k")
+" call tinymode#EnterMap("yankstack","<Leader>pj","j")
+" call tinymode#EnterMap("yankstack","<Leader>pk","k")
+" call tinymode#Map("yankstack","j","normal \<Plug>yankstack_substitute_newer_paste")
+" call tinymode#Map("yankstack","k","normal \<Plug>yankstack_substitute_older_paste")
+" call tinymode#ModeMsg("yankstack","Scroll through yankstack with j/k")
 
 
 
