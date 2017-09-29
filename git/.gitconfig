@@ -4,6 +4,8 @@
 	signingkey = 75E73F2ED8DF662B
 [commit]
 	gpgsign = true
+[tag]
+	forceSignAnnotated = true
 [format]
 	signoff = true
 [push]
