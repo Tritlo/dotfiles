@@ -1,8 +1,0 @@
-*~
-.*.sw*
-.envrc
-.DS_Store
-.tern-port
-.#*
-gitignore
-TAGS

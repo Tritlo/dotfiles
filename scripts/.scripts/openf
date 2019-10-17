@@ -1,2 +1,0 @@
-#!/bin/bash
-gnome-terminal --working-directory=$PWD -x xdg-open "$*" & disown

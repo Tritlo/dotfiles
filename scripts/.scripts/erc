@@ -1,4 +1,0 @@
-#!/bin/bash
-emacs --daemon=erc -q --load $HOME/.erc
-emacsclient -a "" -c -n -s erc
-

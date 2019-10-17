@@ -1,7 +1,0 @@
-- name: github
-  hosts: 127.0.0.1
-  connection: local
-  tasks:
-      - name: install github cli
-        pip: name=hub
-        sudo: yes

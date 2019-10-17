@@ -1,1 +1,0 @@
-../nicklist-tmux_auto_resize.pl

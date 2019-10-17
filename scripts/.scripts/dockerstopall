@@ -1,2 +1,0 @@
-#!/bin/bash
-docker.io ps -q | xargs docker.io stop 

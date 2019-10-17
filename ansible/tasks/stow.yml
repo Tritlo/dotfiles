@@ -1,7 +1,0 @@
-# vi: set ft=yaml :
-- include: dotfiles.yml
-- name: install stow
-  apt: name=stow state=present
-
-- name: stow {{ tostow }}
-  command: chdir={{ansible_env.HOME}}/dotfiles stow {{ tostow }}

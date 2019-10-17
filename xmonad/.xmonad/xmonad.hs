@@ -64,9 +64,6 @@ import XMonad.Layout.LayoutCombinators ((|||))
 --Nofn
 import XMonad.Layout.ShowWName
 
---Android-studio
-import XMonad.Hooks.ICCCMFocus
-
 xmobarEscape = concatMap doubleLts
   where doubleLts '<' = "<<"
         doubleLts x   = [x]
@@ -95,15 +92,15 @@ bLayouts = ["Tabs", "Grid", "Spiral"]
 nLayouts =["IMGBFloat", "Tall"]
 
 -- Layouts based on workspace names
---myLayout =   onWorkspace "grid" gridLayout $ onWorkspace "spiral" spiralLayout $ onWorkspace "tabs" simpleTabbedBottom $ onWorkspace "float" simplestFloat $  named "Tabs" simpleTabbedBottom ||| layoutHook defaultConfig
+--myLayout =   onWorkspace "grid" gridLayout $ onWorkspace "spiral" spiralLayout $ onWorkspace "tabs" simpleTabbedBottom $ onWorkspace "float" simplestFloat $  named "Tabs" simpleTabbedBottom ||| layoutHook def
 myLayoutHook =
      --imageButtonDeco shrinkText defaultThemeWithImageButtons
      --maximize  $
      --minimize  $
      avoidStruts $
-     named "SmallBSP" (smartBorders (subTabbed  (smartSpacing 10 (emptyBSP))))  |||
-     named "SmallTall" (smartBorders (subTabbed $  smartSpacing 10 (Tall 1 (3%100) (1%2))))  |||
-     named "SmallMirror" (smartBorders (subTabbed $  smartSpacing 10 (Mirror (Tall 1 (3%100) (1%2))))) |||
+     named "SmallBSP" (smartBorders (subTabbed  (mySpacing (emptyBSP))))  |||
+     named "SmallTall" (smartBorders (subTabbed $  mySpacing (Tall 1 (3%100) (1%2))))  |||
+     named "SmallMirror" (smartBorders (subTabbed $  mySpacing (Mirror (Tall 1 (3%100) (1%2))))) |||
      named "Tall" ( smartBorders (subTabbed (Tall 1 (3%100) (1%2))))  |||
      named "Mirror Tall" (smartBorders (subTabbed (Mirror (Tall 1 (3%100) (1%2))))) |||
      named "Full" (smartBorders (subTabbed (Full))) |||
@@ -117,6 +114,9 @@ myLayoutHook =
      --named "BSP" bspLayout
 
 
+mySpacing = spacingRaw False nb True b True
+  where nb = Border 25 0 0 0
+        b = Border 5 5 5 5
 
 --hljod kemur upp a skja
 --alert = dzenConfig return . show
@@ -154,17 +154,16 @@ addPrefix p ms conf =
     chopMod = (.&. complement mod)
 
 
---myTerm = "urxvtclient"
+myTerm = "urxvt"
 --myTerm = "sakura"
-myTerm = "gnome-terminal"
+--myTerm = "terminator"
 editor = "XMODIFIERS= emacsclient -c -n  || emacs & disown"
 ircopen = "/home/tritlo/.scripts/gtmuxirssi"
 simpleEditor ="gedit"
 fixMouse = "(sleep 1 && killall lxappearance)& lxappearance"
 
 altMask = mod1Mask
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
-	(
+myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList (
     [
     -- Dmenu fix
       ((modm                , xK_p), (spawn "dmenu_run"))
@@ -226,18 +225,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     --, ((modm .|. controlMask, xK_s), submap $ defaultSublMap conf)
     -- Gestures
     --, ((modm   , 2), mouseGesture gestures)
-	--, ((modm .|. shiftMask, xK_q), (spawn logoutCmd))
-	{-, ((modm                , xK_u), (spawn fixMouse))-}
-	, ((modm .|. shiftMask  , xK_u), restart "/home/tritlo/.scripts/obtoxmd" True)
+    --, ((modm .|. shiftMask, xK_q), (spawn logoutCmd))
+    {-, ((modm                , xK_u), (spawn fixMouse))-}
+    , ((modm .|. shiftMask  , xK_u), restart "/home/tritlo/.scripts/obtoxmd" True)
     -- Workspaces
     , ((modm  .|. shiftMask , xK_space), (cycleThroughLayouts spaceLayouts))
     , ((modm                , xK_x), increaseNMasterGroups)
     , ((modm .|. shiftMask  , xK_x), decreaseNMasterGroups)
-	, ((modm                , xK_space), (spawn changeKbLayout))
-	, ((modm                , xK_b), (cycleThroughLayouts spaceLayouts))
-	, ((modm                , xK_n), (cycleThroughLayouts smallLayouts))
-	, ((modm .|. shiftMask  , xK_n), (cycleThroughLayouts bLayouts))
-	{-, ((modm                , xK_n), (cycleThroughLayouts nLayouts))-}
+    , ((modm                , xK_space), (spawn changeKbLayout))
+    , ((modm                , xK_b), (cycleThroughLayouts spaceLayouts))
+    , ((modm                , xK_n), (cycleThroughLayouts smallLayouts))
+    , ((modm .|. shiftMask  , xK_n), (cycleThroughLayouts bLayouts))
+    {-, ((modm                , xK_n), (cycleThroughLayouts nLayouts))-}
     , ((modm .|. shiftMask  , xK_b     ), sendMessage ToggleStruts)
     , ((modm                , xK_i ), removeEmptyWorkspaceAfterExcept mywspaces (moveTo Prev HiddenWS))
     , ((modm                , xK_o), removeEmptyWorkspaceAfterExcept mywspaces (moveTo Next HiddenWS))
@@ -245,10 +244,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     , ((modm .|. shiftMask  , xK_o), removeEmptyWorkspaceAfterExcept mywspaces (shiftTo Next HiddenWS))
     , ((modm                , xK_a), removeEmptyWorkspaceAfterExcept mywspaces toggleWS)
     , ((modm .|. shiftMask  , xK_BackSpace), removeWorkspace)
-    , ((modm .|. shiftMask  , xK_v), selectWorkspace defaultXPConfig)
-    -- , ((modm                , xK_m), withWorkspace defaultXPConfig (windows . W.shift))
-    --, ((modm .|. shiftMask  , xK_m), withWorkspace defaultXPConfig (windows . copy))
-    , ((modm .|. shiftMask  , xK_r), renameWorkspace defaultXPConfig)
+    , ((modm .|. shiftMask  , xK_v), selectWorkspace def)
+    -- , ((modm                , xK_m), withWorkspace def (windows . W.shift))
+    --, ((modm .|. shiftMask  , xK_m), withWorkspace def (windows . copy))
+    , ((modm .|. shiftMask  , xK_r), renameWorkspace def)
     -- lock, kill windows(do not kill program if same window on other workspace) and change kbLayout to icelandic
     , ((modm .|. shiftMask  , xK_c), kill1)
     , ((modm .|. shiftMask  , xK_l), (spawn lockCmd))
@@ -271,7 +270,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     --, ((0                   , xF86XK_AudioPlay), (spawn "/home/tritlo/.scripts/musickeystospotify play"))
     --, ((0                   , xF86XK_AudioNext), (spawn "/home/tritlo/.scripts/musickeystospotify next"))
     --, ((0                   , xF86XK_AudioPrev), (spawn "/home/tritlo/.scripts/musickeystospotify prev"))
-	]
+    ]
     ++
     zip (zip (repeat (modm)) [xK_1..xK_9]) (map (withNthWorkspace W.greedyView) [0..])
     ++
@@ -279,15 +278,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
     )
 
 myManageHook =  composeAll
-    [ manageHook defaultConfig
+    [ manageHook def
     , className =? "Unity-2d-panel" --> doIgnore
     , className =? "gimp" --> doFloat
     , title =? "Sunrise Calendar" --> doFloat
     , appName =? "chromium_app_list" --> doFloat
     ]
 
-myRed = "#CC6666"
-myGreen = "#B5BD68"
+myRed = "#D12F2C"
+myGreen = "#819400"
+--myRed = "#CC6666"
+--myGreen = "#B5BD68"
 --myRed = "#FF0000"
 --myGreen = "#FFFF00"
 {-myPP = xmobarPP { ppCurrent = xmobarColor "#00ff00" "" . wrap "[" "]",
@@ -305,14 +306,10 @@ myPP = xmobarPP { ppCurrent = xmobarColor "#b9ca4a" "" . wrap "[" "]",
 -}
 
 myStartupHook :: X()
-myStartupHook = ewmhDesktopsStartup <+> setWMName "LG3D"
-
---Android-studio
-{-myLogHook = do
-    takeTopFocus
-    dynamicLogWithPP myPP >>= xmonadPropLog-}
+myStartupHook = ewmhDesktopsStartup <+> setWMName "LG3D" <+> docksStartupHook
 
 myEventHook = fullscreenEventHook <+> ewmhDesktopsEventHook
+
 
 
 main =  do
@@ -324,27 +321,26 @@ replace
 xmproc <- spawnPipe "xmobar /home/tritlo/.xmobarrc" --Status bar
 --xflux <- spawnPipe "killall -q xflux; xflux -l 64 -g -22" --Make display better
 --stalonetray <- spawnPipe "killall -q stalonetray; sleep 15; stalonetray "-- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && stalonetray || stalonetray -c /home/tritlo/.stalonetrayhomerc" -- Tray
-systray <- spawnPipe "killall -q trayer; sleep 15; /home/tritlo/.scripts/startsystray"
-sound <- spawnPipe " killall -q gnome-sound-applet; sleep 20; gnome-sound-applet" -- Audio keys
+--systray <- spawnPipe "killall -q trayer; sleep 15; /home/tritlo/.scripts/startsystray"
+--sound <- spawnPipe " killall -q gnome-sound-applet; sleep 20; gnome-sound-applet" -- Audio keys
 --natscroll <- spawnPipe "killall -q naturalscrolling; sleep 20; naturalscrolling"-- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && stalonetray || stalonetray -c /home/tritlo/.stalonetrayhomerc" -- Tray
-primeind <- spawnPipe " ps -ax | grep prime-indicator | grep -v grep | awk '{print $1}' | xargs kill; sleep 20; prime-indicator" -- nvidia switching
-circscroll <- spawnPipe "/home/tritlo/.scripts/circscroll.sh"
-kbsettings  <- spawnPipe "/home/tritlo/.scripts/kbsettings.sh"
-kbsettingsAgain  <- spawnPipe "sleep 30; /home/tritlo/.scripts/kbsettings.sh"
-dropbox <- spawnPipe "sleep 20; dropbox start"
+--primeind <- spawnPipe " ps -ax | grep prime-indicator | grep -v grep | awk '{print $1}' | xargs kill; sleep 20; prime-indicator" -- nvidia switching
+--circscroll <- spawnPipe "/home/tritlo/.scripts/circscroll.sh"
+--kbsettings  <- spawnPipe "/home/tritlo/.scripts/kbsettings.sh"
+--kbsettingsAgain  <- spawnPipe "sleep 30; /home/tritlo/.scripts/kbsettings.sh"
+--dropbox <- spawnPipe "sleep 20; dropbox start"
 --not needed with nm-cli
-networkm <- spawnPipe "killall -q nm-applet; sleep 20; nm-applet;"
+--networkm <- spawnPipe "killall -q nm-applet; sleep 20; nm-applet;"
 -- nitrogen <- spawnPipe "sleep 30; nitrogen --restore;" -- Wallpaper
-gnomesettings <- spawnPipe "killall -q gnome-settings-daemon; sleep 20; gnome-settings-daemon;" -- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && gnome-settings-daemon;" --Brightness and audio keys.
+--gnomesettings <- spawnPipe "killall -q gnome-settings-daemon; sleep 20; gnome-settings-daemon;" -- [[ $(xrandr -q | grep ' connected ' | wc -l) -le 1 ]] && gnome-settings-daemon;" --Brightness and audio keys.
 --wicd <- spawnPipe "sleep 15; killall -q wicd-client;  wicd-client -t;"
-redshift <- spawnPipe " killall -q redshift; sleep 15; redshift-gtk -c /home/tritlo/.config/redshift.conf;"
+--redshift <- spawnPipe " killall -q redshift; sleep 15; redshift-gtk -c /home/tritlo/.config/redshift.conf;"
 --redshift <- spawnPipe "sleep 15; killall -q gtk-redshift ; gtk-redshift -l 64:-22"
-xmonad $ ewmh defaultConfig {
+xmonad $ ewmh def {
 manageHook = manageDocks <+> myManageHook,
---keys = myKeys <+> keys defaultConfig,
-keys = addPrefix (controlMask, xK_less)  (myKeys <+> keys defaultConfig) <+> (myKeys <+> keys defaultConfig ),
+--keys = myKeys <+> keys def,
+keys = addPrefix (controlMask, xK_less)  (myKeys <+> keys def) <+> (myKeys <+> keys def ),
 --layoutHook = showWName myLayout, --er i xmobar
---layoutHook = smartSpacing 5 $ avoidStruts $ myLayout,
 layoutHook =  myLayoutHook,
 terminal = myTerm,
 focusedBorderColor = myRed,
@@ -355,7 +351,7 @@ modMask = mod4Mask, --super key
 --modMask = mod5Mask, --hyper key
 --must be here so xmproc is defined
 logHook = do
-    takeTopFocus
+    --takeTopFocus
     ewmhDesktopsLogHook
     dynamicLogWithPP  xmobarPP { ppCurrent = xmobarColor myGreen "" . wrap "[" "]",
                   ppTitle = xmobarColor myGreen "" . shorten 90,
@@ -363,7 +359,7 @@ logHook = do
                   ppLayout = layoutPrinter
                 },
 
-handleEventHook = handleEventHook defaultConfig <+> myEventHook
+handleEventHook = handleEventHook def <+> myEventHook
 }
 
 

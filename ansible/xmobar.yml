@@ -1,9 +1,0 @@
-- name: Xmobar
-  hosts: 127.0.0.1
-  connection: local
-  tasks:
-      - name: install xmobar
-        apt: name=xmobar state=present
-      - include: tasks/stow.yml tostow=xmobar
-      - include: tasks/stow.yml tostow=scripts
-

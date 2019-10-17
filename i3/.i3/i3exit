@@ -1,9 +1,0 @@
-#!/bin/sh
-
-case "$1" in
-    poweroff)
-        sudo poweroff
-    ;;
-esac
-
-exit 0
