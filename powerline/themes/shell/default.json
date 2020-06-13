@@ -1,0 +1,54 @@
+{
+    "cursor_space": 50,
+	"segments": {
+		"left": [
+			{
+				"function": "powerline.segments.common.net.hostname",
+				"priority": 10
+			},
+			{
+				"function": "powerline.segments.common.env.user",
+				"priority": 60
+			},
+			{
+				"function": "powerline.segments.common.env.virtualenv",
+				"priority": 50
+			},
+			{
+				"function": "powerline.segments.shell.cwd",
+				"args": {
+				"dir_limit_depth" : 2,
+				"use_path_separator": true
+                }
+			},
+			{
+				"function": "powerline.segments.common.time.date",
+				"priority": 50,
+				"args": {
+				"istime" : true,
+				"format": "%Y-%m-%d"
+                }
+			},
+			{
+				"function": "powerline.segments.common.time.date",
+				"priority": 45,
+				"args": {
+				"istime" : true,
+				"format": "%H:%M:%S"
+                }
+			},
+			{
+				"function": "powerline.segments.common.vcs.branch",
+				"priority": 40
+			},
+			{
+				"function": "powerline.segments.shell.jobnum",
+				"priority": 20
+			},
+			{
+				"function": "powerline.segments.shell.last_pipe_status",
+				"priority": 10
+			}
+		]
+	}
+}

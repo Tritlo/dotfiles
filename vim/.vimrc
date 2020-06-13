@@ -18,6 +18,7 @@ call plug#begin('~/.vim/plugged')
 " The colorschemes
 " Plug 'tomasr/molokai'
 " Plug 'flazz/vim-colorschemes'
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'} " file browser
@@ -26,7 +27,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeFind'}
 Plug 'tpope/vim-commentary'
 
 Plug 'vim-airline/vim-airline' "status bar
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/syntastic' " Dat syntax highlighter
 Plug 'tpope/vim-fugitive' " git integration
 
@@ -91,7 +92,7 @@ Plug 'thiderman/vim-supervisor' " also some functionality
 " Plug 'vim-scripts/Tail-Bundle' " works for other tail files as well
 
 Plug 'sjl/gundo.vim', {'on':'GundoToggle'}     " bound to <Leader>gu, displays the undo tree (so that i use it)
-Plug 'edsono/vim-matchit' " better % matching, including html tags
+" Plug 'edsono/vim-matchit' " better % matching, including html tags
 
 " Plug 'SirVer/ultisnips' " inserts snippets
 " Plug 'honza/vim-snippets' " lots of predefined snippets
@@ -169,21 +170,35 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 command! OrgCapture :call org#CaptureBuffer()
 command! OrgCaptureFile :call org#OpenCaptureFile()
 
-
 if has("unix")
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
-    let g:airline#extensions#tabline#left_sep = '>'
-    let g:airline#extensions#tabline#right_sep = '>'
-    let g:airline#extensions#tabline#left_alt_sep = '|'
-    let g:airline#extensions#tabline#right_alt_sep = '|'
-    let g:airline_left_sep = '>'
-    let g:airline_right_sep = '<'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.whitespace = '_'
+    " if !exists('g:airline_symbols')
+    "   let g:airline_symbols = {}
+    " endif
+    let g:airline_powerline_fonts = 1
+    " let g:airline#extensions#tabline#left_sep = '|>'
+    " let g:airline#extensions#tabline#right_sep = '<|'
+    " let g:airline#extensions#tabline#left_alt_sep = '||>'
+    " let g:airline#extensions#tabline#right_alt_sep = '<||'
+    " let g:airline_left_sep = '|>'
+    " let g:airline_right_sep = '<|'
+    " let g:airline_symbols.linenr = '␤'
+    " let g:airline_symbols.paste = 'ρ'
+    " let g:airline_symbols.whitespace = '_'
+
+    " " unicode symbols
+    " let g:airline_left_sep = '»'
+    " let g:airline_left_sep = '▶'
+    " let g:airline_right_sep = '«'
+    " let g:airline_right_sep = '◀'
+    " let g:airline_symbols.linenr = '␊'
+    " let g:airline_symbols.linenr = '␤'
+    " let g:airline_symbols.linenr = '¶'
+    " let g:airline_symbols.branch = '⎇'
+    " let g:airline_symbols.paste = 'ρ'
+    " let g:airline_symbols.paste = 'Þ'
+    " let g:airline_symbols.paste = '∥'
+    " let g:airline_symbols.whitespace = 'Ξ'
+
 endif
 
 
@@ -232,8 +247,6 @@ let g:indent_guides_start_level=2
 let g:indent_guides_enable_on_vim_startup=1
 
 let g:shell_mappings_enabled = 0
-
-" colorscheme molokai
 
 if has('gui_running')
     let g:ctrlp_extensions = ['gazetteer']
@@ -312,8 +325,8 @@ function! g:ToggleColorColumn()
     endif
 endfunction
 
-let g:airline_theme="dark"
-colorscheme default
+" let g:airline_theme="dark"
+"colorscheme default
 
 " if has('gui_running')
 "     silent! colorscheme molokai
@@ -373,6 +386,7 @@ endif
 if !&scrolloff
   set scrolloff=1
 endif
+
 if !&sidescrolloff
   set sidescrolloff=5
 endif
@@ -635,3 +649,9 @@ let g:vimtex_quickfix_ignored_warnings=[
     \ 'Overfull',
     \ 'specifier changed to',
     \ ]
+
+set cursorline
+" Light mode terminal:
+" colorscheme delek
+colorscheme pablo
+let g:airline_theme="minimalist"
