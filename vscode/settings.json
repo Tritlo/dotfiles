@@ -1,0 +1,25 @@
+{
+    "editor.fontFamily": "Cascadia Code PL, JetBrains Mono, Pragmata Pro, 'Courier New'",
+    "editor.fontLigatures": true,
+    "editor.rulers": [
+    
+        80,
+        120
+    ],
+    "latex-workshop.message.update.show": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "window.autoDetectColorScheme": true,
+    "java.home": "C:\\Users\\tritl\\AppData\\Local\\Programs\\AdoptOpenJDK",
+    "java.help.firstView": "gettingStarted",
+    "remote.SSH.remotePlatform": {
+        "remote11.chalmers.se": "linux",
+        "remote12.chalmers.se": "linux"
+    },
+    "git.enableSmartCommit": true,
+    "explorer.confirmDelete": false,
+    "window.zoomLevel": 0,
+    "workbench.preferredLightColorTheme": "onehalf-light",
+    "workbench.colorTheme": "onehalf-dark"
+}
