@@ -1,0 +1,10 @@
+[user]
+	email = mpg@mpg.is
+	name = Matthías Páll Gissurarson
+[color]
+    ui = auto
+
+[pager]
+    log = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | less
+    show = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | less
+    diff = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | less
