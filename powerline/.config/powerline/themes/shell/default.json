@@ -46,6 +46,13 @@
 				"priority": 20
 			},
 			{
+				"function": "powerline.segments.common.env.environment",
+				"priority": 10,
+				"args": {
+				"variable" : "IN_NIX_SHELL"
+                }
+			},
+			{
 				"function": "powerline.segments.shell.last_pipe_status",
 				"priority": 10
 			}
