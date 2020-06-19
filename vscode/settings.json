@@ -20,8 +20,7 @@
     "git.enableSmartCommit": true,
     "explorer.confirmDelete": false,
     "window.zoomLevel": 0,
-    "workbench.preferredLightColorTheme": "onehalf-light",
-    "workbench.colorTheme": "onehalf-dark",
+    "workbench.preferredLightColorTheme": "GitHub Light",
     "terminal.external.windowsExec": "C:\\Users\\tritl\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.cursorStyle": "underline",
@@ -101,5 +100,7 @@
     "latex-workshop.view.pdf.external.viewer.command": "/home/tritlo/.local/bin/open-in-explorer.sh",
     "files.trimTrailingWhitespace": true,
     "git.confirmSync": false,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "workbench.preferredDarkColorTheme": "GitHub Dark",
+    "workbench.colorTheme": "GitHub Dark"
 }
