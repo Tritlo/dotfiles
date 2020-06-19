@@ -32,12 +32,12 @@
             // "colorScheme": "Dark Plus",
             "colorScheme": "One Half Dark",
             // "colorScheme": "One Half Light",
-            "cursorShape": "vintage",                                                                                   
+            "cursorShape": "vintage",
             "fontFace": "Cascadia Code PL" ,
             "padding" :"4, 4",
             "fontSize": 12,
             "antialiasingMode": "cleartype",
-            "useAcrylic": true,
+            //"useAcrylic": true,
             "scrollbarState": "hidden"
 
             //"fontSize": 11
@@ -88,8 +88,8 @@
 
     // Add custom color schemes to this array.
     // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
-    "schemes": 
-    [ 
+    "schemes":
+    [
         {
             "name": "Dark Plus",
             "background": "#1E1E1E",
@@ -122,8 +122,8 @@
         // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
         // These two lines additionally bind them to Ctrl+C and Ctrl+V.
         // To learn more about selection, visit https://aka.ms/terminal-selection
-        { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
-        { "command": "paste", "keys": "ctrl+v" },
+       //{ "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
+       //{ "command": "paste", "keys": "ctrl+v" },
 
         // Press Ctrl+Shift+F to open the search box
         { "command": "find", "keys": "ctrl+shift+f" },

@@ -1,8 +1,8 @@
+// Place your settings in this file to overwrite the default settings
 {
     "editor.fontFamily": "Cascadia Code PL, JetBrains Mono, Pragmata Pro, 'Courier New'",
     "editor.fontLigatures": true,
     "editor.rulers": [
-    
         80,
         120
     ],
@@ -21,5 +21,85 @@
     "explorer.confirmDelete": false,
     "window.zoomLevel": 0,
     "workbench.preferredLightColorTheme": "onehalf-light",
-    "workbench.colorTheme": "onehalf-dark"
+    "workbench.colorTheme": "onehalf-dark",
+    "terminal.external.windowsExec": "C:\\Users\\tritl\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "underline",
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.invert": 0.86,
+    "latex-workshop.latex.external.build.args": [
+        "-shell-escape"
+    ],
+    "latex-workshop.latex.tools": [
+
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-shell-escape",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "lualatexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "-shell-escape",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "latexmk_rconly",
+            "command": "latexmk",
+            "args": [
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-shell-escape",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "rnw2tex",
+            "command": "Rscript",
+            "args": [
+                "-e",
+                "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+            ],
+            "env": {}
+        }
+    ],
+    "latex-workshop.view.pdf.external.viewer.command": "/home/tritlo/.local/bin/open-in-explorer.sh",
+    "files.trimTrailingWhitespace": true,
+    "git.confirmSync": false,
+    "git.autofetch": true
 }
