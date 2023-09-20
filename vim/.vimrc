@@ -16,20 +16,22 @@ call plug#begin('~/.vim/plugged')
 " Plug 'gmarik/Vundle.vim' " Required
 
 " The colorschemes
-" Plug 'tomasr/molokai'
+Plug 'tomasr/molokai'
 " Plug 'flazz/vim-colorschemes'
-" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'} " file browser
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeFind'}
-"Plug 'scrooloose/nerdcommenter' " Commenter
+" Plug 'scrooloose/nerdtree', {'on': 'NERDTreeFind'} " file browser
+" Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeFind'}
+" Plug 'scrooloose/nerdcommenter' " Commenter
 Plug 'tpope/vim-commentary'
 
 Plug 'vim-airline/vim-airline' "status bar
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/syntastic' " Dat syntax highlighter
 Plug 'tpope/vim-fugitive' " git integration
+
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " easy motion, to train motions better.
 " mapped to leader leader.
@@ -91,7 +93,7 @@ Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
 Plug 'thiderman/vim-supervisor' " also some functionality
 " Plug 'vim-scripts/Tail-Bundle' " works for other tail files as well
 
-Plug 'sjl/gundo.vim', {'on':'GundoToggle'}     " bound to <Leader>gu, displays the undo tree (so that i use it)
+" Plug 'sjl/gundo.vim', {'on':'GundoToggle'}     " bound to <Leader>gu, displays the undo tree (so that i use it)
 " Plug 'edsono/vim-matchit' " better % matching, including html tags
 
 " Plug 'SirVer/ultisnips' " inserts snippets
@@ -167,8 +169,8 @@ filetype plugin indent on    " required
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 
-command! OrgCapture :call org#CaptureBuffer()
-command! OrgCaptureFile :call org#OpenCaptureFile()
+" command! OrgCapture :call org#CaptureBuffer()
+" command! OrgCaptureFile :call org#OpenCaptureFile()
 
 if has("unix")
     " if !exists('g:airline_symbols')
@@ -326,7 +328,6 @@ function! g:ToggleColorColumn()
 endfunction
 
 " let g:airline_theme="dark"
-"colorscheme default
 
 " if has('gui_running')
 "     silent! colorscheme molokai
@@ -347,7 +348,7 @@ autocmd BufEnter \[vimshell\]* NeoComplCacheEnable
 autocmd BufLeave \[vimshell\]* NeoComplCacheDisable
 
 
-set omnifunc=syntaxcomplete#Complete
+" set omnifunc=syntaxcomplete#Complete
 
 " Native settings
 silent! set cryptmethod=blowfish " Set encryption method. Encrypt files with :X.
@@ -560,27 +561,44 @@ nnoremap <leader>ts :SyntasticToggleMode<CR>
 " nnoremap <Leader>u :Unite<Cr>
 
 
-nnoremap <Leader>jb :call JsBeautify()<cr>
+" nnoremap <Leader>jb :call JsBeautify()<cr>
 "close quickfix
 nnoremap <Leader>qc :ccl<CR>
 nnoremap <Leader>cc :make<CR>
 
-let g:pymode_breakpoint_bind = '<leader>pb'
-let g:pymode_run_bind = '<leader>pr'
-nnoremap <Leader>pl :PymodeLintToggle<CR>
+" let g:pymode_breakpoint_bind = '<leader>pb'
+" let g:pymode_run_bind = '<leader>pr'
+" nnoremap <Leader>pl :PymodeLintToggle<CR>
+
+
+" language server
+"
+"
+" nnoremap <silent> K :call ShowDocumentation()<CR>
+" " Show hover when provider exists, fallback to vim's builtin behavior.
+" function! ShowDocumentation()
+" if CocAction('hasProvider', 'hover')
+" 	call CocActionAsync('definitionHover')
+" else
+" 	call feedkeys('K', 'in')
+" endif
+" endfunction
+
+" map <Leader>lk :call ShowDocumentation()<CR>
+" map <Leader>lc :call CocActionAsync('codeAction', cursor)
+
 
 " YouCompleteMe
 "let g:ycm_key_list_previous_completion=['<Up>']
-let g:ycm_key_list_select_completion=['<C-j>',"<tab>"]
-let g:ycm_key_list_previous_completion=['<C-k>']
-
+" let g:ycm_key_list_select_completion=['<C-j>',"<tab>"]
+" let g:ycm_key_list_previous_completion=['<C-k>']
 
 
 "let g:UltiSnipsExpandTrigger="<c-j>"
 "
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsExpandTrigger="<c-j>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 
 "continuous resize
@@ -643,15 +661,18 @@ nmap <leader>cp "+p<CR>
 let g:tex_flavor="latex"
 
 
-let g:vimtex_quickfix_ignore_all_warnings=1
-let g:vimtex_quickfix_ignored_warnings=[
-    \ 'Underfull',
-    \ 'Overfull',
-    \ 'specifier changed to',
-    \ ]
+" let g:vimtex_quickfix_ignore_all_warnings=1
+" let g:vimtex_quickfix_ignored_warnings=[
+"     \ 'Underfull',
+"     \ 'Overfull',
+"     \ 'specifier changed to',
+"     \ ]
+
+
 
 set cursorline
 " Light mode terminal:
 " colorscheme delek
-colorscheme pablo
+"colorscheme pablo
+colorscheme molokai
 let g:airline_theme="minimalist"
