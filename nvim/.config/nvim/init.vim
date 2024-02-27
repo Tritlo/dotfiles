@@ -5,12 +5,12 @@ let &packpath = &runtimepath
 filetype off
 
 " Bootstrap vim-plug if not already present
-if !filereadable(expand('~/.vim/autoload/plug.vim'))
-    silent exec "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+if !filereadable(expand('~/.nvim/autoload/plug.vim'))
+    silent exec "!curl -fLo ~/.nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     silent exec "!vim +PlugInstall +qa"
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.nvim/plugged')
 Plug 'tpope/vim-surround' 
 " repeat last command, . on steroids
 " Plug 'tpope/vim-repeat'
@@ -22,7 +22,7 @@ Plug 'tpope/vim-commentary'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
-Plug 'nathanaelkane/vim-indent-guides' " toggleable with <Leader>ig
+Plug 'preservim/vim-indent-guides' " toggleable with <Leader>ig
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 
@@ -51,6 +51,7 @@ let g:airline_powerline_fonts = 1
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_auto_colors = 1
 
 let g:shell_mappings_enabled = 0
 

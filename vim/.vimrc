@@ -91,74 +91,10 @@ Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
 
 " supervisor files and supervisor ctl
 Plug 'thiderman/vim-supervisor' " also some functionality
-" Plug 'vim-scripts/Tail-Bundle' " works for other tail files as well
-
-" Plug 'sjl/gundo.vim', {'on':'GundoToggle'}     " bound to <Leader>gu, displays the undo tree (so that i use it)
-" Plug 'edsono/vim-matchit' " better % matching, including html tags
-
-" Plug 'SirVer/ultisnips' " inserts snippets
-" Plug 'honza/vim-snippets' " lots of predefined snippets
 
 Plug 'nathanaelkane/vim-indent-guides' " toggleable with <Leader>ig
-
-
-" vimshell and deps.
-" Plug 'Shougo/vimproc.vim'
-" Plug 'Shougo/vimshell.vim' , {'on': 'VimShellCreate'}
-" Plug 'Shougo/neocomplcache.vim'
-
-
-" clojure
-" Plug 'tpope/vim-dispatch', {'for':'clojure'}
-" Plug 'tpope/vim-fireplace', {'for':'clojure'}
-" Plug 'tpope/vim-leiningen', {'for':'clojure'}
-
-" Latex
-
-" Plug 'git://git.code.sf.net/p/vim-latex/vim-latex', {'for':'latex'}
-
-" Plug 'vim-voom/VOoM' " outline viewer
-" Plug 'vim-scripts/utl.vim' " better vim url handling
-" emacs kill-ring in vim.
-" use with meta-p to scroll through yank history.
-" Does not work with the Icelandic key ð.
 Plug 'maxbrunsfeld/vim-yankstack'
 
-Plug 'lervag/vimtex'
-" Thessi haegja a, viljum thad ekki i terminal
-if has('gui_running')
-    " these take longer to load
-
-    "vim notes
-    " Plug 'xolox/vim-shell'
-    " Plug 'xolox/vim-misc'
-    " Plug 'xolox/vim-notes'
-    "
-    " local vimrc, loads .lvimrc files in reverse order, and applies those 
-    " settings. Like exrc, but hierarchical.
-    Plug 'embear/vim-localvimrc'
-
-    Plug 'klen/python-mode', {'for' : 'python'}
-    " File finder
-    Plug 'kien/ctrlp.vim'
-    Plug 'tpope/vim-sleuth' " automatically detects indent settings
-
-    "git gutter
-    Plug 'airblade/vim-gitgutter'
-    " vim-rooter is nice, but might be confusing
-    " during command line editing
-    Plug 'airblade/vim-rooter'
-    " Ser medhondlun
-
-    if has("unix")
-        " unix only plugins go here
-        " Code completion, tharf ad compile-a med cmake og libclang og e-d
-        Plug 'Valloric/YouCompleteMe'
-        " Tharf exuberant ctags
-        Plug 'jeetsukumaran/vim-gazetteer'
-        Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
-    endif
-endif
 call plug#end()
 " call vundle#end()            " required
 filetype plugin indent on    " required
@@ -166,7 +102,7 @@ filetype plugin indent on    " required
 
 
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 
 " command! OrgCapture :call org#CaptureBuffer()
@@ -204,33 +140,6 @@ if has("unix")
 endif
 
 
-" Have vim-rooter not echo the dir
-let g:rooter_silent_chdir = 1
-
-let g:wakatime_PythonBinary = '/usr/bin/python'
-
-
-let g:pymode_rope_completion = 0
-let g:pymode_lint_cwindow = 0
-let g:pymode_lint_on_fly = 0
-let g:pymode_lint_unmodified = 0
-let g:pymode_folding = 0
-
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'qf' : 1,
-      \ 'notes' : 1,
-      \ 'markdown' : 1,
-      \ 'unite' : 1,
-      \ 'vimshell' : 1,
-      \ 'text' : 1,
-      \ 'vimwiki' : 1,
-      \ 'pandoc' : 1,
-      \ 'infolog' : 1,
-      \ 'mail' : 1,
-      \ 'conque_term' : 1
-      \}
-
 
 let g:yankstack_map_keys = 0
 let g:markdown_fold_style = 'nested'
@@ -250,63 +159,7 @@ let g:indent_guides_enable_on_vim_startup=1
 
 let g:shell_mappings_enabled = 0
 
-if has('gui_running')
-    let g:ctrlp_extensions = ['gazetteer']
-    let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
-    let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-    let g:ctrlp_gazetteer_ctags_bin = "ctags-exuberant"
-    let g:ctrlp_gazetteer_types = {
-        \   'javascript' :{
-        \       'bin' : 'jsctags',
-        \       'args' : '-f -',
-        \   }
-        \ }
-endif
 
-
-" call tinymode#EnterMap("winsize","<C-W>+","+")
-" call tinymode#EnterMap("winsize","<C-W>-","-")
-" call tinymode#EnterMap("winsize","<Leader>w+","+")
-" call tinymode#EnterMap("winsize","<Leader>w-","-")
-" call tinymode#Map("winsize","+","wincmd +")
-" call tinymode#Map("winsize","-","wincmd -")
-" call tinymode#EnterMap("winsize","<C-W><","<")
-" call tinymode#EnterMap("winsize","<C-W>>",">")
-" call tinymode#EnterMap("winsize","<Leader>w<","<")
-" call tinymode#EnterMap("winsize","<Leader>w>",">")
-" call tinymode#Map("winsize","<","wincmd <")
-" call tinymode#Map("winsize",">","wincmd >")
-" call tinymode#ModeMsg("winsize","Change window size +/-, </>")
-" call tinymode#EnterMap("yankstack","<Leader>pj","j")
-" call tinymode#EnterMap("yankstack","<Leader>pk","k")
-" call tinymode#Map("yankstack","j","normal \<Plug>yankstack_substitute_newer_paste")
-" call tinymode#Map("yankstack","k","normal \<Plug>yankstack_substitute_older_paste")
-" call tinymode#ModeMsg("yankstack","Scroll through yankstack with j/k")
-
-
-
-" NERDTress File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('sh', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('jsx', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-call NERDTreeHighlightFile('py', 'Magenta', 'none', '#ff00ff', '#151515')
 
 
 
@@ -327,14 +180,6 @@ function! g:ToggleColorColumn()
     endif
 endfunction
 
-" let g:airline_theme="dark"
-
-" if has('gui_running')
-"     silent! colorscheme molokai
-" else
-"     let g:airline_theme="dark"
-"     colorscheme pablo
-" endif
 
 
 
@@ -556,14 +401,6 @@ nnoremap  <Leader>tn :tabnew<CR>
 nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
-" nnoremap <Leader>tt :VimShellCreate<Cr>
-nnoremap <leader>ts :SyntasticToggleMode<CR>
-" nnoremap <Leader>u :Unite<Cr>
-
-
-" nnoremap <Leader>jb :call JsBeautify()<cr>
-"close quickfix
-nnoremap <Leader>qc :ccl<CR>
 nnoremap <Leader>cc :make<CR>
 
 " let g:pymode_breakpoint_bind = '<leader>pb'
@@ -614,12 +451,6 @@ nnoremap <Leader>cc :make<CR>
 " Reminder: Jumplist with ctrl-i and ctrl-o.
 
 
-" list buffers
-if has("unix")
-    " unix only mappings
-    nnoremap <F4> :!sakura & disown<CR>
-    inoremap <F4> :!sakura & disown<CR>
-endif
 
 " if has('gui_running')
 "     nnoremap <M-x> :
@@ -648,8 +479,8 @@ nnoremap <leader>h :set hlsearch!<CR>
 "
 
 " Save fold information and cursor location
-autocmd BufWinLeave *.* mkview!
-autocmd BufWinEnter *.* silent loadview
+" autocmd BufWinLeave *.* mkview!
+" autocmd BufWinEnter *.* silent loadview
 
 " nmap <leader>c<Space> gc
 " vmap <leader>c<Space> gc
@@ -661,18 +492,9 @@ nmap <leader>cp "+p<CR>
 let g:tex_flavor="latex"
 
 
-" let g:vimtex_quickfix_ignore_all_warnings=1
-" let g:vimtex_quickfix_ignored_warnings=[
-"     \ 'Underfull',
-"     \ 'Overfull',
-"     \ 'specifier changed to',
-"     \ ]
-
-
-
 set cursorline
 " Light mode terminal:
 " colorscheme delek
-"colorscheme pablo
-colorscheme molokai
+colorscheme onehalfdark
+" colorscheme molokai
 let g:airline_theme="minimalist"
