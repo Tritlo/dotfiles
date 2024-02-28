@@ -27,6 +27,7 @@ if !has('nvim')
     Plug 'nathanaelkane/vim-indent-guides'
 else
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'neovim/nvim-lspconfig'
 endif
 
 call plug#end()
@@ -51,6 +52,8 @@ filetype plugin indent on    " required
 
 " let g:markdown_fold_style = 'nested'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 0
 
 let g:shell_mappings_enabled = 0
 
@@ -226,7 +229,8 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 require("lazy").setup({
-{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
+{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+
 })
 
 
@@ -240,12 +244,47 @@ vim.call('plug#end')
 require("nvim-treesitter.configs").setup {
 
     ensure_installed = {"haskell", "c", "lua", "vim", "latex"},
-    highlight = {
-        enable = true,
-        disable = {"vim"},
-    },
+    highlight = {enable = true },
     indent = {enable = true},
 }
+
+
+
+-- Latex LSP
+require('lspconfig').texlab.setup({})
+
+-- Haskell LSP
+require('lspconfig').hls.setup({
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+  --settings = {haskell = {plugin = {rename = {globalOn = true}}}},
+})
+
+-- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    local opts = { buffer = ev.buf }
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+    vim.keymap.set('n', 'J', vim.diagnostic.open_float)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', '<leader>rf', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+    --vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<leader>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
+
 
 
 end)
