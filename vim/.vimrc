@@ -23,6 +23,12 @@ Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as Ã
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 
+if !has('nvim')
+    Plug 'nathanaelkane/vim-indent-guides'
+else
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+endif
+
 call plug#end()
 
 
@@ -45,10 +51,6 @@ filetype plugin indent on    " required
 
 " let g:markdown_fold_style = 'nested'
 let g:airline_powerline_fonts = 1
-let g:indent_guides_guide_size=1
-let g:indent_guides_start_level=2
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_auto_colors = 1
 
 let g:shell_mappings_enabled = 0
 
@@ -210,29 +212,44 @@ if has('nvim')
 lua << EOF
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
+vim.fn.system({
     "git",
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
     lazypath,
-  })
+})
 end
 vim.opt.rtp:prepend(lazypath)
 -- Example using a list of specs with the default options
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 require("lazy").setup({
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
+{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
 })
+
+
 
 require("ibl").setup()
 
+
 -- Uff, but ok
 vim.schedule(function()
-    vim.call('plug#end')
+vim.call('plug#end')
+require("nvim-treesitter.configs").setup {
+
+    ensure_installed = {"haskell", "c", "lua", "vim", "latex"},
+    highlight = {
+        enable = true,
+        disable = {"vim"},
+    },
+    indent = {enable = true},
+}
+
+
 end)
 EOF
+
 endif
 
