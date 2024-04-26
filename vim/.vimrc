@@ -35,18 +35,20 @@ call plug#end()
 
 
 
-let g:clipboard = {
-        \   'name': 'WslClipboard',
-        \   'copy': {
-        \      '+': 'clip.exe',
-        \      '*': 'clip.exe',
-        \    },
-        \   'paste': {
-        \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        \   },
-        \   'cache_enabled': 0,
-        \ }
+if executable('clip.exe')
+    let g:clipboard = {
+            \   'name': 'WslClipboard',
+            \   'copy': {
+            \      '+': 'clip.exe',
+            \      '*': 'clip.exe',
+            \    },
+            \   'paste': {
+            \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            \   },
+            \   'cache_enabled': 0,
+            \ }
+endif
 
 " call vundle#end()            " required
 filetype plugin indent on    " required
@@ -279,7 +281,7 @@ vim.schedule(function()
 vim.call('plug#end')
 require("nvim-treesitter.configs").setup {
 
-    ensure_installed = {"haskell", "c", "lua", "vim", "latex"},
+    ensure_installed = {"haskell", "c", "lua", "vim"},
     highlight = {enable = true },
     indent = {enable = true},
 }
