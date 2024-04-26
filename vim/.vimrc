@@ -9,7 +9,7 @@ if !filereadable(expand('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-surround' 
+Plug 'tpope/vim-surround'
 " repeat last command, . on steroids
 " Plug 'tpope/vim-repeat'
 "
@@ -18,6 +18,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive' " git integration
 Plug 'tpope/vim-commentary'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'tomasiser/vim-code-dark'
 
 Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
@@ -51,7 +52,7 @@ let g:clipboard = {
 filetype plugin indent on    " required
 
 " let g:markdown_fold_style = 'nested'
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 0
 
@@ -132,7 +133,7 @@ let maplocalleader="\\"
 nnoremap <silent> <Leader>tc :call g:ToggleColorColumn()<CR>
 
 " map the leader to : so that all commands are just a space away.
-nnoremap <Leader> :
+" nnoremap <Leader> :
 
 nnoremap <Leader>wq :wq<Space>
 
@@ -205,8 +206,16 @@ nmap <leader>cp "+p<CR>
 let g:tex_flavor="latex"
 
 set cursorline
-colorscheme onehalfdark
-let g:airline_theme="minimalist"
+set termguicolors
+set background=dark
+
+let g:airline_theme="codedark"
+" let g:codedark_conservative=1
+" let g:codedark_modern=1
+let g:codedark_transparent=1
+set t_Co=256
+set t_ut=
+colorscheme codedark
 
 
 
@@ -230,6 +239,33 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 
 require("lazy").setup({
 { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+{
+  "folke/flash.nvim",
+  event = "VeryLazy",
+  ---@type Flash.Config
+  opts = {},
+  -- stylua: ignore
+  keys = {
+    { "S", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    { "R", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    --{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+    --{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    --{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  },
+},
+{
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  init = function()
+    vim.o.timeout = true
+    vim.o.timeoutlen = 300
+  end,
+  opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+}
 
 })
 
@@ -272,9 +308,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>K', vim.diagnostic.open_float)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-    vim.keymap.set('n', 'J', vim.diagnostic.open_float)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', '<leader>rf', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
