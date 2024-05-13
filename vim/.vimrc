@@ -189,6 +189,7 @@ nnoremap <Leader>bh :bp<CR>
 nnoremap <Leader>bl :bn<CR>
 nnoremap <Leader>bd :bd<CR>
 
+
 "nnoremap <Leader>e :e<Space>
 
 " tabs
@@ -198,6 +199,10 @@ nnoremap  <Leader>tl :tabnext<CR>
 nnoremap  <Leader>tn :tabnew<CR>
 nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
+
+nnoremap <Leader>tv :vertical terminal<CR>
+nnoremap <Leader>ts :horizontal terminal<CR>
+nnoremap <Leader>tt :terminal<CR>
 
 nnoremap <Leader>cc :make<CR>
 
