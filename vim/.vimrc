@@ -200,9 +200,13 @@ nnoremap  <Leader>tn :tabnew<CR>
 nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
-nnoremap <Leader>tv :vertical terminal<CR>
-nnoremap <Leader>ts :horizontal terminal<CR>
-nnoremap <Leader>tt :terminal<CR>
+nnoremap <Leader>tt <cmd>terminal<CR>
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <Leader>ft <cmd>NvimTreeToggle<CR>
 
 nnoremap <Leader>cc :make<CR>
 
@@ -246,6 +250,19 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 
 require("lazy").setup({
 { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+{ 'nvim-telescope/telescope.nvim', tag = '0.1.6',
+      dependencies = { 'nvim-lua/plenary.nvim' } },
+{
+  "nvim-tree/nvim-tree.lua",
+  version = "*",
+  lazy = false,
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
+  config = function()
+    require("nvim-tree").setup {}
+  end,
+}
 -- {
 -- "folke/flash.nvim",
 -- event = "VeryLazy",
