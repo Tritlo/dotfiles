@@ -204,6 +204,10 @@ nnoremap <Leader>tv :vertical terminal<CR>
 nnoremap <Leader>ts :horizontal terminal<CR>
 nnoremap <Leader>tt :terminal<CR>
 
+nnoremap <Leader>ss :mksession!<CR>
+nnoremap <Leader>sl :source Session.vim<CR>
+
+
 nnoremap <Leader>cc :make<CR>
 
 nmap <leader>cy "+y
