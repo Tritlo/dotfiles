@@ -27,6 +27,7 @@ Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 if !has('nvim')
     Plug 'nathanaelkane/vim-indent-guides'
 else
+    Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'neovim/nvim-lspconfig'
 endif
@@ -54,7 +55,7 @@ endif
 filetype plugin indent on    " required
 
 " let g:markdown_fold_style = 'nested'
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 0
 
@@ -209,7 +210,10 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <Leader>ft <cmd>NvimTreeToggle<CR>
 
-nnoremap <Leader>cc :make<CR>
+nnoremap <Leader>ss :mksession!<CR>
+nnoremap <Leader>sl :source Session.vim<CR>
+
+nnoremap <Leader>cc :make!<CR>
 
 nmap <leader>cy "+y
 vmap <leader>cy "+y<CR>
@@ -221,14 +225,19 @@ set cursorline
 set termguicolors
 set background=dark
 
-let g:airline_theme="codedark"
 " let g:codedark_conservative=1
 " let g:codedark_modern=1
 let g:codedark_transparent=1
 set t_Co=256
 set t_ut=
-colorscheme codedark
-
+ " colorscheme catppuccin-latte
+if has('nvim')
+    colorscheme catppuccin
+    let g:airline_theme="catppuccin"
+else
+    colorscheme codedark
+    let g:airline_theme="codedark"
+endif
 
 
 
@@ -250,7 +259,11 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 require("lazy").setup({
-{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {},
+  config = function()
+    require("ibl").setup {}
+  end,
+},
 { 'nvim-telescope/telescope.nvim', tag = '0.1.6',
       dependencies = { 'nvim-lua/plenary.nvim' } },
 {
@@ -261,7 +274,17 @@ require("lazy").setup({
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    require("nvim-tree").setup {}
+    require("nvim-tree").setup {
+        renderer = {
+            icons = {
+                show = {
+                    file = false,
+                    folder = false,
+                    git = true,
+                    folder_arrow = false, }
+                }
+            }
+        }
   end,
 }
 -- {
@@ -296,7 +319,6 @@ require("lazy").setup({
 
 
 
-require("ibl").setup()
 
 
 -- Uff, but ok
