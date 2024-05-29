@@ -201,6 +201,7 @@ nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
 nnoremap <Leader>tt <cmd>terminal<CR>
+set shell=/usr/bin/bash
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
