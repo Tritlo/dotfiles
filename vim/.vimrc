@@ -1,5 +1,3 @@
-"
-
 filetype off
 
 " Bootstrap vim-plug if not already present
@@ -205,7 +203,8 @@ nnoremap <Leader>tt <cmd>terminal<CR>
 set shell=/usr/bin/bash
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fg <cmd>Telescope git_files<cr>
+nnoremap <leader>fl <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <Leader>ft <cmd>NvimTreeToggle<CR>
@@ -231,9 +230,20 @@ let g:codedark_transparent=1
 set t_Co=256
 set t_ut=
  " colorscheme catppuccin-latte
+ 
 if has('nvim')
     colorscheme catppuccin
     let g:airline_theme="catppuccin"
+    let stl = strlen("AppsUseLightTheme : 1")
+    if split(system("powershell.exe Get-ItemProperty -Path \"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" -Name AppsUseLightTheme | findstr.exe AppsUse"),'\zs')[stl-1] == 1
+        set background=light
+        colorscheme catppuccin-latte
+    else
+        set background=dark
+        colorscheme catppuccin
+    endif
+
+
 else
     colorscheme codedark
     let g:airline_theme="codedark"
