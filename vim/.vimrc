@@ -93,6 +93,7 @@ set wildignore=*.o,*.pyc,*.so,*.swp,*.zip " ignore these when expanding paths.
 set clipboard=unnamed " yank to clipboard
 set mouse=a " enable mouse support
 set ruler   " show cursor location in statusbar
+set spell
 
 " stuff from vim-sensible
 set showcmd
@@ -206,7 +207,7 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope git_files<cr>
 nnoremap <leader>fl <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 nnoremap <Leader>ft <cmd>NvimTreeToggle<CR>
 
 nnoremap <Leader>ss :mksession!<CR>
@@ -284,16 +285,16 @@ require("lazy").setup({
     "nvim-tree/nvim-web-devicons",
   },
   config = function()
-    require("nvim-tree").setup {
-        renderer = {
-            icons = {
-                show = {
-                    file = false,
-                    folder = false,
-                    git = true,
-                    folder_arrow = false, }
-                }
-            }
+  require("nvim-tree").setup {
+       -- renderer = {
+       --     icons = {
+       --         show = {
+       --             file = false,
+       --             folder = false,
+       --             git = true,
+       --             folder_arrow = false, }
+       --         }
+       --     }
         }
   end,
 }
