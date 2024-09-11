@@ -1,0 +1,16 @@
+import = ["~/.nix-profile/catppuccin_mocha.toml"]
+
+# shell = "/usr/bin/byobu"
+
+[window]
+decorations = "None"
+dynamic_padding = true
+
+[font]
+normal = {family = "BerkeleyMono Nerd Font"}
+
+[selection]
+save_to_clipboard = true
+
+[keyboard]
+bindings = [{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" }]

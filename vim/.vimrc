@@ -234,14 +234,17 @@ set t_ut=
 if has('nvim')
     colorscheme catppuccin
     let g:airline_theme="catppuccin"
-    let stl = strlen("AppsUseLightTheme : 1")
-    if split(system("powershell.exe Get-ItemProperty -Path \"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" -Name AppsUseLightTheme | findstr.exe AppsUse"),'\zs')[stl-1] == 1
-        set background=light
-        colorscheme catppuccin-latte
-    else
-        set background=dark
-        colorscheme catppuccin
-    endif
+
+    if executable('powershell.exe')
+      let stl = strlen("AppsUseLightTheme : 1")
+      if split(system("powershell.exe Get-ItemProperty -Path \"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" -Name AppsUseLightTheme | findstr.exe AppsUse"),'\zs')[stl-1] == 1
+          set background=light
+          colorscheme catppuccin-latte
+      else
+          set background=dark
+          colorscheme catppuccin
+      endif
+  endif
 
 
 else
