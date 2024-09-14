@@ -1,10 +1,12 @@
-import = ["~/.nix-profile/catppuccin_mocha.toml"]
+import = ["/usr/tritlo/.nix-profile/catppuccin_mocha.toml"]
+
 
 # shell = "/usr/bin/byobu"
 
 [window]
 decorations = "None"
 dynamic_padding = true
+startup_mode = "Maximized"
 
 [font]
 normal = {family = "BerkeleyMono Nerd Font"}
@@ -14,3 +16,7 @@ save_to_clipboard = true
 
 [keyboard]
 bindings = [{ key = "N", mods = "Control|Shift", action = "CreateNewWindow" }]
+
+[mouse]
+bindings = [
+{ mouse = "Right", mods = "Control", action = "Paste" }, ]
