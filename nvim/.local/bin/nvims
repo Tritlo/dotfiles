@@ -1,0 +1,3 @@
+
+#/usr/bin/bash
+nvim --listen ~/.cache/nvim/server.pipe $*

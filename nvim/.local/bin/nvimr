@@ -1,0 +1,2 @@
+#/usr/bin/bash
+nvim --server ~/.cache/nvim/server.pipe --remote $*

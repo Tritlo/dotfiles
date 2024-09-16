@@ -93,7 +93,6 @@ set wildignore=*.o,*.pyc,*.so,*.swp,*.zip " ignore these when expanding paths.
 set clipboard=unnamed " yank to clipboard
 set mouse=a " enable mouse support
 set ruler   " show cursor location in statusbar
-set spell
 
 " stuff from vim-sensible
 set showcmd
@@ -120,7 +119,7 @@ if !empty(&viminfo)
 endif
 
 " show line showing location of character 80
-silent! set colorcolumn=80
+silent! set colorcolumn=105
 highlight ColorColumn ctermbg=238 guibg=#505040
 highlight ExtraWhitespace ctermbg=236 guibg=#303030
 
@@ -200,7 +199,8 @@ nnoremap  <Leader>tn :tabnew<CR>
 nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
-nnoremap <Leader>tt <cmd>terminal<CR>
+nnoremap <Leader>tt <cmd>terminal /usr/bin/bash --rcfile ~/.bashrc.nvim<CR>
+"nnoremap <Leader>tt <cmd>terminal<CR>
 set shell=/usr/bin/bash
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -209,6 +209,8 @@ nnoremap <leader>fl <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 
 nnoremap <Leader>ft <cmd>NvimTreeToggle<CR>
+
+nnoremap <Leader>fo :!fourmolu -q -i %<CR>
 
 nnoremap <Leader>ss :mksession!<CR>
 nnoremap <Leader>sl :source Session.vim<CR>
@@ -223,7 +225,6 @@ let g:tex_flavor="latex"
 
 set cursorline
 set termguicolors
-set background=dark
 
 " let g:codedark_conservative=1
 " let g:codedark_modern=1
@@ -233,19 +234,24 @@ set t_ut=
  " colorscheme catppuccin-latte
  
 if has('nvim')
-    colorscheme catppuccin
     let g:airline_theme="catppuccin"
     let stl = strlen("AppsUseLightTheme : 1")
-    if split(system("powershell.exe Get-ItemProperty -Path \"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" -Name AppsUseLightTheme | findstr.exe AppsUse"),'\zs')[stl-1] == 1
-        set background=light
-        colorscheme catppuccin-latte
-    else
+
+    " Note: slows everything down, querying the registry is *slow*
+    " if executable('powershell.exe')
+    "     if split(system("powershell.exe -nologo -noninteractive -noprofile Get-ItemProperty -Path \"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" -Name AppsUseLightTheme | findstr.exe AppsUse"),'\zs')[stl-1] == 1
+    "         set background=light
+    "         colorscheme catppuccin-latte
+    "     else
+    "         set background=dark
+    "         colorscheme catppuccin
+    "     endif
+    " else
         set background=dark
         colorscheme catppuccin
-    endif
-
-
+    " endif
 else
+    set background=dark
     colorscheme codedark
     let g:airline_theme="codedark"
 endif
@@ -277,6 +283,7 @@ require("lazy").setup({
 },
 { 'nvim-telescope/telescope.nvim', tag = '0.1.6',
       dependencies = { 'nvim-lua/plenary.nvim' } },
+
 {
   "nvim-tree/nvim-tree.lua",
   version = "*",
