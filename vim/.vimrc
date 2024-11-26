@@ -63,7 +63,7 @@ function! g:ToggleColorColumn()
     if &colorcolumn != ''
         setlocal colorcolumn&
     else
-        setlocal colorcolumn=80
+        setlocal colorcolumn=100
     endif
 endfunction
 " Native settings
@@ -119,7 +119,7 @@ if !empty(&viminfo)
 endif
 
 " show line showing location of character 80
-silent! set colorcolumn=80
+silent! set colorcolumn=100
 highlight ColorColumn ctermbg=238 guibg=#505040
 highlight ExtraWhitespace ctermbg=236 guibg=#303030
 
@@ -132,6 +132,7 @@ let mapleader=" "
 let maplocalleader="\\"
 " nnoremap <Leader>ti :IndentGuidesToggle<CR>
 nnoremap <silent> <Leader>tc :call g:ToggleColorColumn()<CR>
+nnoremap <silent> <Leader>tw :set wrap!<CR>
 
 " map the leader to : so that all commands are just a space away.
 " nnoremap <Leader> :
@@ -186,7 +187,7 @@ nnoremap <Leader>bb :b<Space>
 nnoremap <Leader>bB :buffers<CR>
 nnoremap <Leader>bh :bp<CR>
 nnoremap <Leader>bl :bn<CR>
-nnoremap <Leader>bd :bd<CR>
+nnoremap <Leader>bd :bp\|bd! #<CR>
 
 
 "nnoremap <Leader>e :e<Space>
@@ -207,7 +208,9 @@ nnoremap <leader>fg <cmd>Telescope git_files<cr>
 nnoremap <leader>fl <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <Leader>ft <cmd>NvimTreeToggle<CR>
+nnoremap <leader>ft <cmd>Telescope<cr>
+
+nnoremap <Leader>tf <cmd>NvimTreeToggle<CR>
 
 nnoremap <Leader>ss :mksession!<CR>
 nnoremap <Leader>sl :source Session.vim<CR>
@@ -277,8 +280,13 @@ require("lazy").setup({
     require("ibl").setup {}
   end,
 },
-{ 'nvim-telescope/telescope.nvim', tag = '0.1.6',
-      dependencies = { 'nvim-lua/plenary.nvim' } },
+{"github/copilot.vim"
+
+},
+{ 'nvim-telescope/telescope.nvim',
+    tag = '0.1.6',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+},
 {
   "nvim-tree/nvim-tree.lua",
   version = "*",
@@ -299,6 +307,27 @@ require("lazy").setup({
             }
         }
   end,
+},
+{ "epwalsh/obsidian.nvim",
+    lazy=false,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts={
+        workspaces={
+            {
+                    name="vault",
+                    path="~/Obsidian"
+            }
+        },
+        daily_notes={
+            folder="Dailies/",
+            template="Daily.md"
+        },
+        templates={
+            folder="Templates/"
+        
+        }
+
+    }
 }
 -- {
 -- "folke/flash.nvim",
