@@ -19,6 +19,7 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'tomasiser/vim-code-dark'
 
 Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
+Plug 'tritlo/hypersubatomic.vim', {'branch': 'main'}
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 
@@ -63,7 +64,7 @@ function! g:ToggleColorColumn()
     if &colorcolumn != ''
         setlocal colorcolumn&
     else
-        setlocal colorcolumn=80
+        setlocal colorcolumn=100
     endif
 endfunction
 " Native settings
@@ -118,10 +119,13 @@ if !empty(&viminfo)
   set viminfo^=!
 endif
 
+
 " show line showing location of character 80
-silent! set colorcolumn=105
-highlight ColorColumn ctermbg=238 guibg=#505040
-highlight ExtraWhitespace ctermbg=236 guibg=#303030
+silent! set colorcolumn=100
+" highlight ColorColumn ctermbg=238 guibg=#80869e
+" highlight ExtraWhitespace ctermbg=236 guibg=#80869e
+highlight ColorColumn ctermbg=238 guibg=#3B3F51
+highlight ExtraWhitespace ctermbg=246 guibg=#8f93a2
 
 match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -132,6 +136,9 @@ let mapleader=" "
 let maplocalleader="\\"
 " nnoremap <Leader>ti :IndentGuidesToggle<CR>
 nnoremap <silent> <Leader>tc :call g:ToggleColorColumn()<CR>
+nnoremap <silent> <Leader>tw :set wrap!<CR>
+nnoremap <silent> <Leader>ts :set spell!<CR>
+nnoremap <silent> <Leader>dw :%s/\s\+$//gc<CR>
 
 " map the leader to : so that all commands are just a space away.
 " nnoremap <Leader> :
@@ -186,7 +193,7 @@ nnoremap <Leader>bb :b<Space>
 nnoremap <Leader>bB :buffers<CR>
 nnoremap <Leader>bh :bp<CR>
 nnoremap <Leader>bl :bn<CR>
-nnoremap <Leader>bd :bd<CR>
+nnoremap <Leader>bd :bp\|bd! #<CR>
 
 
 "nnoremap <Leader>e :e<Space>
@@ -207,8 +214,10 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope git_files<cr>
 nnoremap <leader>fl <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>ft <cmd>Telescope<cr>
 
-nnoremap <Leader>ft <cmd>NvimTreeToggle<CR>
+nnoremap <Leader>tf <cmd>NvimTreeToggle<CR>
 
 nnoremap <Leader>fo :!fourmolu -q -i %<CR>
 
@@ -229,32 +238,37 @@ set termguicolors
 " let g:codedark_conservative=1
 " let g:codedark_modern=1
 let g:codedark_transparent=1
-set t_Co=256
-set t_ut=
- " colorscheme catppuccin-latte
+"set t_Co=256
+"set t_ut=
+" colorscheme catppuccin-latte
  
-if has('nvim')
-    let g:airline_theme="catppuccin"
-    let stl = strlen("AppsUseLightTheme : 1")
 
-    " Note: slows everything down, querying the registry is *slow*
-    " if executable('powershell.exe')
-    "     if split(system("powershell.exe -nologo -noninteractive -noprofile Get-ItemProperty -Path \"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" -Name AppsUseLightTheme | findstr.exe AppsUse"),'\zs')[stl-1] == 1
-    "         set background=light
-    "         colorscheme catppuccin-latte
-    "     else
-    "         set background=dark
-    "         colorscheme catppuccin
-    "     endif
-    " else
-        set background=dark
-        colorscheme catppuccin
-    " endif
+if !has('gui')
+    if has('nvim')
+        colorscheme hypersubatomic
+        let g:airline_theme="catppuccin"
+
+        " if executable('powershell.exe')
+        " let stl = strlen("AppsUseLightTheme : 1")
+        " if split(system("powershell.exe Get-ItemProperty -Path \"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" -Name AppsUseLightTheme | findstr.exe AppsUse"),'\zs')[stl-1] == 1
+        "     set background=light
+        "     colorscheme catppuccin-latte
+        " else
+        "     set background=dark
+        "     colorscheme hypersubatomic
+        "     let g:airline_theme="hypersubatomic"
+        " endif
+    else
+        colorscheme codedark
+        let g:airline_theme="codedark"
+    endif
 else
-    set background=dark
-    colorscheme codedark
-    let g:airline_theme="codedark"
+    set guifont=BerkeleyMono\ Nerd\ Font\ Regular\ 9
+    colorscheme hypersubatomic
+    let g:airline_theme="hypersubatomic"
+    " set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
 endif
+
 
 
 
@@ -281,9 +295,13 @@ require("lazy").setup({
     require("ibl").setup {}
   end,
 },
-{ 'nvim-telescope/telescope.nvim', tag = '0.1.6',
-      dependencies = { 'nvim-lua/plenary.nvim' } },
+{"github/copilot.vim"
 
+},
+{ 'nvim-telescope/telescope.nvim',
+    tag = '0.1.6',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+},
 {
   "nvim-tree/nvim-tree.lua",
   version = "*",
@@ -304,7 +322,32 @@ require("lazy").setup({
        --     }
         }
   end,
-}
+},
+{
+  'mrcjkb/rustaceanvim',
+  version = '^5', -- Recommended
+  lazy = false, -- This plugin is already lazy
+},
+--{ "epwalsh/obsidian.nvim",
+--   lazy=false,
+--   dependencies = { "nvim-lua/plenary.nvim" },
+--   opts={
+--       workspaces={
+--           {
+--                   name="vault",
+--                   path="~/Obsidian"
+--           }
+--       },
+--       daily_notes={
+--           folder="Dailies/",
+--           template="Daily.md"
+--       },
+--       templates={
+--           folder="Templates/"
+--       }
+--
+--   }
+--}
 -- {
 -- "folke/flash.nvim",
 -- event = "VeryLazy",
@@ -342,9 +385,10 @@ require("lazy").setup({
 -- Uff, but ok
 vim.schedule(function()
 vim.call('plug#end')
+
 require("nvim-treesitter.configs").setup {
 
-    ensure_installed = {"haskell", "c", "lua", "vim"},
+    ensure_installed = {"haskell", "c", "lua", "vim", "latex"},
     highlight = {enable = true },
     indent = {enable = true},
 }

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#0C212F",
+          "foreground": "#FFFFFF",
+          "leading_diamond": "\ue0b6",
+          "powerline_symbol": "\ue0b4",
+          "style": "powerline",
+          "template": " {{ .Icon }} ",
+          "trailing_diamond": "\ue0b0",
+          "type": "os"
+        },
+        {
+          "background": "#DE2121",
+          "foreground": "#FFFFFF",
+          "leading_diamond": "<transparent,#DE2121>\ue0b0</>",
+          "powerline_symbol": "\ue0b4",
+          "style": "powerline",
+          "template": " \uf0e7 ",
+          "trailing_diamond": "\ue0b0",
+          "type": "root"
+        },
+        {
+          "background": "#26BDBB",
+          "foreground": "#0C212F",
+          "leading_diamond": "<transparent,#26BDBB>\ue0b0</>",
+          "properties": {
+            "folder_icon": "\uf07c",
+            "folder_separator_icon": "<transparent> \ue0b1 </>",
+            "home_icon": "\ueb06",
+            "style": "agnoster_short"
+          },
+          "style": "powerline",
+          "powerline_symbol": "\ue0b4",
+          "template": " {{ .Path }} ",
+          "trailing_diamond": "\ue0b0",
+          "type": "path"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "console_title_template": "{{if .Root}} \u26a1 {{end}}{{.Folder | replace \"~\" \"🏠\"}} @ {{.HostName}}",
+  "final_space": true,
+  "version": 2
+}
