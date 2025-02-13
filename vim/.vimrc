@@ -200,8 +200,9 @@ nnoremap  <Leader>te :tabedit<Space>
 nnoremap  <Leader>td :tabclose<CR>
 
 nnoremap <Leader>tt <cmd>terminal /usr/bin/bash --rcfile ~/.bashrc.nvim<CR>
-"nnoremap <Leader>tt <cmd>terminal<CR>
 set shell=/usr/bin/bash
+" nnoremap <Leader>tt <cmd>terminal<CR>
+" set shell=/usr/bin/zsh
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope git_files<cr>
@@ -237,7 +238,6 @@ let g:codedark_transparent=1
 "
 hi cursor guifg=black guibg=yellow
 
-hi TermCursor cterm=underline gui=underline
 " set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 "     \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 "     \,sm:block-blinkwait175-blinkoff150-blinkon175
@@ -272,10 +272,20 @@ endif
 
 " Set after the theme to overwrite
 "highlight ColorColumn ctermbg=238 guibg=#3B3F51
-highlight ExtraWhitespace ctermbg=246 guibg=#8F93A2
-match ExtraWhitespace /\s\+$/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhitespace /\s\+$/
+"highlight ExtraWhitespace ctermbg=246 guibg=#8F93A2
+"
+hi TermCursor guifg=yellow guibg=black gui=bold,underline
+
+if &buftype !=# 'terminal'
+  match ExtraWhitespace /\s\+$/
+endif
+
+augroup extra_whitespace
+  autocmd!
+  autocmd TermOpen * match none
+  autocmd InsertEnter * if &buftype !=# 'TERMINAL' | match ExtraWhitespace /\s\+\%#\@<!$/ | endif
+  autocmd InsertLeave * if &buftype !=# 'TERMINAL' | match ExtraWhitespace /\s\+$/ | endif
+augroup end
 
 
 
