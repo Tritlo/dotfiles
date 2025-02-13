@@ -137,6 +137,8 @@ let maplocalleader="\\"
 " nnoremap <Leader>ti :IndentGuidesToggle<CR>
 nnoremap <silent> <Leader>tc :call g:ToggleColorColumn()<CR>
 nnoremap <silent> <Leader>tw :set wrap!<CR>
+nnoremap <silent> <Leader>ts :set spell!<CR>
+nnoremap <silent> <Leader>dw :%s/\s\+$//gc<CR>
 
 " map the leader to : so that all commands are just a space away.
 " nnoremap <Leader> :
