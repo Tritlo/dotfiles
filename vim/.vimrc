@@ -19,6 +19,7 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'tomasiser/vim-code-dark'
 
 Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
+Plug 'tritlo/hypersubatomic.vim', {'branch': 'main'}
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
 Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 
@@ -118,10 +119,13 @@ if !empty(&viminfo)
   set viminfo^=!
 endif
 
+
 " show line showing location of character 80
 silent! set colorcolumn=100
-highlight ColorColumn ctermbg=238 guibg=#505040
-highlight ExtraWhitespace ctermbg=236 guibg=#303030
+" highlight ColorColumn ctermbg=238 guibg=#80869e
+" highlight ExtraWhitespace ctermbg=236 guibg=#80869e
+highlight ColorColumn ctermbg=238 guibg=#3B3F51
+highlight ExtraWhitespace ctermbg=246 guibg=#8f93a2 
 
 match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -230,30 +234,38 @@ set background=dark
 " let g:codedark_conservative=1
 " let g:codedark_modern=1
 let g:codedark_transparent=1
-set t_Co=256
-set t_ut=
- " colorscheme catppuccin-latte
+"set t_Co=256
+"set t_ut=
+" colorscheme catppuccin-latte
  
-if has('nvim')
-    colorscheme catppuccin
-    let g:airline_theme="catppuccin"
 
-    if executable('powershell.exe')
-      let stl = strlen("AppsUseLightTheme : 1")
-      if split(system("powershell.exe Get-ItemProperty -Path \"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" -Name AppsUseLightTheme | findstr.exe AppsUse"),'\zs')[stl-1] == 1
-          set background=light
-          colorscheme catppuccin-latte
-      else
-          set background=dark
-          colorscheme catppuccin
-      endif
-  endif
+if !has('gui')
+    if has('nvim')
+        colorscheme hypersubatomic
+        let g:airline_theme="catppuccin"
 
-
+        if executable('powershell.exe')
+        let stl = strlen("AppsUseLightTheme : 1")
+        if split(system("powershell.exe Get-ItemProperty -Path \"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\" -Name AppsUseLightTheme | findstr.exe AppsUse"),'\zs')[stl-1] == 1
+            set background=light
+            colorscheme catppuccin-latte
+        else
+            set background=dark
+            colorscheme hypersubatomic
+            let g:airline_theme="hypersubatomic"
+        endif
+    endif
+    else
+        colorscheme codedark
+        let g:airline_theme="codedark"
+    endif
 else
-    colorscheme codedark
-    let g:airline_theme="codedark"
+    set guifont=BerkeleyMono\ Nerd\ Font\ Regular\ 9
+    colorscheme hypersubatomic
+    let g:airline_theme="hypersubatomic"
+    set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
 endif
+
 
 
 
@@ -307,6 +319,11 @@ require("lazy").setup({
             }
         }
   end,
+},
+{
+  'mrcjkb/rustaceanvim',
+  version = '^5', -- Recommended
+  lazy = false, -- This plugin is already lazy
 },
 { "epwalsh/obsidian.nvim",
     lazy=false,
@@ -366,12 +383,13 @@ require("lazy").setup({
 -- Uff, but ok
 vim.schedule(function()
 vim.call('plug#end')
-require("nvim-treesitter.configs").setup {
-
-    ensure_installed = {"haskell", "c", "lua", "vim"},
-    highlight = {enable = true },
-    indent = {enable = true},
-}
+ 
+--   require("nvim-treesitter.configs").setup {
+--
+--       ensure_installed = {"haskell", "c", "lua", "vim"},
+--       highlight = {enable = true },
+--       indent = {enable = true},
+--   }
 
 
 
