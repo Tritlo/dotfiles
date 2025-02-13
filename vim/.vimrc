@@ -125,7 +125,7 @@ silent! set colorcolumn=100
 " highlight ColorColumn ctermbg=238 guibg=#80869e
 " highlight ExtraWhitespace ctermbg=236 guibg=#80869e
 highlight ColorColumn ctermbg=238 guibg=#3B3F51
-highlight ExtraWhitespace ctermbg=246 guibg=#8f93a2 
+highlight ExtraWhitespace ctermbg=246 guibg=#8f93a2
 
 match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -239,7 +239,15 @@ let g:codedark_transparent=1
 "set t_Co=256
 "set t_ut=
 " colorscheme catppuccin-latte
- 
+"
+hi cursor guifg=black guibg=yellow
+
+hi TermCursor cterm=underline gui=underline
+" set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+"     \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+"     \,sm:block-blinkwait175-blinkoff150-blinkon175
+set guicursor=
+autocmd OptionSet guicursor set guicursor=
 
 if !has('gui')
     if has('nvim')
@@ -343,7 +351,7 @@ require("lazy").setup({
         },
         templates={
             folder="Templates/"
-        
+
         }
 
     }
@@ -380,19 +388,16 @@ require("lazy").setup({
 
 
 
-
-
 -- Uff, but ok
 vim.schedule(function()
 vim.call('plug#end')
- 
---   require("nvim-treesitter.configs").setup {
---
---       ensure_installed = {"haskell", "c", "lua", "vim"},
---       highlight = {enable = true },
---       indent = {enable = true},
---   }
 
+require("nvim-treesitter.configs").setup {
+
+    ensure_installed = {"haskell", "c", "lua", "vim", "latex"},
+    highlight = {enable = true },
+    indent = {enable = true},
+}
 
 
 -- Latex LSP
