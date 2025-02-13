@@ -122,14 +122,7 @@ endif
 
 " show line showing location of character 80
 silent! set colorcolumn=100
-" highlight ColorColumn ctermbg=238 guibg=#80869e
-" highlight ExtraWhitespace ctermbg=236 guibg=#80869e
-highlight ColorColumn ctermbg=238 guibg=#3B3F51
-highlight ExtraWhitespace ctermbg=246 guibg=#8f93a2
 
-match ExtraWhitespace /\s\+$/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " space is pretty easy to reach:
 let mapleader=" "
@@ -276,6 +269,12 @@ else
     set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
 endif
 
+" Set after the theme to overwrite
+"highlight ColorColumn ctermbg=238 guibg=#3B3F51
+highlight ExtraWhitespace ctermbg=246 guibg=#8F93A2
+match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
 
 
 
@@ -395,6 +394,7 @@ vim.call('plug#end')
 require("nvim-treesitter.configs").setup {
 
     ensure_installed = {"haskell", "c", "lua", "vim", "latex"},
+    auto_install = true, --make sure tree-sitter-cli is installed, e.g. apt install tree-sitter-cli
     highlight = {enable = true },
     indent = {enable = true},
 }
