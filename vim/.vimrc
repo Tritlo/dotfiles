@@ -21,13 +21,13 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
 Plug 'tritlo/hypersubatomic.vim', {'branch': 'main'}
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
-Plug 'nelstrom/vim-markdown-folding', {'for': 'markdown'}
 
 if !has('nvim')
     Plug 'nathanaelkane/vim-indent-guides'
 else
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/playground'
     Plug 'neovim/nvim-lspconfig'
 endif
 
@@ -59,6 +59,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 0
 
 let g:shell_mappings_enabled = 0
+
+
 
 function! g:ToggleColorColumn()
     if &colorcolumn != ''
@@ -238,9 +240,6 @@ let g:codedark_transparent=1
 "
 hi cursor guifg=black guibg=yellow
 
-" set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-"     \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-"     \,sm:block-blinkwait175-blinkoff150-blinkon175
 set guicursor=
 autocmd OptionSet guicursor set guicursor=
 
@@ -286,6 +285,11 @@ augroup extra_whitespace
   autocmd InsertEnter * if &buftype !=# 'TERMINAL' | match ExtraWhitespace /\s\+\%#\@<!$/ | endif
   autocmd InsertLeave * if &buftype !=# 'TERMINAL' | match ExtraWhitespace /\s\+$/ | endif
 augroup end
+
+" this messes up the terminal cursor sadly
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+    \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+    \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 
 
@@ -403,11 +407,31 @@ vim.call('plug#end')
 
 require("nvim-treesitter.configs").setup {
 
-    ensure_installed = {"haskell", "c", "lua", "vim", "latex"},
-    highlight = {enable = true },
-    indent = {enable = true},
+  ensure_installed = {"haskell", "c", "lua", "vim", "latex", "sql"},
+  auto_install = true,
+  highlight = {enable = true },
+  indent = {enable = true},
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- debounce time for highlighting nodes in the playground
+    persist_queries = false,
+  },
 }
 
+-- Note: to enable custom latex highlighting for listings, you need to define e.g.
+--
+-- (listing_environment
+--   code: ((source_code) @injection.content
+--          (#lua-match? @injection.content "language=haskell"))
+--   (#set! injection.language "haskell"))
+--
+-- and add it to ~/.vim/plugged/nvim-treesitter/queries/latex/injections.scm
+-- note: not required for minted.
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
 
 -- Latex LSP
 require('lspconfig').texlab.setup({})
