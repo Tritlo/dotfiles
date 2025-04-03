@@ -9,26 +9,19 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
 " repeat last command, . on steroids
-" Plug 'tpope/vim-repeat'
-"
-Plug 'vim-airline/vim-airline' "status bar
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive' " git integration
-Plug 'tpope/vim-commentary'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'tomasiser/vim-code-dark'
 
 Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
-Plug 'tritlo/hypersubatomic.vim', {'branch': 'main'}
+" Plug 'tritlo/hypersubatomic.vim', {'branch': 'main'}
 Plug 'tpope/vim-markdown', {'for': 'markdown'}
 
 if !has('nvim')
-    Plug 'nathanaelkane/vim-indent-guides'
-else
+    " Plug 'nathanaelkane/vim-indent-guides'
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'nvim-treesitter/playground'
-    Plug 'neovim/nvim-lspconfig'
+    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    " Plug 'nvim-treesitter/playground'
+    " Plug 'neovim/nvim-lspconfig'
 endif
 
 call plug#end()
@@ -54,12 +47,18 @@ endif
 filetype plugin indent on    " required
 
 " let g:markdown_fold_style = 'nested'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tagbar#enabled = 0
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tagbar#enabled = 0
 
 let g:shell_mappings_enabled = 0
 
+" Make sure to load bashrc to set the environment variables correctly
+if has('unix')
+  silent !bash -c "source ~/.bashrc"
+  " or
+  " silent !zsh -c "source ~/.zshrc"
+endif
 
 
 function! g:ToggleColorColumn()
@@ -86,7 +85,7 @@ set smartindent autoindent copyindent shiftround
 " ignore case in searches/replaces, except if they contain uppercase letters.
 set smartcase ignorecase
 " Tab = 4 spaces, expand tabs into 4 spaces, and make a <BS> delete 4 spaces.
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " read .exrc's in project folders.
 set exrc secure
 set wildmenu
@@ -164,7 +163,7 @@ nnoremap <Leader>wv :winc v<CR>
 nnoremap <Leader>ws :winc s<CR>
 
 "Closes preview
-nnoremap <Leader>wz :winc z<CR>
+noremap <Leader>wz :winc z<CR>
 "noremap <Leader>w- :winc -<CR>
 "noremap <Leader>w+ :winc +<CR>
 "noremap <Leader>w< :winc <<CR>
@@ -245,8 +244,8 @@ autocmd OptionSet guicursor set guicursor=
 
 if !has('gui')
     if has('nvim')
-        colorscheme hypersubatomic
-        let g:airline_theme="catppuccin"
+        " colorscheme hypersubatomic
+        " let g:airline_theme="catppuccin"
 
         " if executable('powershell.exe')
         " let stl = strlen("AppsUseLightTheme : 1")
@@ -260,12 +259,12 @@ if !has('gui')
         " endif
     else
         colorscheme codedark
-        let g:airline_theme="codedark"
+        --let g:airline_theme="codedark"
     endif
 else
     set guifont=BerkeleyMono\ Nerd\ Font\ Regular\ 9
-    colorscheme hypersubatomic
-    let g:airline_theme="hypersubatomic"
+    " colorscheme hypersubatomic
+    " let g:airline_theme="hypersubatomic"
     " set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
 endif
 
@@ -306,100 +305,140 @@ vim.fn.system({
     lazypath,
 })
 end
+
 vim.opt.rtp:prepend(lazypath)
 -- Example using a list of specs with the default options
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 require("lazy").setup({
-{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {},
-  config = function()
-    require("ibl").setup {}
-  end,
-},
-{"github/copilot.vim"
-
-},
-{ 'nvim-telescope/telescope.nvim',
+ -- { 'vim-airline/vim-airline'},
+ -- { 'vim-airline/vim-airline-themes'},
+  { 'nvim-lualine/lualine.nvim',
+  {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
+  dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
+  {'tpope/vim-fugitive'},
+  {'tpope/vim-commentary'},
+  {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
+  {'nvim-treesitter/playground'},
+  {'neovim/nvim-lspconfig'},
+  -- {'tritlo/hypersubatomic.vim'},
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {},
+    config = function()
+      require("ibl").setup {}
+    end,
+  },
+  {"github/copilot.vim" },
+  { 'nvim-telescope/telescope.nvim',
     tag = '0.1.6',
     dependencies = { 'nvim-lua/plenary.nvim' }
-},
-{
-  "nvim-tree/nvim-tree.lua",
-  version = "*",
-  lazy = false,
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
   },
-  config = function()
-  require("nvim-tree").setup {
-       -- renderer = {
-       --     icons = {
-       --         show = {
-       --             file = false,
-       --             folder = false,
-       --             git = true,
-       --             folder_arrow = false, }
-       --         }
-       --     }
-        }
-  end,
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {
+        -- renderer = {
+        --     icons = {
+        --         show = {
+        --             file = false,
+        --             folder = false,
+        --             git = true,
+        --             folder_arrow = false, }
+        --         }
+        --     }
+      }
+    end,
+  },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
+ {
+  "brenton-leighton/multiple-cursors.nvim",
+  version = "*",  -- Use the latest tagged version
+  opts = {},  -- This causes the plugin setup function to be called
+  keys = {
+    {"<C-j>", "<Cmd>MultipleCursorsAddDown<CR>", mode = {"n", "x"}, desc = "Add cursor and move down"},
+    {"<C-k>", "<Cmd>MultipleCursorsAddUp<CR>", mode = {"n", "x"}, desc = "Add cursor and move up"},
+    {"<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = {"n", "i"}, desc = "Add or remove cursor"},
+    {"<Leader>mm", "<Cmd>MultipleCursorsAddVisualArea<CR>", mode = {"x"}, desc = "Add cursors to the lines of the visual area"},
+    {"<Leader>ml", "<Cmd>MultipleCursorsLock<CR>", mode = {"n", "x"}, desc = "Lock virtual cursors"},
+    },
+  },
+{
+  "folke/noice.nvim",
+  event = "VeryLazy",
+  opts = {
+    -- add any options here
+  },
+  dependencies = {
+    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+    "MunifTanjim/nui.nvim",
+    -- OPTIONAL:
+    --   `nvim-notify` is only needed, if you want to use the notification view.
+    --   If not available, we use `mini` as the fallback
+    "rcarriga/nvim-notify",
+    }
 },
 {
-  'mrcjkb/rustaceanvim',
-  version = '^5', -- Recommended
-  lazy = false, -- This plugin is already lazy
+  "folke/trouble.nvim",
+  opts = {}, -- for default options, refer to the configuration section for custom setup.
+  cmd = "Trouble",
+  keys = {
+    {
+      "<leader>xx",
+      "<cmd>Trouble diagnostics toggle<cr>",
+      desc = "Diagnostics (Trouble)",
+    },
+    {
+      "<leader>xX",
+      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      desc = "Buffer Diagnostics (Trouble)",
+    },
+    {
+      "<leader>cs",
+      "<cmd>Trouble symbols toggle focus=false<cr>",
+      desc = "Symbols (Trouble)",
+    },
+    {
+      "<leader>cl",
+      "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+      desc = "LSP Definitions / references / ... (Trouble)",
+    },
+    {
+      "<leader>xl",
+      "<cmd>Trouble loclist toggle<cr>",
+      desc = "Location List (Trouble)",
+    },
+    {
+      "<leader>xQ",
+      "<cmd>Trouble qflist toggle<cr>",
+      desc = "Quickfix List (Trouble)",
+    },
+  },
 },
---{ "epwalsh/obsidian.nvim",
---   lazy=false,
---   dependencies = { "nvim-lua/plenary.nvim" },
---   opts={
---       workspaces={
---           {
---                   name="vault",
---                   path="~/Obsidian"
---           }
---       },
---       daily_notes={
---           folder="Dailies/",
---           template="Daily.md"
---       },
---       templates={
---           folder="Templates/"
---       }
---
---   }
---}
--- {
--- "folke/flash.nvim",
--- event = "VeryLazy",
--- ---@type Flash.Config
--- opts = {},
--- -- stylua: ignore
--- keys = {
---     { "S", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
---     { "R", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
---     --{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
---     --{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
---     --{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
--- },
--- },
---{
---  "folke/which-key.nvim",
---  event = "VeryLazy",
---  init = function()
---    vim.o.timeout = true
---    vim.o.timeoutlen = 300
---  end,
---  opts = {
---    -- your configuration comes here
---    -- or leave it empty to use the default settings
---    -- refer to the configuration section below
---  }
--- }
-
+{
+  "folke/tokyonight.nvim",
+  lazy = false,
+  priority = 1000,
+  opts = {},
+},
+{ "lewis6991/gitsigns.nvim"},
+{
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+},
+{"petertriho/nvim-scrollbar"}
 })
-
-
 
 -- Uff, but ok
 vim.schedule(function()
@@ -407,7 +446,7 @@ vim.call('plug#end')
 
 require("nvim-treesitter.configs").setup {
 
-  ensure_installed = {"haskell", "c", "lua", "vim", "latex", "sql"},
+  ensure_installed = {"haskell", "c", "lua", "vim", "latex", "sql", "dpella"},
   auto_install = true,
   highlight = {enable = true },
   indent = {enable = true},
@@ -433,6 +472,10 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
 
+-- vim.cmd("colorscheme hypersubatomic")
+-- vim.g["airline_theme"] = "hypersubatomic"
+
+
 -- Latex LSP
 require('lspconfig').texlab.setup({})
 
@@ -442,14 +485,55 @@ require('lspconfig').hls.setup({
   --settings = {haskell = {plugin = {rename = {globalOn = true}}}},
 })
 
--- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+local lspconfig = require('lspconfig')
+local configs = require('lspconfig.configs')
 
+-- Register a new server configuration
+if not configs.dpella then
+  configs.dpella = {
+    default_config = {
+      cmd = { '/home/tritlo/Code/DPella/engine-v2/dist-newstyle/build/x86_64-linux/ghc-9.6.6/dpella-repl-0.1.0.0/x/dpella-lsp/opt/build/dpella-lsp/dpella-lsp'},
+      filetypes = { 'dpella' },
+      root_dir = function(fname)
+        return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
+      end,
+      settings = {},
+      init_options = {}
+    }
+  }
+end
+
+lspconfig.dpella.setup({filetypes = { 'dpella' }})
+
+local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+
+parser_config.dpella = {
+    install_info = {
+        url = '/home/tritlo/Code/DPella/engine-v2/dpella-treesitter',
+        files = {'src/parser.c'},
+        generate_requires_npm = false,
+        requires_generate_from_grammar = true,
+  },
+  filetype = 'dpella',
+}
+
+
+vim.filetype.add({
+  extension = {
+    dpella = "dpella",
+  },
+})
+
+vim.opt.indentexpr = "nvim_treesitter#indent()"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.opt.omnifunc = "v:lua.vim.lsp.omnifunc"
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
     -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+    --vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     local opts = { buffer = ev.buf }
     -- Buffer local mappings.
@@ -468,7 +552,42 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = true, -- add a border to hover docs and signature help
+  },
+})
 
+vim.cmd[[colorscheme tokyonight]]
+require('lualine').setup({
+  options = {
+  theme = 'tokyonight',
+  }
+})
+require("bufferline").setup({
+  options = {
+    diagnostics = "nvim_lsp",
+    separator_style = "slant"
+  }
+})
+
+require('gitsigns').setup()
+require('ibl').setup()
+require("scrollbar").setup()
+require("scrollbar.handlers.gitsigns").setup()
 
 end)
 EOF
@@ -480,3 +599,18 @@ tnoremap <F10> <Esc>
 tnoremap <Esc> <C-\><C-n>
 
 autocmd BufRead,BufNewFile *.dpella set ft=dpella
+
+if exists("g:neovide")
+  set guifont=BerkeleyMono\ Nerd\ Font:h10
+  let g:neovide_cursor_smooth_blink = v:true
+  "set linespace=0
+  "let g:neovide_scale_factor = 1.0
+  "let g:neovide_text_gamma = 0.0
+  "let g:neovide_text_contrast = 0.5
+  "let g:neovide_padding_top = 0
+  "let g:neovide_padding_bottom = 0
+  "let g:neovide_padding_right = 0
+  "let g:neovide_padding_left = 0
+  "let g:neovide_title_background_color = "green"
+  "let g:neovide_title_text_color = "pink"
+endif
