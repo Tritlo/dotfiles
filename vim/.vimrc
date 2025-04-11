@@ -331,7 +331,7 @@ require("lazy").setup({
   },
   {"github/copilot.vim" },
   { 'nvim-telescope/telescope.nvim',
-    tag = '0.1.6',
+    tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {
@@ -491,7 +491,7 @@ require("lazy").setup({
    },
    provider = "ollama",
    ollama = {
-      model = "deepcoder"
+      model = "deepcoder",
    }
 
   },
