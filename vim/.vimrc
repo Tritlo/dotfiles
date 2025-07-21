@@ -14,7 +14,7 @@ Plug 'tomasiser/vim-code-dark'
 
 Plug 'Tritlo/vim-rsi' " uses tritlo instead of tpope, due to M-n being same as ð key on icelandic keyboard
 " Plug 'tritlo/hypersubatomic.vim', {'branch': 'main'}
-Plug 'tpope/vim-markdown', {'for': 'markdown'}
+" Plug 'tpope/vim-markdown', {'for': 'markdown'}
 
 if !has('nvim')
     " Plug 'nathanaelkane/vim-indent-guides'
@@ -260,7 +260,7 @@ if !has('gui')
         endif
     else
         colorscheme codedark
-        --let g:airline_theme="codedark"
+        let g:airline_theme="codedark"
     endif
 else
     set guifont=BerkeleyMono\ Nerd\ Font\ Regular\ 9
@@ -274,6 +274,11 @@ endif
 "highlight ExtraWhitespace ctermbg=246 guibg=#8F93A2
 "
 hi TermCursor guifg=yellow guibg=black gui=bold,underline
+
+
+
+
+if has('nvim')
 
 if &buftype !=# 'terminal'
   match ExtraWhitespace /\s\+$/
@@ -291,9 +296,6 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
     \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
     \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-
-
-if has('nvim')
 lua << EOF
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -329,7 +331,7 @@ require("lazy").setup({
       require("ibl").setup {}
     end,
   },
-  {"github/copilot.vim" },
+  --{"github/copilot.vim" },
   { 'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' }
@@ -462,81 +464,82 @@ require("lazy").setup({
 },
 { "lewis6991/gitsigns.nvim"},
 {"petertriho/nvim-scrollbar"},
- {
-   -- Make sure to set this up properly if you have lazy=true
-   'MeanderingProgrammer/render-markdown.nvim',
-   opts = {
-     file_types = { "markdown", "Avante" },
-   },
-   ft = { "markdown", "Avante" },
- },
 {
-  "yetone/avante.nvim",
-  event = "VeryLazy",
-  version = false, -- Never set this value to "*"! Never!
+  -- Make sure to set this up properly if you have lazy=true
+  'MeanderingProgrammer/render-markdown.nvim',
   opts = {
-    -- add any opts here
-    -- for example
-   --provider = "openai",
-   --openai = {
-   --  endpoint = "https://api.openai.com/v1",
-   --  model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-   --  timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-   --  temperature = 0,
-   --  max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-   --  --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-   --},
-   behaviour = {
-    enable_cursor_planning_mode = true,
-   },
-   provider = "ollama",
-   ollama = {
-      model = "deepcoder",
-   }
-
+    file_types = { "markdown"},
+    latex = {enabled = false},
   },
-  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  build = "make",
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-    "stevearc/dressing.nvim",
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    --- The below dependencies are optional,
-    --"echasnovski/mini.pick", -- for file_selector provider mini.pick
-    "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-    "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-    --"ibhagwan/fzf-lua", -- for file_selector provider fzf
-    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-    --"zbirenbaum/copilot.lua", -- for providers='copilot'
-    {
-      -- support for image pasting
-      "HakonHarnes/img-clip.nvim",
-      event = "VeryLazy",
-      opts = {
-        -- recommended settings
-        default = {
-          embed_image_as_base64 = false,
-          prompt_for_file_name = false,
-          drag_and_drop = {
-            insert_mode = true,
-          },
-          -- required for Windows users
-          use_absolute_path = true,
-        },
-      },
-    },
-    {
-      -- Make sure to set this up properly if you have lazy=true
-      'MeanderingProgrammer/render-markdown.nvim',
-      opts = {
-        file_types = { "markdown", "Avante" },
-      },
-      ft = { "markdown", "Avante" },
-    },
-  },
-}
+  ft = { "markdown" },
+},
+-- {
+--  "yetone/avante.nvim",
+--  event = "VeryLazy",
+--  version = false, -- Never set this value to "*"! Never!
+--  opts = {
+--    -- add any opts here
+--    -- for example
+--   --provider = "openai",
+--   --openai = {
+--   --  endpoint = "https://api.openai.com/v1",
+--   --  model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+--   --  timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+--   --  temperature = 0,
+--   --  max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+--   --  --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+--   --},
+--   behaviour = {
+--    enable_cursor_planning_mode = true,
+--   },
+--   provider = "ollama",
+--   ollama = {
+--      model = "deepcoder",
+--   }
+-- 
+--  },
+--  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+--  build = "make",
+--  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+--  dependencies = {
+--    "nvim-treesitter/nvim-treesitter",
+--    "stevearc/dressing.nvim",
+--    "nvim-lua/plenary.nvim",
+--    "MunifTanjim/nui.nvim",
+--    --- The below dependencies are optional,
+--    --"echasnovski/mini.pick", -- for file_selector provider mini.pick
+--    "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+--    "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+--    --"ibhagwan/fzf-lua", -- for file_selector provider fzf
+--    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+--    --"zbirenbaum/copilot.lua", -- for providers='copilot'
+--    {
+--      -- support for image pasting
+--      "HakonHarnes/img-clip.nvim",
+--      event = "VeryLazy",
+--      opts = {
+--        -- recommended settings
+--        default = {
+--          embed_image_as_base64 = false,
+--          prompt_for_file_name = false,
+--          drag_and_drop = {
+--            insert_mode = true,
+--          },
+--          -- required for Windows users
+--          use_absolute_path = true,
+--        },
+--      },
+--    },
+--   --{
+--   --  -- Make sure to set this up properly if you have lazy=true
+--   --  'MeanderingProgrammer/render-markdown.nvim',
+--   --  opts = {
+--   --    file_types = { "markdown", "Avante" },
+--   --  },
+--   --  ft = { "markdown", "Avante" },
+--   --},
+--  },
+-- }
 
 })
 
@@ -545,21 +548,12 @@ vim.schedule(function()
 vim.call('plug#end')
 
 
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
 
-parser_config.dpella = {
-    install_info = {
-        url = '~/Code/DPella/engine-v2/dpella-treesitter',
-        files = {'src/parser.c'},
-        generate_requires_npm = false,
-        requires_generate_from_grammar = true,
-  }
-}
 
 
 require("nvim-treesitter.configs").setup {
 
-  ensure_installed = {"haskell", "c", "lua", "vim", "latex", "sql", "dpella"},
+  ensure_installed = {"haskell", "c", "lua", "vim", "latex", "sql"},--, "dpella"},
   auto_install = true,
   highlight = {enable = true },
   indent = {enable = true},
@@ -569,6 +563,18 @@ require("nvim-treesitter.configs").setup {
     updatetime = 25, -- debounce time for highlighting nodes in the playground
     persist_queries = false,
   },
+}
+
+local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+
+parser_config.dpella = {
+    install_info = {
+        url = '/home/tritlo/Code/DPella/engine-v2/dpella-treesitter',
+        files = {'src/parser.c'},
+        generate_requires_npm = false,
+        requires_generate_from_grammar = true,
+  },
+  filetype = 'dpella',
 }
 
 -- Note: to enable custom latex highlighting for listings, you need to define e.g.
@@ -600,20 +606,6 @@ require('lspconfig').hls.setup({
 
 local lspconfig = require('lspconfig')
 local configs = require('lspconfig.configs')
-
-lspconfig.dpella.setup({filetypes = { 'dpella' }})
-
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-
-parser_config.dpella = {
-    install_info = {
-        url = '/home/tritlo/Code/DPella/engine-v2/dpella-treesitter',
-        files = {'src/parser.c'},
-        generate_requires_npm = false,
-        requires_generate_from_grammar = true,
-  },
-  filetype = 'dpella',
-}
 
 
 vim.filetype.add({
