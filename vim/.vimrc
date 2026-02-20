@@ -54,10 +54,8 @@ filetype plugin indent on    " required
 let g:shell_mappings_enabled = 0
 
 " Make sure to load bashrc to set the environment variables correctly
-if has('unix')
+if has('unix') && filereadable(expand('~/.bashrc'))
   silent !bash -c "source ~/.bashrc"
-  " or
-  " silent !zsh -c "source ~/.zshrc"
 endif
 
 
@@ -259,7 +257,7 @@ if !has('gui')
             endif
         endif
     else
-        colorscheme codedark
+        silent! colorscheme codedark
         let g:airline_theme="codedark"
     endif
 else
@@ -322,9 +320,15 @@ require("lazy").setup({
   },
   {'tpope/vim-fugitive'},
   {'tpope/vim-commentary'},
-  {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
-  {'nvim-treesitter/playground'},
-  {'neovim/nvim-lspconfig'},
+  {'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    opts = {
+      ensure_installed = {"haskell", "c", "lua", "vim", "latex", "sql"},
+      auto_install = true,
+    },
+  },
+  -- {'nvim-treesitter/playground'}, -- deprecated: use :InspectTree instead
+  -- {'neovim/nvim-lspconfig'}, -- deprecated in 0.11: use vim.lsp.config instead
   -- {'tritlo/hypersubatomic.vim'},
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {},
     config = function()
@@ -551,31 +555,7 @@ vim.call('plug#end')
 
 
 
-require("nvim-treesitter.configs").setup {
-
-  ensure_installed = {"haskell", "c", "lua", "vim", "latex", "sql"},--, "dpella"},
-  auto_install = true,
-  highlight = {enable = true },
-  indent = {enable = true},
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- debounce time for highlighting nodes in the playground
-    persist_queries = false,
-  },
-}
-
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-
-parser_config.dpella = {
-    install_info = {
-        url = '/home/tritlo/Code/DPella/engine-v2/dpella-treesitter',
-        files = {'src/parser.c'},
-        generate_requires_npm = false,
-        requires_generate_from_grammar = true,
-  },
-  filetype = 'dpella',
-}
+-- treesitter is now configured via lazy.nvim opts above
 
 -- Note: to enable custom latex highlighting for listings, you need to define e.g.
 --
@@ -588,25 +568,19 @@ parser_config.dpella = {
 -- note: not required for minted.
 
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldenable = false
 
 -- vim.cmd("colorscheme hypersubatomic")
 -- vim.g["airline_theme"] = "hypersubatomic"
 
 
--- Latex LSP
-require('lspconfig').texlab.setup({})
-
--- Haskell LSP
-require('lspconfig').hls.setup({
+-- LSP config (native vim.lsp.config, Neovim 0.11+)
+vim.lsp.config('texlab', {})
+vim.lsp.config('hls', {
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
-  --settings = {haskell = {plugin = {rename = {globalOn = true}}}},
 })
-
-local lspconfig = require('lspconfig')
-local configs = require('lspconfig.configs')
-
+vim.lsp.enable({'texlab', 'hls'})
 
 vim.filetype.add({
   extension = {
@@ -614,27 +588,10 @@ vim.filetype.add({
   },
 })
 
-vim.opt.indentexpr = "nvim_treesitter#indent()"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.indentexpr = "v:lua.vim.treesitter.indent()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 vim.opt.omnifunc = "v:lua.vim.lsp.omnifunc"
--- Register a new server configuration
-if not configs.dpella then
-  configs.dpella = {
-    default_config = {
-      cmd = { '/home/tritlo/Code/DPella/engine-v2/dist-newstyle/build/x86_64-linux/ghc-9.6.5/dpella-repl-0.1.0.0/x/dpella-lsp/opt/build/dpella-lsp/dpella-lsp'},
-      filetypes = { 'dpella' },
-      root_dir = function(fname)
-        return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
-      end,
-      settings = {},
-      init_options = {}
-    }
-  }
-end
-
-
-lspconfig.dpella.setup({filetypes = { 'dpella' }})
 
 vim.diagnostic.config({
   -- Use the default configuration
@@ -648,10 +605,10 @@ vim.diagnostic.config({
 })
 
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldenable = false
 
-vim.opt.indentexpr = "nvim_treesitter#indent()"
+vim.opt.indentexpr = "v:lua.vim.treesitter.indent()"
 
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
