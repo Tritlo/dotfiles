@@ -181,6 +181,7 @@ hi cursor guifg=black guibg=yellow
 " Colorscheme selection
 if !has('gui')
     if has('nvim')
+        set background=light
         " WSL: detect Windows light/dark theme
         if executable('powershell.exe')
             let stl = strlen("AppsUseLightTheme : 1")
@@ -380,9 +381,9 @@ vim.schedule(function()
     },
   })
 
-  local theme = vim.o.background == "light"
-    and "github_light_high_contrast"
-    or "github_dark_high_contrast"
+  local theme = vim.o.background == "dark"
+    and "github_dark_high_contrast"
+    or "github_light_high_contrast"
   vim.cmd("colorscheme " .. theme)
   require('lualine').setup({
     options = { theme = theme },
